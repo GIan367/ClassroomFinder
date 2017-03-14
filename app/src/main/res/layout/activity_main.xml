@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tabHost"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TabWidget
+            android:id="@android:id/tabs"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"></TabWidget>
+
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="50dp">
+
+            <RelativeLayout
+                android:id="@+id/tab1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#ffc916"
+                android:orientation="vertical">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Find"
+                    android:onClick="find"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="18dp"
+                    android:id="@+id/button" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Destination"
+                    android:id="@+id/textView"
+                    android:layout_above="@+id/button"
+                    android:layout_alignLeft="@+id/button"
+                    android:layout_alignStart="@+id/button"
+                    android:layout_marginBottom="103dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Current Location"
+                    android:id="@+id/textView2"
+                    android:layout_above="@+id/textView"
+                    android:layout_alignRight="@+id/button"
+                    android:layout_alignEnd="@+id/button"
+                    android:layout_marginBottom="94dp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Building"
+                    android:id="@+id/textView3"
+                    android:layout_marginTop="48dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true" />
+
+                <Spinner
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="33dp"
+                    android:id="@+id/spinner"
+                    android:layout_below="@+id/textView3"
+                    android:layout_centerHorizontal="true">
+                </Spinner>
+
+                <SearchView
+                    android:layout_width="match_parent"
+                    android:layout_height="310dp"
+                    android:id="@+id/searchView1"
+                    android:layout_below="@+id/textView3"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true">
+                </SearchView>
+
+                <SearchView
+                    android:layout_width="match_parent"
+                    android:layout_height="310dp"
+                    android:id="@+id/searchView2"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignTop="@+id/textView2">
+                </SearchView>
+
+                <!-- <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Search"
+                    android:onClick="openSearch"
+                    android:id="@+id/button2"
+                    android:layout_centerVertical="true"
+                    android:layout_alignLeft="@+id/textView"
+                    android:layout_alignStart="@+id/textView" /> -->
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/tab2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#da8200"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="This is tab 2" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/tab3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#5b89ff"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="This is tab 3" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/tab4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#5b89ff"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="This is tab 4" />
+            </RelativeLayout>
+
+
+
+        </FrameLayout>
+    </RelativeLayout>
+
+</TabHost>
