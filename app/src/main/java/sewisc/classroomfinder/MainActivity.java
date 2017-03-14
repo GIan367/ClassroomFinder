@@ -1,9 +1,14 @@
 package sewisc.classroomfinder;
 
+import android.app.Activity;
+import android.app.SearchManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ListAdapter;
 import android.widget.TabHost;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         spec.setIndicator("Tab Three");
         host.addTab(spec);
 
-	//Tab 4
+	    //Tab 4
         spec = host.newTabSpec("Tab Four");
         spec.setContent(R.id.tab4);
         spec.setIndicator("Tab Four");
@@ -49,7 +54,9 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
+    // Got rid of settings action bar item because we don't need it.
+    // Also commented out relevant stuff in menu_main.xml -- Zak
+    /*@Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -62,5 +69,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }*/
+
+    public void openSearch(View view) {
+        Intent intent = new Intent(this, LocationSearch.class);
+        startActivity(intent);
     }
 }

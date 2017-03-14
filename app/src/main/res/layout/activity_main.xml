@@ -74,10 +74,37 @@
                     android:layout_marginTop="33dp"
                     android:id="@+id/spinner"
                     android:layout_below="@+id/textView3"
-                    android:layout_centerHorizontal="true"
+                    android:layout_centerHorizontal="true">
+                </Spinner>
 
-                    ></Spinner>
+                <SearchView
+                    android:layout_width="match_parent"
+                    android:layout_height="310dp"
+                    android:id="@+id/searchView1"
+                    android:layout_below="@+id/textView3"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true">
+                </SearchView>
 
+                <SearchView
+                    android:layout_width="match_parent"
+                    android:layout_height="310dp"
+                    android:id="@+id/searchView2"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignTop="@+id/textView2">
+                </SearchView>
+
+                <!-- <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Search"
+                    android:onClick="openSearch"
+                    android:id="@+id/button2"
+                    android:layout_centerVertical="true"
+                    android:layout_alignLeft="@+id/textView"
+                    android:layout_alignStart="@+id/textView" /> -->
 
             </RelativeLayout>
 
@@ -124,4 +151,5 @@
 
         </FrameLayout>
     </RelativeLayout>
+
 </TabHost>
