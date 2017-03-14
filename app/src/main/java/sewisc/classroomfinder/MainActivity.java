@@ -34,6 +34,12 @@ public class MainActivity extends AppCompatActivity {
         spec.setContent(R.id.tab3);
         spec.setIndicator("Tab Three");
         host.addTab(spec);
+
+	//Tab 4
+        spec = host.newTabSpec("Tab Four");
+        spec.setContent(R.id.tab4);
+        spec.setIndicator("Tab Four");
+        host.addTab(spec);
     }
 
     @Override
