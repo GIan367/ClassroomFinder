@@ -2,14 +2,11 @@
     <string name="app_name">ClassroomFinder</string>
 
     <string-array name="tempData">
-        <item>101</item>
-        <item>108</item>
-        <item>112</item>
-        <item>204</item>
-        <item>361</item>
-        <item>577</item>
-        <item>Assembly Hall</item>
-        <item>Entrance: South</item>
-        <item>Entrance: Scheuring Road</item>
+        <item>You</item>
+        <item>should</item>
+        <item>not</item>
+        <item>be</item>
+        <item>seeing</item>
+        <item>these!</item>
     </string-array>
 </resources>

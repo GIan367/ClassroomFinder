@@ -29,54 +29,59 @@
                 android:background="#ffc916"
                 android:orientation="vertical">
 
-                <Button
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Find"
-                    android:onClick="find"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="18dp"
-                    android:id="@+id/button" />
+                    android:text="Building"
+                    android:id="@+id/textView3"
+                    android:layout_above="@+id/spinner1"
+                    android:layout_centerHorizontal="true" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Destination"
                     android:id="@+id/textView"
-                    android:layout_above="@+id/button"
-                    android:layout_alignLeft="@+id/button"
-                    android:layout_alignStart="@+id/button"
-                    android:layout_marginBottom="103dp" />
+                    android:layout_above="@+id/spinner3"
+                    android:layout_centerHorizontal="true" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Find"
+                    android:onClick="find"
+                    android:layout_marginBottom="17dp"
+                    android:id="@+id/button"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Current Location"
                     android:id="@+id/textView2"
-                    android:layout_above="@+id/textView"
-                    android:layout_alignRight="@+id/button"
-                    android:layout_alignEnd="@+id/button"
-                    android:layout_marginBottom="94dp"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Building"
-                    android:id="@+id/textView3"
-                    android:layout_marginTop="48dp"
-                    android:layout_alignParentTop="true"
+                    android:layout_above="@+id/spinner2"
                     android:layout_centerHorizontal="true" />
 
-                <Spinner
-                    android:layout_width="fill_parent"
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/spinner1"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="33dp"
-                    android:id="@+id/spinner"
-                    android:layout_below="@+id/textView3"
-                    android:layout_centerHorizontal="true">
-                </Spinner>
+                    android:entries="@array/tempData"
+                    app:hintText="Select Building"
+                    android:layout_above="@+id/textView2"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="10dp" />
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/spinner2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/tempData"
+                    app:hintText="Select Current Location"
+                    android:layout_above="@+id/textView"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="11dp" />
 
                 <com.toptoche.searchablespinnerlibrary.SearchableSpinner
                     android:id="@+id/spinner3"
@@ -84,20 +89,9 @@
                     android:layout_height="wrap_content"
                     android:entries="@array/tempData"
                     app:hintText="Select Destination"
-                    android:layout_below="@+id/textView2"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="31dp" />
-
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/spinner2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:entries="@array/tempData"
-                    app:hintText="Select Location"
-                    android:layout_marginTop="31dp"
-                    android:layout_alignTop="@+id/textView2"
-                    android:layout_alignLeft="@+id/spinner3"
-                    android:layout_alignStart="@+id/spinner3" />
+                    android:layout_marginBottom="18dp"
+                    android:layout_above="@+id/button"
+                    android:layout_centerHorizontal="true" />
 
             </RelativeLayout>
 
