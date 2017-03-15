@@ -1,7 +1,12 @@
 <resources>
     <string name="app_name">ClassroomFinder</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-
+    <string-array name="tempData">
+        <item>You</item>
+        <item>should</item>
+        <item>not</item>
+        <item>be</item>
+        <item>seeing</item>
+        <item>these!</item>
+    </string-array>
 </resources>
