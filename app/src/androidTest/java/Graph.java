@@ -13,8 +13,11 @@ public class Graph {
 
     //Function that returns the cost of movement from one node to another
     public int cost (Node A, Node B){
-        System.out.println("Graph.cost() has not been implemented");
-        return -1;
+        //TODO: We will need to change cost function to reflect actual cost. This will be based on dimension of the map.
+        if (A.getType() == NodeType.normal) return 10;
+        if (A.getType() == NodeType.stair) return 15;
+        if (A.getType() == NodeType.elevator) return 11;
+        return 10;
     }
 
     //Return an array of neighboring Nodes for the arg Node
