@@ -1,7 +1,15 @@
 <resources>
     <string name="app_name">ClassroomFinder</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-
+    <string-array name="tempData">
+        <item>101</item>
+        <item>108</item>
+        <item>112</item>
+        <item>204</item>
+        <item>361</item>
+        <item>577</item>
+        <item>Assembly Hall</item>
+        <item>Entrance: South</item>
+        <item>Entrance: Scheuring Road</item>
+    </string-array>
 </resources>
