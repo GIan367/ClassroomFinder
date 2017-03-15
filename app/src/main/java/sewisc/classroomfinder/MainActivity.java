@@ -1,5 +1,6 @@
 package sewisc.classroomfinder;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -144,10 +145,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }*/
 
-    public void openSearch(View view) {
-        Intent intent = new Intent(this, LocationSearch.class);
-        startActivity(intent);
-    }
 
 
     //not a very intensive test - only tests insert; shows output in debugger
