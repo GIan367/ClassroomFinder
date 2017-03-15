@@ -5,11 +5,15 @@ import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListAdapter;
 import android.widget.TabHost;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     TabHost tabHost;
@@ -45,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
         spec.setContent(R.id.tab4);
         spec.setIndicator("Tab Four");
         host.addTab(spec);
+
+
+        SQLTest();
     }
 
     @Override
@@ -74,5 +81,68 @@ public class MainActivity extends AppCompatActivity {
     public void openSearch(View view) {
         Intent intent = new Intent(this, LocationSearch.class);
         startActivity(intent);
+    }
+
+
+    //not a very intensive test - only tests insert; shows output in debugger
+    public void SQLTest(){
+        DataBaseHandler dataBaseHandler = new DataBaseHandler(this);
+        dataBaseHandler.clearAllData(); //resets data
+
+        List<Favorite> testFavorites = new ArrayList<Favorite>();
+        for (int i = 0;i < 4; i++){
+            testFavorites.add(new Favorite(i, "Test Building Name " + i, "Test Start Location " + i, "Test Destination " + i));
+        }
+
+        List<Building> testBuildings = new ArrayList<Building>();
+        for (int i = 0;i < 4; i++){
+            testBuildings.add(new Building(i, "Test Name(Building) " + i));
+        }
+
+        List<Location> testLocations = new ArrayList<Location>();
+        for (int i = 0;i < 4; i++){
+            testLocations.add(new Location(i, "Test Name(Location) " + i, i, i));
+        }
+
+        for (Favorite f: testFavorites){
+            Log.d("Insert:", "Inserting "+f.getBuildingName());
+            dataBaseHandler.addFavorite(f);
+        }
+
+        for (Building b: testBuildings){
+            Log.d("Insert:", "Inserting "+b.getName());
+            dataBaseHandler.addBuilding(b);
+        }
+
+        for (Location l: testLocations){
+            Log.d("Insert:", "Inserting " + l.getName());
+            dataBaseHandler.addLocation(l);
+        }
+
+        List<Favorite> resultFavorites = dataBaseHandler.getAllFavorites();
+        Log.d("Reading:", "Favorites");
+        for (Favorite f: resultFavorites){
+            Log.d("Read:", "Index: " + f.getIndx() + " Building Name: "
+                    + f.getBuildingName() + " Start Location: " + f.getStartLocation()
+                    + " Destination: " + f.getDestination());
+        }
+
+        List<Building> resultBuildings = dataBaseHandler.getAllBuildings();
+        Log.d("Reading:", "Buildings");
+        for (Building b: resultBuildings){
+            Log.d("Read:", "ID: " + b.getID() + " Name: " + b.getName());
+        }
+
+        List<Location> resultLocations = dataBaseHandler.getAllLocations();
+        Log.d("Reading:", "Favorites");
+        for (Location l: resultLocations){
+            Log.d("Read:", "ID: " + l.getID() + " Name: "
+                    + l.getName() + " Building ID: " + l.getBuildingID()
+                    + " Floor Number: " + l.getFloorNumber());
+        }
+
+        dataBaseHandler.closeDB();
+
+
     }
 }
