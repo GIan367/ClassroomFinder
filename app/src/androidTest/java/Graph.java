@@ -20,6 +20,12 @@ public class Graph {
         return 10;
     }
 
+    public int heuristic(Node A, Node B){
+        //TODO: We will need to change the heuristic function to reflect estimated cost. This will be based on dimensions of the map.
+        int ret = Math.abs(A.getRelativeX() - B.getRelativeX()) + Math.abs(A.getRelativeY() - B.getRelativeY());
+        return ret; //Currently multiplying by 10 so that estimated cost is similar to actual cost above.
+    }
+
     //Return an array of neighboring Nodes for the arg Node
     public Node[] neighbors(Node A){
         Node[] ret = edges.get(A);
