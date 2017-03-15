@@ -21,7 +21,7 @@ public class BFS {
         cameFrom.put(start,null);
 
         while(!(frontier.isEmpty())){
-            Node current = frontier.get(0);
+            Node current = frontier.remove(0);
             System.out.println(current.getName());
 
             //Early Exit
