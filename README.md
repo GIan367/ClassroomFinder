@@ -8,7 +8,11 @@ GridAdapter.java:
 ImageAdapter.java:  
 Location.java: This class represents the Location table in the database, with the corresponding getter/setter methods for its fields.    
 MainActivity.java:  
-MapView.java:  
+MapView.java:
+AStar.java: This class implements A star pathfinding.  
+PriorityNode.java: This class is used by the PriorityQueue in AStar and associates a Node object with a priority.  
+Graph.java: This class represents the Nodes in a map as a graph of nodes and its neighbors.  
+Node.java: This class represents a point of interest in a map with coordinate locations and associated type.    
 Front end related code, such as activities, are located at __________:  
 
 
