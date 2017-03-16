@@ -1,12 +1,12 @@
 # classroomFinder
 All up to date code is located in the master branch. The master branch should only be merged to at the end of an iteration OR with the agreement of a majority team.  
 Java classes pertaining to Database functionality, Pathfinding, and Map Layout are located in   ClassroomFinder/app/src/main/java/sewisc/classroomfinder/:  
-Building.java:  
-DataBaseHandler.java:  
-Favorite.java:  
+Building.java: This class represents the Building table in the database, with the corresponding getter/setter methods for its fields.   
+DataBaseHandler.java: This class has functions that can create, manipuate, and delete a database; to be used with the Building, Favorite, and Location classes.    
+Favorite.java: This class represents the Favorite table in the database, with the corresponding getter/setter methods for its fields.    
 GridAdapter.java:  
 ImageAdapter.java:  
-Location.java:  
+Location.java: This class represents the Location table in the database, with the corresponding getter/setter methods for its fields.    
 MainActivity.java:  
 MapView.java:  
 Front end related code, such as activities, are located at __________:  
