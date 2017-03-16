@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Building"
+        android:id="@+id/textView3"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true" />
+
+    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+        android:id="@+id/spinner1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:entries="@array/tempData"
+        app:hintText="Select Building"
+        android:layout_marginTop="35dp"
+        android:layout_below="@+id/textView3"
+        android:layout_centerHorizontal="true" />
+
+
+    <GridView
+        android:id="@+id/gridView1"
+        android:numColumns="2"
+        android:gravity="center"
+        android:columnWidth="70dp"
+        android:stretchMode="columnWidth"
+        android:layout_width="fill_parent"
+        android:scrollbars="vertical"
+        android:layout_height="400dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+    </GridView>
+
+
+</RelativeLayout>

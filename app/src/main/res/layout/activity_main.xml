@@ -103,9 +103,38 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="This is tab 2" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Building"
+                    android:id="@+id/textView1_tab2"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentTop="true" />
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/spinner1_tab2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/tempData"
+                    app:hintText="Select Building"
+                    android:layout_marginTop="35dp"
+                    android:layout_below="@+id/textView1_tab2"
+                    android:layout_centerHorizontal="true" />
+
+
+                <GridView
+                    android:id="@+id/gridView1_tab2"
+                    android:numColumns="2"
+                    android:gravity="center"
+                    android:columnWidth="70dp"
+                    android:stretchMode="columnWidth"
+                    android:layout_width="fill_parent"
+                    android:scrollbars="vertical"
+                    android:layout_height="400dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true">
+                </GridView>
+
             </RelativeLayout>
 
             <RelativeLayout
@@ -116,9 +145,57 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="This is tab 3" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Current Location"
+                    android:id="@+id/textView_tab3_cl"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true" />
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/spinner1_tab3_b"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/tempData"
+                    app:hintText="Select Building"
+                    android:layout_below="@+id/textView_tab3_b"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="27dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Building"
+                    android:id="@+id/textView_tab3_b"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="67dp" />
+
+
+
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/spinner2_tab3_cl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/tempData"
+                    app:hintText="Select Current Location"
+                    android:layout_marginTop="63dp"
+                    android:layout_below="@+id/textView_tab3_cl"
+                    android:layout_centerHorizontal="true" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Find"
+                    android:onClick="find"
+                    android:layout_marginBottom="17dp"
+                    android:id="@+id/button_tab3"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true" />
+
+
+
+
             </RelativeLayout>
 
             <RelativeLayout
@@ -128,10 +205,17 @@
                 android:background="#5b89ff"
                 android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="This is tab 4" />
+                <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/gridView1_fav"
+                    android:numColumns="1"
+                    android:gravity="center"
+                    android:columnWidth="70dp"
+                    android:stretchMode="columnWidth"
+                    android:layout_width="fill_parent"
+                    android:scrollbars="vertical"
+                    android:layout_height="fill_parent" >
+                </GridView>
+
             </RelativeLayout>
 
 
