@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         spec.setContent(R.id.bathroom);
         host.addTab(spec);
 
-	    //Tab 4
+        //Tab 4
         spec = host.newTabSpec("Favorites");
         spec.setIndicator("Favorites");
         spec.setContent(R.id.favorite);
