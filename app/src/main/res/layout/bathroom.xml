@@ -2,26 +2,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bathroom">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Current Location"
-        android:id="@+id/textView"
+        android:id="@+id/textView_b"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
     <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-        android:id="@+id/spinner1"
+        android:id="@+id/spinner1_b"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:entries="@array/tempData"
         app:hintText="Select Building"
-        android:layout_below="@+id/textView3"
+        android:layout_below="@+id/textView3_b"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="27dp" />
 
@@ -29,32 +27,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Building"
-        android:id="@+id/textView3"
+        android:id="@+id/textView3_b"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="67dp" />
 
-
-
     <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-        android:id="@+id/spinner2"
+        android:id="@+id/spinner2_b"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:entries="@array/tempData"
         app:hintText="Select Current Location"
         android:layout_marginTop="63dp"
-        android:layout_below="@+id/textView"
+        android:layout_below="@+id/textView_b"
         android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Find"
-        android:onClick="find"
+        android:onClick="displayMap"
         android:layout_marginBottom="17dp"
-        android:id="@+id/button"
+        android:id="@+id/button_b"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
-
 
 </RelativeLayout>
