@@ -1,4 +1,4 @@
-/**
+package sewisc.classroomfinder; /**
  * Created by Shreyash on 3/14/2017.
  */
 
@@ -11,7 +11,7 @@ public class Dijkstra {
         this.g = g;
     }
 
-    //Pathfinding using BFS
+    //Pathfinding using sewisc.classroomfinder.BFS
     public List<Node> findPath(Node start, Node goal){
         PriorityQueue<PriorityNode> frontier = new PriorityQueue<PriorityNode>();	//Priority queue that holds node and current cost to get there
         HashMap<Node, Node> cameFrom = new HashMap<Node, Node>();	//Breadcrumb trail from goal to start

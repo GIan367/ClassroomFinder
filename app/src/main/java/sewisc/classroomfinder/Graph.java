@@ -1,4 +1,4 @@
-/**
+package sewisc.classroomfinder; /**
  * Created by Shreyash on 3/13/2017.
  */
 import java.util.*;
@@ -26,11 +26,11 @@ public class Graph {
         return ret;
     }
 
-    //Return an array of neighboring Nodes for the arg Node
+    //Return an array of neighboring Nodes for the arg sewisc.classroomfinder.Node
     public Node[] neighbors(Node A){
         Node[] ret = edges.get(A);
         if (ret == null){
-            System.err.println("Graph.neighbors() - arg Node object does not exist in current Graph!");
+            System.err.println("sewisc.classroomfinder.Graph.neighbors() - arg sewisc.classroomfinder.Node object does not exist in current sewisc.classroomfinder.Graph!");
         }
         return ret;
     }

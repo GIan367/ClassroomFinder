@@ -1,4 +1,4 @@
-/**
+package sewisc.classroomfinder; /**
  * Created by Shreyash on 3/14/2017.
  */
 

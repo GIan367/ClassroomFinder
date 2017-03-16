@@ -1,4 +1,4 @@
-/**
+package sewisc.classroomfinder; /**
  * Created by Shreyash on 3/13/2017.
  */
 import java.util.*;
@@ -11,7 +11,7 @@ public class BFS {
         this.g = g;
     }
 
-    //Pathfinding using BFS
+    //Pathfinding using sewisc.classroomfinder.BFS
     public List<Node> findPath(Node start, Node goal){
         List<Node> frontier = new LinkedList<Node>();	//List of nodes in the frontier
         HashMap<Node, Node> cameFrom = new HashMap<Node, Node>();	//Breadcrumb trail from goal to start

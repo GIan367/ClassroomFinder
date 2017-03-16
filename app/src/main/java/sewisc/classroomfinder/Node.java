@@ -1,13 +1,15 @@
+package sewisc.classroomfinder;
+
 /**
  * Created by Shreyash on 3/13/2017.
  */
 
 public class Node {
     //Private Variables
-    private NodeType type;              //Type of Node
+    private NodeType type;              //Type of sewisc.classroomfinder.Node
     private int relativeX, relativeY;	//Relative x and y coordinates on the map
     private int floor;                  //The floor this node is located in
-    private String name;                //Name of this Node object
+    private String name;                //Name of this sewisc.classroomfinder.Node object
 
     //Getters for type, relativeX, relativeY, and name
     public NodeType getType() {
