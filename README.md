@@ -4,16 +4,23 @@ Java classes pertaining to Database functionality, Pathfinding, and Map Layout a
 Building.java: This class represents the Building table in the database, with the corresponding getter/setter methods for its fields.   
 DataBaseHandler.java: This class has functions that can create, manipulate, and delete a database; to be used with the Building, Favorite, and Location classes.    
 Favorite.java: This class represents the Favorite table in the database, with the corresponding getter/setter methods for its fields.    
-GridAdapter.java:  
-ImageAdapter.java:  
+GridAdapter.java: This class assembles text in a format that can be interpreted by the Favorites View's GridView.
+ImageAdapter.java: This class assembles images in a format that can be interpreted by the FloorGallery View's GridView.
 Location.java: This class represents the Location table in the database, with the corresponding getter/setter methods for its fields.    
-MainActivity.java:  
-MapView.java:
+MainActivity.java: This class gives functionality to the 4 tabs representing the primary views.
+MapView.java: This class describes the View containing the requested map, with or without a computed path.
 AStar.java: This class implements A star pathfinding.  
 PriorityNode.java: This class is used by the PriorityQueue in AStar and associates a Node object with a priority.  
 Graph.java: This class represents the Nodes in a map as a graph of nodes and its neighbors.  
-Node.java: This class represents a point of interest in a map with coordinate locations and associated type.    
-Front end related code, such as activities, are located at __________:  
+Node.java: This class represents a point of interest in a map with coordinate locations and associated type.
+
+Front end xml files:
+activity_main.xml: This file describes the 4 tabs on the bottom of the screen and how to interact based on which tab is pressed.
+bathroom.xml: This file describes the layout of the drop down search bars for building, and current location with the find button to route to nearest bathroom.
+favorite.xml: This file describes the layout of the grid view that is populated with the user's favorite routes.
+floor_gallery.xml: This file describes the layout of the drop down search bar for building, and the grid view that is populated with the floors of the selected building.
+map.xml: This file describes the layout for when a user clicks the find button and the map with/without computed map pops up.
+room_finder.xml: This file describes the layout for the homescreen, with drop down search bars for building, current location, and destination, and a find button.
 
 
 Test Code is located in the main directory of the project ClassroomFinder/Tests/:  
