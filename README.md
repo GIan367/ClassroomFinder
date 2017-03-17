@@ -13,7 +13,16 @@ AStar.java: This class implements A star pathfinding.
 PriorityNode.java: This class is used by the PriorityQueue in AStar and associates a Node object with a priority.  
 Graph.java: This class represents the Nodes in a map as a graph of nodes and its neighbors.  
 Node.java: This class represents a point of interest in a map with coordinate locations and associated type.    
-Front end related code, such as activities, are located at __________:  
+Front end related code, such as xml files, are located at ClassroomFinder/app/src/main/res/layout:  
+activity_main.xml: This files describes the 4 tabes on the bottom of the screen and how to interact based on which tab is pressed.
+bathroom.xml: This file describes the layout of the drop down search bars for building, and current location with the find button to route to nearest bathroom.
+favorite.xml: This file describes the layout of the grid view that is populated with the users' favorite routes
+floor_gallery: 
+map.xml: This files describes the layout for when a user clicks the find button and the map with route pops up
+room_finder.xml: This file describes the layout for the homescreen/ with drop down search bars for building, current location, and destination and a find button.
+
+
+
 
 
 Test Code is located in the main directory of the project ClassroomFinder/Tests/:  
