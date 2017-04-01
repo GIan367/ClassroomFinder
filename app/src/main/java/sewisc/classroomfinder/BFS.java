@@ -33,7 +33,7 @@ public class BFS {
 
             for(Node node: edges){
                 if (!(cameFrom.containsKey(node))){
-                    frontier.add(0, node);
+                    frontier.add(node);
                     cameFrom.put(node, current);
                 }
             }
