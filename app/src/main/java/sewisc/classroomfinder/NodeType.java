@@ -8,4 +8,5 @@ public enum NodeType {
     normal,
     stair,
     elevator,
+    bathroom,
 }
