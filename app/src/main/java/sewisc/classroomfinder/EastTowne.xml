@@ -1,100 +1,98 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<Nodes>
-<Node><Name>Amplified Phones</Name><X>4710</X><Y>3735</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Auntie Anne's</Name><X>3655</X><Y>3790</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Customized Teez</Name><X>4000</X><Y>3709</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Piercing Pagoda</Name><X>4350</X><Y>3790</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>ecoATM</Name><X>3515</X><Y>4130</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Sunglass Hut</Name><X>3340</X><Y>4330</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Justice</Name><X>3440</X><Y>4330</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Chinese Relaxation Center</Name><X>2780</X><Y>3970</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Journeys</Name><X>3000</X><Y>3970</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Charlotte Russe</Name><X>4850</X><Y>4015</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Nails and Spa</Name><X>5045</X><Y>4845</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Picture People</Name><X>4975</X><Y>4730</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Happy Feet Salon</Name><X>4905</X><Y>4600</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Name of the Game</Name><X>4815</X><Y>4815</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Master Cuts</Name><X>4730</X><Y>4290</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Dakota Watch Company</Name><X>4730</X><Y>4290</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Proactiv ZoomShops</Name><X>1985</X><Y>3815</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Sprint Store by Wireless Evolution</Name><X>4635</X><Y>4125</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>T-Mobile</Name><X>4635</X><Y>4125</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>TechBank</Name><X>3350</X><Y>2280</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>U.S. Cellular</Name><X>3350</X><Y>2500</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Victoria's Secret</Name><X>3350</X><Y>2800</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Fred Meyer Jewelers</Name><X>3350</X><Y>3400</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>DOZ CELL / iAccessories</Name><X>3350</X><Y>3970</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Express</Name><X>3620</X><Y>4155</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>The B-12 Store</Name><X>3455</X><Y>4860</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Life Uniform</Name><X>3455</X><Y>5045</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Just Fine Alterations</Name><X>3455</X><Y>5170</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Cricket</Name><X>3455</X><Y>5280</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>La Botique Eybrow Threading</Name><X>3455</X><Y>5360</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Best Nails</Name><X>3235</X><Y>5475</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Selah Hair &amp; Fashions</Name><X>3235</X><Y>5275</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>On 2 The Field</Name><X>3235</X><Y>5035</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Spencer's</Name><X>3235</X><Y>4845</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Claire's</Name><X>3235</X><Y>4645</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Zales</Name><X>3145</X><Y>4250</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Bath and Body Works</Name><X>3010</X><Y>4160</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>maurices</Name><X>2735</X><Y>4085</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Amy's Hallmark</Name><X>2575</X><Y>4085</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>AT&amp;T</Name><X>2355</X><Y>4085</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Gamestop</Name><X>2215</X><Y>4085</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>rue21</Name><X>1605</X><Y>3635</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Payless ShoeSource</Name><X>1385</X><Y>3510</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>The Salon Professional Academy</Name><X>1110</X><Y>3350</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Best Buy Mobile</Name><X>3235</X><Y>2675</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Zumiez</Name><X>3235</X><Y>2810</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Vanity</Name><X>3235</X><Y>2965</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Lids</Name><X>3235</X><Y>3100</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Mia and Maxx Hair Studio</Name><X>3235</X><Y>3335</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Kay Jewelers</Name><X>3235</X><Y>3580</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Buckle</Name><X>2985</X><Y>3810</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Aeropostale</Name><X>2755</X><Y>3890</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Things Remembered</Name><X>2645</X><Y>3890</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Hot Topic</Name><X>2455</X><Y>3890</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Complete Nutrition</Name><X>2095</X><Y>3695</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Champs Sports</Name><X>2245</X><Y>3780</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>LensCrafters</Name><X>2095</X><Y>3695</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Finish Line</Name><X>1960</X><Y>3615</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>American Eagle Outfitters</Name><X>1785</X><Y>3515</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Planet Fitness</Name><X>1405</X><Y>3295</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Foot Locker</Name><X>3455</X><Y>2700</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Fanzz</Name><X>3455</X><Y>2940</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Rogers and Hollands Jewelers</Name><X>3520</X><Y>3175</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>GNC</Name><X>3645</X><Y>3730</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>francesca's</Name><X>3755</X><Y>3810</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Hollister Co.</Name><X>3990</X><Y>3810</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Gymboree</Name><X>4200</X><Y>3890</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Motherhood Maternity</Name><X>4405</X><Y>3805</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>The Children's Place</Name><X>4535</X><Y>3730</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Torrid</Name><X>4675</X><Y>3810</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Lane Bryant</Name><X>4815</X><Y>3575</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Tradehome Shoes</Name><X>4940</X><Y>3500</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Windsor</Name><X>5095</X><Y>5095</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>dressbarn</Name><X>5300</X><Y>3285</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Boston Store</Name><X>1905</X><Y>3975</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Gordmans</Name><X>5295</X><Y>3510</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>JCPenney</Name><X>3865</X><Y>3170</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Sears</Name><X>995</X><Y>3165</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Barnes and Noble Booksellers</Name><X>3235</X><Y>2170</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Buffalo Wild Wings</Name><X>4090</X><Y>2075</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Steinhafels</Name><X>3335</X><Y>5565</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Dick's Sporting Goods</Name><X>5215</X><Y>4905</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Shoe Carnival</Name><X>5605</X><Y>3115</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Kato's Cajun</Name><X>3710</X><Y>2010</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Subway</Name><X>3625</X><Y>2010</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Sarku Japan</Name><X>3550</X><Y>2010</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Steak Escape</Name><X>3805</X><Y>2110</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Arby's</Name><X>3885</X><Y>2180</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Open Hearth Charbroiled Chicken</Name><X>3900</X><Y>2280</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Stir Fry 88</Name><X>3900</X><Y>2400</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>McDonald's</Name><X>3875</X><Y>2490</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Taco Bell</Name><X>3800</X><Y>2560</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>EMPTY</Name><X>3675</X><Y>2645</Y><Z>1</Z><type>Normal</type></Node>
-<Node><Name>Bathroom 1</Name><X>3920</X><Y>2680</Y><Z>1</Z><type>Bathroom</type></Node>
-<Node><Name>Bathroom 2</Name><X>2980</X><Y>3155</Y><Z>1</Z><type>Bathroom</type></Node>
-<Node><Name>Bathroom 3</Name><X>3850</X><Y>5460</Y><Z>1</Z><type>Bathroom</type></Node>
-<Node><Name>Bathroom 4</Name><X>4845</X><Y>5040</Y><Z>1</Z><type>Bathroom</type></Node>
-</Nodes>
+<?xml version="1.0"?>
+<Node name="Amplified Phones"><X>4710</X><Y>3735</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Auntie Anne's"><X>3655</X><Y>3790</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Customized Teez"><X>4000</X><Y>3709</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Piercing Pagoda"><X>4350</X><Y>3790</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="ecoATM"><X>3515</X><Y>4130</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Sunglass Hut"><X>3340</X><Y>4330</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Justice"><X>3440</X><Y>4330</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Chinese Relaxation Center"><X>2780</X><Y>3970</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Journeys"><X>3000</X><Y>3970</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Charlotte Russe"><X>4850</X><Y>4015</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Nails and Spa"><X>5045</X><Y>4845</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Picture People"><X>4975</X><Y>4730</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Happy Feet Salon"><X>4905</X><Y>4600</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Name of the Game"><X>4815</X><Y>4815</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Master Cuts"><X>4730</X><Y>4290</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Dakota Watch Company"><X>4730</X><Y>4290</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Proactiv ZoomShops"><X>1985</X><Y>3815</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Sprint Store by Wireless Evolution"><X>4635</X><Y>4125</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="T-Mobile"><X>4635</X><Y>4125</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="TechBank"><X>3350</X><Y>2280</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="U.S. Cellular"><X>3350</X><Y>2500</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Victoria's Secret"><X>3350</X><Y>2800</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Fred Meyer Jewelers"><X>3350</X><Y>3400</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="DOZ CELL / iAccessories"><X>3350</X><Y>3970</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Express"><X>3620</X><Y>4155</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="The B-12 Store"><X>3455</X><Y>4860</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Life Uniform"><X>3455</X><Y>5045</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Just Fine Alterations"><X>3455</X><Y>5170</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Cricket"><X>3455</X><Y>5280</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="La Botique Eybrow Threading"><X>3455</X><Y>5360</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Best Nails"><X>3235</X><Y>5475</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Selah Hair &amp; Fashions"><X>3235</X><Y>5275</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="On 2 The Field"><X>3235</X><Y>5035</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Spencer's"><X>3235</X><Y>4845</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Claire's"><X>3235</X><Y>4645</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Zales"><X>3145</X><Y>4250</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Bath and Body Works"><X>3010</X><Y>4160</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="maurices"><X>2735</X><Y>4085</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Amy's Hallmark"><X>2575</X><Y>4085</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="AT&amp;T"><X>2355</X><Y>4085</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Gamestop"><X>2215</X><Y>4085</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="rue21"><X>1605</X><Y>3635</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Payless ShoeSource"><X>1385</X><Y>3510</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="The Salon Professional Academy"><X>1110</X><Y>3350</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Best Buy Mobile"><X>3235</X><Y>2675</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Zumiez"><X>3235</X><Y>2810</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Vanity"><X>3235</X><Y>2965</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Lids"><X>3235</X><Y>3100</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Mia and Maxx Hair Studio"><X>3235</X><Y>3335</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Kay Jewelers"><X>3235</X><Y>3580</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Buckle"><X>2985</X><Y>3810</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Aeropostale"><X>2755</X><Y>3890</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Things Remembered"><X>2645</X><Y>3890</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Hot Topic"><X>2455</X><Y>3890</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Complete Nutrition"><X>2095</X><Y>3695</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Champs Sports"><X>2245</X><Y>3780</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="LensCrafters"><X>2095</X><Y>3695</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Finish Line"><X>1960</X><Y>3615</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="American Eagle Outfitters"><X>1785</X><Y>3515</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Planet Fitness"><X>1405</X><Y>3295</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Foot Locker"><X>3455</X><Y>2700</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Fanzz"><X>3455</X><Y>2940</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Rogers and Hollands Jewelers"><X>3520</X><Y>3175</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="GNC"><X>3645</X><Y>3730</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="francesca's"><X>3755</X><Y>3810</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Hollister Co."><X>3990</X><Y>3810</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Gymboree"><X>4200</X><Y>3890</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Motherhood Maternity"><X>4405</X><Y>3805</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="The Children's Place"><X>4535</X><Y>3730</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Torrid"><X>4675</X><Y>3810</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Lane Bryant"><X>4815</X><Y>3575</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Tradehome Shoes"><X>4940</X><Y>3500</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Windsor"><X>5095</X><Y>5095</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="dressbarn"><X>5300</X><Y>3285</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Boston Store"><X>1905</X><Y>3975</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Gordmans"><X>5295</X><Y>3510</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="JCPenney"><X>3865</X><Y>3170</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Sears"><X>995</X><Y>3165</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Barnes and Noble Booksellers"><X>3235</X><Y>2170</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Buffalo Wild Wings"><X>4090</X><Y>2075</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Steinhafels"><X>3335</X><Y>5565</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Dick's Sporting Goods"><X>5215</X><Y>4905</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Shoe Carnival"><X>5605</X><Y>3115</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Kato's Cajun"><X>3710</X><Y>2010</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Subway"><X>3625</X><Y>2010</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Sarku Japan"><X>3550</X><Y>2010</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Steak Escape"><X>3805</X><Y>2110</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Arby's"><X>3885</X><Y>2180</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Open Hearth Charbroiled Chicken"><X>3900</X><Y>2280</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Stir Fry 88"><X>3900</X><Y>2400</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="McDonald's"><X>3875</X><Y>2490</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Taco Bell"><X>3800</X><Y>2560</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="EMPTY"><X>3675</X><Y>2645</Y><Z>1</Z><type>Normal</type></Node>
+<Node name="Bathroom 1"><X>3920</X><Y>2680</Y><Z>1</Z><type>Bathroom</type></Node>
+<Node name="Bathroom 2"><X>2980</X><Y>3155</Y><Z>1</Z><type>Bathroom</type></Node>
+<Node name="Bathroom 3"><X>3850</X><Y>5460</Y><Z>1</Z><type>Bathroom</type></Node>
+<Node name="Bathroom 4"><X>4845</X><Y>5040</Y><Z>1</Z><type>Bathroom</type></Node>
