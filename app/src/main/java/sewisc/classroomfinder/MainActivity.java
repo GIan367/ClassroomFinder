@@ -37,17 +37,10 @@ public class MainActivity extends AppCompatActivity {
     GridAdapter favoritesAdapter;
 
     Integer[] eastTowneFloors = {
-            R.drawable.map
+            R.mipmap.map
     };
     Integer[] hogwartsFloors = {
-            R.drawable.map, R.drawable.map, R.drawable.map, R.drawable.map,
-            R.drawable.map, R.drawable.map, R.drawable.map, R.drawable.map,
-            R.drawable.map, R.drawable.map, R.drawable.map, R.drawable.map,
-            R.drawable.map, R.drawable.map, R.drawable.map, R.drawable.map,
-            R.drawable.map, R.drawable.map, R.drawable.map, R.drawable.map,
-            R.drawable.map, R.drawable.map, R.drawable.map, R.drawable.map,
-            R.drawable.map, R.drawable.map, R.drawable.map, R.drawable.map,
-            R.drawable.map, R.drawable.map, R.drawable.map, R.drawable.map
+            R.mipmap.map2
     };
 
     @Override

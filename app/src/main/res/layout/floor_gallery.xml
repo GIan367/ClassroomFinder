@@ -15,7 +15,7 @@
 
     <GridView
         android:id="@+id/gridView1_g"
-        android:numColumns="auto_fit"
+        android:numColumns="3"
         android:gravity="center"
         android:columnWidth="70dp"
         android:stretchMode="columnWidth"
@@ -37,6 +37,7 @@
         app:hintText="Select Building"
         android:layout_marginBottom="12dp"
         android:layout_above="@+id/gridView1_g"
+        android:layout_below="@+id/textView3_g"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

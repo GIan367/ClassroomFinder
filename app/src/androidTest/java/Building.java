@@ -1,4 +1,4 @@
-import java.awt.image.BufferedImage;
+/*import java.awt.image.BufferedImage;
 import java.util.List;
 
 public class Building {
@@ -50,3 +50,4 @@ public class Building {
 	}
 	
 }
+*/
