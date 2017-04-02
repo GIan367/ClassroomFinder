@@ -29,6 +29,11 @@ public class MainActivity extends AppCompatActivity {
     boolean curLocSpinner1Valid;
     boolean destSpinner1Valid;
 
+    public static final String EXTRA_BUILDING = "sewisc.classroomfinder.BUILDING";
+    public static final String EXTRA_LOC = "sewisc.classroomfinder.LOC";
+    public static final String EXTRA_DEST = "sewisc.classroomfinder.DEST";
+    public static final String EXTRA_FLOOR = "sewisc.classroomfinder.FLOOR";
+
     // Temporary declarations and test data before database integration
     ArrayAdapter<String> buildingAdapter;
     ArrayAdapter<String> eastTowneAdapter;
@@ -37,10 +42,11 @@ public class MainActivity extends AppCompatActivity {
     GridAdapter favoritesAdapter;
 
     Integer[] eastTowneFloors = {
-            R.mipmap.map
+            R.mipmap.east_towne1
     };
     Integer[] hogwartsFloors = {
-            R.mipmap.map2
+            R.mipmap.map2, R.mipmap.east_towne1, R.mipmap.map2, R.mipmap.east_towne1,
+            R.mipmap.map2, R.mipmap.map2, R.mipmap.east_towne1, R.mipmap.map2,
     };
 
     @Override
@@ -217,7 +223,7 @@ public class MainActivity extends AppCompatActivity {
         floors.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                displayMap(getCurrentFocus());
+                displayMap(getCurrentFocus(), floorsAdapter.getItemRef(position));
             }
         });
 
@@ -227,7 +233,8 @@ public class MainActivity extends AppCompatActivity {
         favorites.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                displayMap(getCurrentFocus());
+                // TODO: interface with Favorites.java to get real values
+                displayMap(getCurrentFocus(), "East Towne Mall", "The Gap", "Food Court");
             }
         });
     }
@@ -254,6 +261,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Currently chooses from test data; will of course work with database later
     public void populateGallery(Object selectedBuilding) {
+        floorsAdapter.setmThumbIds(null);
         String buildingName = selectedBuilding.toString();
         if(buildingName.equals("East Towne Mall")) {
             floorsAdapter.setmThumbIds(eastTowneFloors);
@@ -262,9 +270,29 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // Currently displays the same test map no matter where it's called from
-    public void displayMap(View view) {
+    // Handle find button press from RoomFinder view
+    public void findRF(View view) {
+        displayMap(getCurrentFocus(), buildingSpinner1.getSelectedItem().toString(), curLocSpinner1.getSelectedItem().toString(), destSpinner1.getSelectedItem().toString());
+    }
+
+    // Handle find button press from RoomFinder view
+    public void findBF(View view) {
+        displayMap(getCurrentFocus(), buildingSpinner3.getSelectedItem().toString(), curLocSpinner3.getSelectedItem().toString(), null);
+    }
+
+    // When given a floor from Floor Gallery
+    public void displayMap(View view, Integer floor) {
         Intent intent = new Intent(this, MapView.class);
+        intent.putExtra(EXTRA_FLOOR, floor);
+        startActivity(intent);
+    }
+
+    // When given text info
+    public void displayMap(View view, String building, String loc, String dest) {
+        Intent intent = new Intent(this, MapView.class);
+        intent.putExtra(EXTRA_BUILDING, building);
+        intent.putExtra(EXTRA_LOC, loc);
+        intent.putExtra(EXTRA_DEST, dest);
         startActivity(intent);
     }
 
