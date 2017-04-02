@@ -12,6 +12,12 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TabHost;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
+
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,6 +60,43 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /*
+        // Temporary parser code to parse XML file. Just prints our each entry line by line
+        // an Entry is defined in XMLParser.java and currently consists of name, type, x, y, z
+        // If xml format should change, this can easily be update and accounted for in XMLParser.java
+         */
+        InputStream stream = null;
+        XMLParser xmlParser = new XMLParser();
+        List<XMLParser.Entry> entries = null;
+        try {
+            //new FileInputStream(new File("easttowne.xml"));
+            stream = getAssets().open("easttowne.xml");
+            entries = xmlParser.parse(stream);
+        }
+          catch (FileNotFoundException e) {
+            System.out.println("xml file not found");
+        } catch (XmlPullParserException e) {
+            System.out.println("parser not working");
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (stream != null) {
+            try {
+                stream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+        for(XMLParser.Entry entry: entries) {
+            System.out.println("Name: " + entry.name + " Type " +  entry.type + " X: "
+                + entry.x + " Y: " + entry.y + " Z: " + entry.z);
+        }
+
 
         // Set up tabs
         TabHost host = (TabHost) findViewById(R.id.tabHost);

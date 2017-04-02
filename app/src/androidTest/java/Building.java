@@ -1,4 +1,4 @@
-import java.awt.image.BufferedImage;
+//import java.awt.image.BufferedImage;
 import java.util.List;
 
 public class Building {
@@ -6,17 +6,17 @@ public class Building {
 	private List<Node> rooms;
 	private List<Node> bathrooms;
 	private List<Node> entrances;
-	private List<BufferedImage> floorMaps;
+	//private List<BufferedImage> floorMaps;
 	private Graph buildingGraph;
 	
 	public Building(String name, List<Node> rooms, List<Node> bathrooms,
-			List<Node> entrances, List<BufferedImage> floorMaps,
+			List<Node> entrances,
 			Graph buildingGraph){
 		this.name = name;
 		this.rooms = rooms;
 		this.bathrooms = bathrooms;
 		this.entrances = entrances;
-		this.floorMaps = floorMaps;
+		//this.floorMaps = floorMaps;
 		this.buildingGraph = buildingGraph;
 	}
 	
@@ -37,9 +37,9 @@ public class Building {
 		return entrances;
 	}
 	
-	public List<BufferedImage> getFloorMaps() {
+	/* public List<BufferedImage> getFloorMaps() {
 		return floorMaps;
-	}
+	} */
 	
 	public String getName() {
 		return name;
