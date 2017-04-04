@@ -12,7 +12,10 @@ import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -21,16 +24,28 @@ import java.util.List;
  */
 
 public class MapView extends AppCompatActivity {
+    ImageView imageView;
+    int ref;
+    String building;
+    String loc;
+    String dest;
+    Toast toast;
+    DataBaseHandler dataBaseHandler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.map);
 
         Intent intent = getIntent();
-        int ref = intent.getIntExtra(MainActivity.EXTRA_FLOOR, 0);
-        String building = intent.getStringExtra(MainActivity.EXTRA_BUILDING);
-        String loc = intent.getStringExtra(MainActivity.EXTRA_LOC);
-        String dest = intent.getStringExtra(MainActivity.EXTRA_DEST);
+        ref = intent.getIntExtra(MainActivity.EXTRA_FLOOR, 0);
+        building = intent.getStringExtra(MainActivity.EXTRA_BUILDING);
+        loc = intent.getStringExtra(MainActivity.EXTRA_LOC);
+        dest = intent.getStringExtra(MainActivity.EXTRA_DEST);
+
+        imageView = (ImageView)findViewById(R.id.image);
+        toast = Toast.makeText(getApplicationContext(), "Path saved to favorites.", Toast.LENGTH_SHORT);
+        dataBaseHandler = new DataBaseHandler(this);
 
         if(dest != null) { // All text fields populated -- standard Room Finder AStar
             //TODO: call AStar, determine correct map image to draw on (currently dummy value)
@@ -41,9 +56,20 @@ public class MapView extends AppCompatActivity {
             int id = getResources().getIdentifier("east_towne1", "mipmap", getPackageName());
             drawLine(id, null);
         } else { // No text fields populated -- only displaying a floor
-            ImageView imageView = (ImageView) findViewById(R.id.image);
             imageView.setImageResource(ref);
         }
+
+        imageView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if(loc != null) {
+                    int idx = dataBaseHandler.getFavoritesCount() + 1;
+                    dataBaseHandler.addFavorite(new Favorite(idx, building, loc, dest));
+                    toast.show();
+                }
+                return true;
+            }
+        });
     }
 
     // Draw line on given map image reference from current location to destination via list of nodes
@@ -72,7 +98,6 @@ public class MapView extends AppCompatActivity {
         // TODO: loop through list of nodes from AStar; currently draws a simple test line
         canvas.drawLine(0, 0, 691, 492, paint);
 
-        ImageView imageView = (ImageView)findViewById(R.id.image);
         imageView.setAdjustViewBounds(true);
         imageView.setImageBitmap(mutableBitmap);
     }

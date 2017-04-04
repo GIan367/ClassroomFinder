@@ -277,9 +277,9 @@ public class DataBaseHandler extends SQLiteOpenHelper{
         String selectQuery = "SELECT * FROM "  + TABLE_FAVORITE;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(selectQuery, null);
+        int count = c.getCount();
         c.close();
-
-        return c.getCount();
+        return count;
     }
 
     //returns buildings record count
@@ -287,9 +287,9 @@ public class DataBaseHandler extends SQLiteOpenHelper{
         String selectQuery = "SELECT * FROM "  + TABLE_BUILDING;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(selectQuery, null);
+        int count = c.getCount();
         c.close();
-
-        return c.getCount();
+        return count;
     }
 
     //returns locations record count
@@ -297,9 +297,9 @@ public class DataBaseHandler extends SQLiteOpenHelper{
         String selectQuery = "SELECT * FROM "  + TABLE_LOCATION;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(selectQuery, null);
+        int count = c.getCount();
         c.close();
-
-        return c.getCount();
+        return count;
     }
 
     //updates favorite record

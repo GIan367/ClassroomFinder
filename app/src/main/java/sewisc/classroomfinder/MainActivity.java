@@ -22,6 +22,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    DataBaseHandler dataBaseHandler;
+    List<Favorite> favoriteList;
+    List<String> favoritesArray;
     SearchableSpinner buildingSpinner1;
     SearchableSpinner curLocSpinner1;
     SearchableSpinner destSpinner1;
@@ -59,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        dataBaseHandler = new DataBaseHandler(this);
 
         /*
         // Temporary parser code to parse XML file. Just prints our each entry line by line
@@ -125,27 +130,24 @@ public class MainActivity extends AppCompatActivity {
         spec.setContent(R.id.favorite);
         host.addTab(spec);
 
-        SQLTest();
+        //SQLTest();
+        //dataBaseHandler.clearAllData();
 
-        // Generic test info; will later be replaced with database integration code
+        // Replace with reading info from XML files?
         List<String> buildingArray = new ArrayList<String>();
         buildingArray.add("East Towne Mall");
-        buildingArray.add("Hogwarts School of Witchcraft and Wizardry");
+        buildingArray.add("Hogwarts School of Witchcraft and Wizardry"); // Test Data
 
         List<String> eastTowneArray = new ArrayList<String>();
-        eastTowneArray.add("The Gap");
-        eastTowneArray.add("Food Court");
-        eastTowneArray.add("Radio Shack");
+        for(XMLParser.Entry entry: entries) {
+            if(entry.type.equals("Normal")) eastTowneArray.add(entry.name);
+        }
 
         List<String> hogwartsArray = new ArrayList<String>();
         hogwartsArray.add("Headmaster's Office");
         hogwartsArray.add("The Great Hall");
         hogwartsArray.add("Gryffindor Tower");
         hogwartsArray.add("Quidditch Pitch");
-
-        List<String> favoritesArray = new ArrayList<String>();
-        favoritesArray.add("Hogwarts School of Witchcraft and Wizardry: Headmaster's Office to Quidditch Pitch");
-        favoritesArray.add("East Towne Mall: The Gap to Food Court");
 
         // SearchableSpinners
         buildingSpinner1 = (SearchableSpinner) findViewById(R.id.spinner1_r);
@@ -215,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 curLocSpinner1Valid = true;
-                if(destSpinner1Valid == true) {
+                if(destSpinner1Valid) {
                     find1.setEnabled(true);
                 }
             }
@@ -231,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 destSpinner1Valid = true;
-                if(curLocSpinner1Valid == true) {
+                if(curLocSpinner1Valid) {
                     find1.setEnabled(true);
                 }
             }
@@ -270,14 +272,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        favoritesArray = new ArrayList<String>();
         favorites = (GridView) findViewById(R.id.gridView1_f);
-        favoritesAdapter = new GridAdapter(favoritesArray);
-        favorites.setAdapter(favoritesAdapter);
+        updateFavorites();
         favorites.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                // TODO: interface with Favorites.java to get real values
-                displayMap(getCurrentFocus(), "East Towne Mall", "The Gap", "Food Court");
+                Favorite f = favoriteList.get(position);
+                displayMap(getCurrentFocus(), f.getBuildingName(), f.getStartLocation(), f.getDestination());
+            }
+        });
+
+        // Refresh list of favorites whenever switching to Favorites tab
+        host.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String s) {
+                if(s.equals("Favorites")) updateFavorites();
             }
         });
     }
@@ -313,12 +323,24 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // Generates the favorites list from the favorites database and sets the grid adapter
+    public void updateFavorites() {
+        favoritesArray.clear();
+        favoriteList = dataBaseHandler.getAllFavorites();
+        for(Favorite f: favoriteList) {
+            System.out.println(f.getIndx() + f.getBuildingName() + f.getStartLocation() + f.getDestination());
+            favoritesArray.add(f.getBuildingName() + ": " + f.getStartLocation() + " to " + f.getDestination());
+        }
+        favoritesAdapter = new GridAdapter(favoritesArray);
+        favorites.setAdapter(favoritesAdapter);
+    }
+
     // Handle find button press from RoomFinder view
     public void findRF(View view) {
         displayMap(getCurrentFocus(), buildingSpinner1.getSelectedItem().toString(), curLocSpinner1.getSelectedItem().toString(), destSpinner1.getSelectedItem().toString());
     }
 
-    // Handle find button press from RoomFinder view
+    // Handle find button press from BathroomFinder view
     public void findBF(View view) {
         displayMap(getCurrentFocus(), buildingSpinner3.getSelectedItem().toString(), curLocSpinner3.getSelectedItem().toString(), null);
     }
@@ -348,7 +370,6 @@ public class MainActivity extends AppCompatActivity {
 
     //not a very intensive test - only tests insert; shows output in debugger
     public void SQLTest(){
-        DataBaseHandler dataBaseHandler = new DataBaseHandler(this);
         dataBaseHandler.clearAllData(); //resets data
 
         List<Favorite> testFavorites = new ArrayList<Favorite>();
