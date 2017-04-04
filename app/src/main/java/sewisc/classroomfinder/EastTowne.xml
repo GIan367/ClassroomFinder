@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<Nodes>
-<Node name="Journeys"><X>3000</X><Y>3970</Y><Z>1</Z><type>Normal</type><Neighbor>I</Neighbor></Node>
+<feed>
+<Node name="Journeys"><X>5060</X><Y>3647</Y><Z>1</Z><type>Normal</type><Neighbor>I</Neighbor></Node>
 <Node name="Charlotte Russe"><X>4850</X><Y>4015</Y><Z>1</Z><type>Normal</type><Neighbor>I</Neighbor></Node>
 <Node name="Nails and Spa"><X>5045</X><Y>4845</Y><Z>1</Z><type>Normal</type><Neighbor>K</Neighbor></Node>
 <Node name="Picture People"><X>4975</X><Y>4730</Y><Z>1</Z><type>Normal</type><Neighbor>K</Neighbor></Node>
@@ -23,7 +23,7 @@
 <Node name="Cricket"><X>3455</X><Y>5280</Y><Z>1</Z><type>Normal</type><Neighbor>G</Neighbor></Node>
 <Node name="La Botique Eybrow Threading"><X>3455</X><Y>5360</Y><Z>1</Z><type>Normal</type><Neighbor>G</Neighbor></Node>
 <Node name="Best Nails"><X>3235</X><Y>5475</Y><Z>1</Z><type>Normal</type><Neighbor>G</Neighbor></Node>
-<Node name="Selah Hair &amp; Fashions"><X>3235</X><Y>5275</Y><Z>1</Z><type>Normal</type><Neighbor>G</Neighbor></Node>
+<Node name="Selah Hair & Fashions"><X>3235</X><Y>5275</Y><Z>1</Z><type>Normal</type><Neighbor>G</Neighbor></Node>
 <Node name="On 2 The Field"><X>3235</X><Y>5035</Y><Z>1</Z><type>Normal</type><Neighbor>G</Neighbor></Node>
 <Node name="Spencer's"><X>3235</X><Y>4845</Y><Z>1</Z><type>Normal</type><Neighbor>G</Neighbor></Node>
 <Node name="Claire's"><X>3235</X><Y>4645</Y><Z>1</Z><type>Normal</type><Neighbor>G</Neighbor></Node>
@@ -31,7 +31,7 @@
 <Node name="Bath and Body Works"><X>3010</X><Y>4160</Y><Z>1</Z><type>Normal</type><Neighbor>D</Neighbor></Node>
 <Node name="maurices"><X>2735</X><Y>4085</Y><Z>1</Z><type>Normal</type><Neighbor>D</Neighbor></Node>
 <Node name="Amy's Hallmark"><X>2575</X><Y>4085</Y><Z>1</Z><type>Normal</type><Neighbor>D</Neighbor></Node>
-<Node name="AT&amp;T"><X>2355</X><Y>4085</Y><Z>1</Z><type>Normal</type><Neighbor>E</Neighbor></Node>
+<Node name="AT&T"><X>2355</X><Y>4085</Y><Z>1</Z><type>Normal</type><Neighbor>E</Neighbor></Node>
 <Node name="Gamestop"><X>2215</X><Y>4085</Y><Z>1</Z><type>Normal</type><Neighbor>E</Neighbor></Node>
 <Node name="rue21"><X>1605</X><Y>3635</Y><Z>1</Z><type>Normal</type><Neighbor>E</Neighbor></Node>
 <Node name="Payless ShoeSource"><X>1385</X><Y>3510</Y><Z>1</Z><type>Normal</type><Neighbor>F</Neighbor></Node>
@@ -68,7 +68,7 @@
 <Node name="dressbarn"><X>5300</X><Y>3285</Y><Z>1</Z><type>Normal</type><Neighbor>J</Neighbor></Node>
 <Node name="Boston Store"><X>1905</X><Y>3975</Y><Z>1</Z><type>Normal</type><Neighbor>E</Neighbor></Node>
 <Node name="Gordmans"><X>5295</X><Y>3510</Y><Z>1</Z><type>Normal</type><Neighbor>J</Neighbor></Node>
-<Node name="JCPenney"><X>3865</X><Y>3170</Y><Z>1</Z><type>Normal</type><Neighbor>J</Neighbor></Node>
+<Node name="JCPenney"><X>5847</X><Y>3160</Y><Z>1</Z><type>Normal</type><Neighbor>J</Neighbor></Node>
 <Node name="Sears"><X>995</X><Y>3165</Y><Z>1</Z><type>Normal</type><Neighbor>F</Neighbor></Node>
 <Node name="Barnes and Noble Booksellers"><X>3235</X><Y>2170</Y><Z>1</Z><type>Normal</type><Neighbor>A</Neighbor></Node>
 <Node name="Buffalo Wild Wings"><X>4090</X><Y>2075</Y><Z>1</Z><type>Normal</type><Neighbor>A</Neighbor></Node>
@@ -100,4 +100,4 @@
 <Node name="I"><X>4243</X><Y>3990</Y><Z>1</Z><type>Hall</type><Neighbor>H,J,K, Journeys, Charlotte Russe, Sprint Store by Wireless Evolution, T-Mobile, TechBank, U.S. Cellular, Victoria's Secret, Motherhood Maternity, The Children's Place, Torrid, Lane Bryant</Neighbor></Node>
 <Node name="J"><X>4593</X><Y>3817</Y><Z>1</Z><type>Hall</type><Neighbor>I, Shoe Carnival, Gordmans, JCPenney, Windsor, dressbarn, Tradehome Shoes</Neighbor></Node>
 <Node name="K"><X>5190</X><Y>4890</Y><Z>1</Z><type>Hall</type><Neighbor>I, Nails and Spa, Picture People, Happy Feet Salon, Name of the Game, Master Cuts, Dakota Watch Company, Proactiv ZoomShops, Bathroom 4, Dick's Sporting Goods</Neighbor></Node>
-</Nodes>
+</feed>
