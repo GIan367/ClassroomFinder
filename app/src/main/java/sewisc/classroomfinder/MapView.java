@@ -84,7 +84,9 @@ public class MapView extends AppCompatActivity {
         testNodes.add(new Node(NodeType.normal, 1905, 3975, 1, "Boston Store"));
         testNodes.add(new Node(NodeType.normal, 995, 3165, 1, "Sears"));
         testNodes.add(new Node(NodeType.normal, 5847, 3160, 1, "JCPenney"));
-        testNodes.add(new Node(NodeType.normal, 4710, 3735, 1, "Amplified Phones 2"));
+        //testNodes.add(new Node(NodeType.normal, 4710, 3735, 1, "Amplified Phones 2"));
+
+
         //uses parser to add all the nodes to a list; list should be used to construct building
         //class which will then be used to make the graph for the A* which will then be used to
         //choose a list of nodes for the path used for drawPath (I believe)
@@ -114,7 +116,10 @@ public class MapView extends AppCompatActivity {
         }
 
 
-
+        System.out.println("Destination: " + dest);
+        System.out.println("Location: " + loc);
+        System.out.println("Ref: " + ref);
+        System.out.println("Building: " + building);
         if(dest != null) { // All text fields populated -- standard Room Finder AStar
             //TODO: call AStar, determine correct map image to draw on (currently dummy value)
             int id = getResources().getIdentifier("east_towne1", "mipmap", getPackageName());
@@ -152,9 +157,7 @@ public class MapView extends AppCompatActivity {
         BitmapFactory.Options myOptions = new BitmapFactory.Options();
         myOptions.inDither = true;
         myOptions.inScaled = false;
-
         myOptions.inPreferredConfig = Bitmap.Config.ARGB_8888;// important
-        myOptions.inPurgeable = true;
 
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), ref, myOptions);
 
@@ -166,24 +169,27 @@ public class MapView extends AppCompatActivity {
 
         Bitmap workingBitmap = Bitmap.createBitmap(bitmap);
         Bitmap mutableBitmap = workingBitmap.copy(Bitmap.Config.ARGB_8888, true);
-
-        double scale = (2100.0/6998.0);
-        System.out.println(scale);
+        Bitmap startIcon = BitmapFactory.decodeResource(getResources(), getResources().getIdentifier("mapicon", "mipmap", getPackageName())); //mapicon bitmap creation
+        double scale = (2100.0/6998.0); //scale used for pixel conversion
         Canvas canvas = new Canvas(mutableBitmap);
-        //canvas.drawCircle(60, 50, 25, paint);
 
         // TODO: loop through list of nodes from AStar; currently draws a simple test line
-       // canvas.drawLine(0, 0, 2000, 2000, paint);
         Node prevNode = null;
+        Node startNode =null;
         for (Node n: nodes){
-
-            if (prevNode != null){
-                //first case
-                canvas.drawLine((int) (prevNode.getRelativeX() * scale), (int) (prevNode.getRelativeY() * scale), (int) (n.getRelativeX() * scale), (int) (n.getRelativeY() * scale), paint);
-                //System.out.println((int) (prevNode.getRelativeX() * scale));
+            if (prevNode == null){
+                //set the first node
+                startNode = n;
+            }
+            else{
+                canvas.drawLine((int) (prevNode.getRelativeX() * scale), (int) (prevNode.getRelativeY() * scale) , (int) (n.getRelativeX() * scale), (int) (n.getRelativeY() * scale), paint);
             }
             prevNode = n;
         }
+
+        //draw the start icon
+        if (startNode != null)
+            canvas.drawBitmap(startIcon, (int) (startNode.getRelativeX() * scale) - 64, (int) (startNode.getRelativeY() * scale) - 120, paint);
 
         imageView.setAdjustViewBounds(true);
         imageView.setImageBitmap(mutableBitmap);
