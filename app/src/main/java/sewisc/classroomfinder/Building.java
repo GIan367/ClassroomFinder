@@ -54,6 +54,21 @@ public class Building {
 		return pathFinder.findPath(currentLocation, destination);
 	}
 	
+	public List<Node> FindNearestBathroom (Node currentLocation){
+		Iterator<Node> bathroomIterator = bathrooms.iterator();
+		Node bathroomNode = bathroomIterator.next();
+		int distance = buildingGraph.heuristic(currentLocation, bathroomNode);
+		while (bathroomIterator.hasNext()){
+			Node nextBathroomNode = bathroomIterator.next();
+			int nextDistance = buildingGraph.heuristic(currentLocation, nextBathroomNode);
+			if (nextDistance < distance){
+				distance = nextDistance;
+				bathroomNode = nextBathroomNode;
+			}
+		}
+		return FindPath(currentLocation,bathroomNode);
+	}
+	
 	public List<Node> getBathrooms() {
 		return bathrooms;
 	}
