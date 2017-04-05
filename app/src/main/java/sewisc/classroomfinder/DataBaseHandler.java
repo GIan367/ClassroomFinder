@@ -343,8 +343,9 @@ public class DataBaseHandler extends SQLiteOpenHelper{
     //deletes favorite record
     public void deleteFavorite(Favorite favorite){
         SQLiteDatabase db = this.getReadableDatabase();
-        db.delete(TABLE_FAVORITE, KEY_BUILDING_NAME + " = ?",
-                new String[]{String.valueOf(favorite.getBuildingName())});
+        db.delete(TABLE_FAVORITE, KEY_INDX + " = ?", //KEY_BUILDING_NAME + "=? and " + KEY_START_LOCATION + "=? and " + KEY_DESTINATION + "=?",
+                new String[]{String.valueOf(favorite.getIndx())});
+                //new String[]{String.valueOf(favorite.getBuildingName()), String.valueOf(favorite.getStartLocation()), String.valueOf(favorite.getDestination())});
         db.close();
     }
     //deletes building record

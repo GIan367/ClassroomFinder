@@ -131,8 +131,14 @@ public class MapView extends AppCompatActivity {
             @Override
             public boolean onLongClick(View v) {
                 if(loc != null) {
-                    int idx = dataBaseHandler.getFavoritesCount() + 1;
-                    dataBaseHandler.addFavorite(new Favorite(idx, building, loc, dest));
+                    List<Favorite> favorites = dataBaseHandler.getAllFavorites();
+                    int indx;
+                    if(favorites.isEmpty()) {
+                        indx = 0;
+                    } else {
+                        indx = favorites.get(favorites.size() - 1).getIndx() + 1;
+                    }
+                    dataBaseHandler.addFavorite(new Favorite(indx, building, loc, dest));
                     toast.show();
                 }
                 return true;
