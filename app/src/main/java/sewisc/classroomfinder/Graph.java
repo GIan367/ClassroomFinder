@@ -34,4 +34,8 @@ public class Graph {
         }
         return ret;
     }
+    
+    public Set<Node> getAllNodes () {
+    	return edges.keySet();
+    }
 }

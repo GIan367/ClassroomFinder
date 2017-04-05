@@ -18,7 +18,7 @@ public class XMLParser {
     private static final String ns = null;
 
 
-    public List parse(InputStream in) throws XmlPullParserException, IOException {
+    public static List<Node> parse(InputStream in) throws XmlPullParserException, IOException {
         try {
             XmlPullParser parser = Xml.newPullParser();
             parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
@@ -30,8 +30,8 @@ public class XMLParser {
         }
     }
 
-    private List readFeed(XmlPullParser parser) throws XmlPullParserException, IOException {
-        List entries = new ArrayList();
+    private static List<Node> readFeed(XmlPullParser parser) throws XmlPullParserException, IOException {
+        List<Node> entries = new ArrayList();
         parser.require(XmlPullParser.START_TAG, ns, "feed");
         while (parser.next() != XmlPullParser.END_TAG) {
             if (parser.getEventType() != XmlPullParser.START_TAG) {
@@ -49,26 +49,29 @@ public class XMLParser {
         return entries;
     }
 
-    public static class Entry {
+    /*public static class Entry {
         public final String name;
         public final String type;
+        public final String[] neighbors;
         public final int x;
         public final int y;
         public final int z;
 
-        private Entry(String name, String type, int x, int y, int z) {
+        private Entry(String name, String type, String[] neighbors, int x, int y, int z) {
             this.name = name;
             this.type = type;
+            this.neighbors = neighbors;
             this.x = x;
             this.y = y;
             this.z = z;
         }
-    }
+    }*/
 
-    private Entry readEntry(XmlPullParser parser) throws XmlPullParserException, IOException {
+    private static Node readEntry(XmlPullParser parser) throws XmlPullParserException, IOException {
         parser.require(XmlPullParser.START_TAG, ns, "Node");
         String name = parser.getAttributeValue(0);
-        String type = null;
+        NodeType type = null;
+        String neighbors = null;
         int x = -1;
         int y = -1;
         int z = -1;
@@ -85,42 +88,68 @@ public class XMLParser {
                 y = readY(parser);
             } else if (parserName.equals("Z")) {
                 z = readZ(parser);
+            } else if (parserName.equals("Neighbor")) {
+                neighbors = readNeighbors(parser);
             } else {
                 skip(parser);
             }
         }
-        return new Entry(name, type, x, y, z);
+        String[] neighborsList = neighbors.split(",");
+        for (int i = 0; i < this.neighborsList.length; i++){
+        	this.neighborsList[i].trim();
+        }
+        return new Node(type, x, y, z, name, neighborsList);
     }
 
-    private String readType(XmlPullParser parser) throws IOException, XmlPullParserException {
+    private static NodeType readType(XmlPullParser parser) throws IOException, XmlPullParserException {
         parser.require(XmlPullParser.START_TAG, ns, "type");
         String type = readText(parser);
         parser.require(XmlPullParser.END_TAG, ns, "type");
-        return type;
+        NodeType enumType;
+        if (type.equalsIgnoreCase("Normal")){
+        	enumType = NodeType.normal;
+        }else if (type.equalsIgnoreCase("Bathroom")){
+        	enumType = NodeType.bathroom;
+        }else if (type.equalsIgnoreCase("Elevator")){
+        	enumType = NodeType.elevator;
+        }else if (type.equalsIgnoreCase("Stair")){
+        	enumType = NodeType.stair;
+        }else{
+        	//TODO Throw proper exception for type not found
+        	throw new XmlPullParserException();
+        }
+        return enumType;
     }
 
-    private int readX(XmlPullParser parser) throws IOException, XmlPullParserException {
+    private static int readX(XmlPullParser parser) throws IOException, XmlPullParserException {
         parser.require(XmlPullParser.START_TAG, ns, "X");
         int x = readNumber(parser);
         parser.require(XmlPullParser.END_TAG, ns, "X");
         return x;
     }
 
-    private int readY(XmlPullParser parser) throws IOException, XmlPullParserException {
+    private static int readY(XmlPullParser parser) throws IOException, XmlPullParserException {
         parser.require(XmlPullParser.START_TAG, ns, "Y");
         int y = readNumber(parser);
         parser.require(XmlPullParser.END_TAG, ns, "Y");
         return y;
     }
 
-    private int readZ(XmlPullParser parser) throws IOException, XmlPullParserException {
+    private static int readZ(XmlPullParser parser) throws IOException, XmlPullParserException {
         parser.require(XmlPullParser.START_TAG, ns, "Z");
         int z = readNumber(parser);
         parser.require(XmlPullParser.END_TAG, ns, "Z");
         return z;
     }
 
-    private String readText(XmlPullParser parser) throws IOException, XmlPullParserException {
+    private static String readNeighbors(XmlPullParser parser) throws IOException, XmlPullParserException {
+        parser.require(XmlPullParser.START_TAG, ns, "Neighbor");
+        String neighbors = readNumber(parser);
+        parser.require(XmlPullParser.END_TAG, ns, "Neighbor");
+        return neighbors;
+    }
+
+    private static String readText(XmlPullParser parser) throws IOException, XmlPullParserException {
         String result = "";
         if (parser.next() == XmlPullParser.TEXT) {
             result = parser.getText();
@@ -129,7 +158,7 @@ public class XMLParser {
         return result;
     }
 
-    private int readNumber(XmlPullParser parser) throws IOException, XmlPullParserException {
+    private static int readNumber(XmlPullParser parser) throws IOException, XmlPullParserException {
         int result = -1;
         if (parser.next() == XmlPullParser.TEXT) {
             result = Integer.parseInt(parser.getText());
@@ -138,7 +167,7 @@ public class XMLParser {
         return result;
     }
 
-    private void skip(XmlPullParser parser) throws XmlPullParserException, IOException {
+    private static void skip(XmlPullParser parser) throws XmlPullParserException, IOException {
         if (parser.getEventType() != XmlPullParser.START_TAG) {
             throw new IllegalStateException();
         }
