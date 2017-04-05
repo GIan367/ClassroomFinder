@@ -1,7 +1,9 @@
 package sewisc.classroomfinder;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     DataBaseHandler dataBaseHandler;
     List<Favorite> favoriteList;
     List<String> favoritesArray;
+    SwipeDetector swipeDetector;
     SearchableSpinner buildingSpinner1;
     SearchableSpinner curLocSpinner1;
     SearchableSpinner destSpinner1;
@@ -274,12 +277,39 @@ public class MainActivity extends AppCompatActivity {
 
         favoritesArray = new ArrayList<String>();
         favorites = (GridView) findViewById(R.id.gridView1_f);
+        favorites.setChoiceMode(GridView.CHOICE_MODE_SINGLE);
+        favorites.setSelector(android.R.color.darker_gray);
         updateFavorites();
+        swipeDetector = new SwipeDetector();
+        favorites.setOnTouchListener(swipeDetector);
         favorites.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                Favorite f = favoriteList.get(position);
-                displayMap(getCurrentFocus(), f.getBuildingName(), f.getStartLocation(), f.getDestination());
+                final Favorite f = favoriteList.get(position);
+                if(swipeDetector.swipeDetected()) {
+                    if(swipeDetector.getAction() == SwipeDetector.Action.RL) {
+                        new AlertDialog.Builder(MainActivity.this)
+                                .setTitle("Delete entry")
+                                .setMessage("Are you sure you want to delete the highlighted entry?")
+                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dataBaseHandler.deleteFavorite(f);
+                                        updateFavorites();
+                                    }
+                                })
+                                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        // do nothing
+                                    }
+                                })
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .show();
+                    }
+                } else {
+                    displayMap(getCurrentFocus(), f.getBuildingName(), f.getStartLocation(), f.getDestination());
+                }
             }
         });
 
