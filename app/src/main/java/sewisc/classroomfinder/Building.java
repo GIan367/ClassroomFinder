@@ -4,6 +4,8 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,8 +21,15 @@ public class Building {
     private Graph buildingGraph;
 
     public Building(String name, String xmlFile, List<String> floorMaps) throws XmlPullParserException{
-        InputStream in = new FileInputStream(new File(xmlFile));
-        List<Node> nodeList = XMLParser.parse(in);
+        List<Node> nodeList = null;
+        try {
+            InputStream in = new FileInputStream(new File(xmlFile));
+            nodeList = XMLParser.parse(in);
+        } catch (FileNotFoundException e) {
+            // TODO: SOMETHING
+        } catch (IOException e) {
+            // TODO: SOMETHING
+        }
         HashMap<Node,Node[]> hashMap = new HashMap<Node,Node[]>();
         Iterator<Node> nodeIterator = nodeList.iterator();
         rooms = new ArrayList<Node>();

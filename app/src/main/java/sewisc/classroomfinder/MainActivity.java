@@ -75,7 +75,8 @@ public class MainActivity extends AppCompatActivity {
          */
         InputStream stream = null;
         XMLParser xmlParser = new XMLParser();
-        List<XMLParser.Entry> entries = null;
+        //List<XMLParser.Entry> entries = null;
+        List<Node> entries = null;
         try {
             //new FileInputStream(new File("easttowne.xml"));
             stream = getAssets().open("easttowne.xml");
@@ -99,9 +100,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        for(XMLParser.Entry entry: entries) {
-            System.out.println("Name: " + entry.name + " Type " +  entry.type + " X: "
-                + entry.x + " Y: " + entry.y + " Z: " + entry.z);
+        for(Node entry: entries) {
+            System.out.println("Name: " + entry.getName() + " Type " +  entry.getType() + " X: "
+                + entry.getRelativeX() + " Y: " + entry.getRelativeY() + " Z: " + entry.getFloor());
         }
 
 
@@ -142,8 +143,8 @@ public class MainActivity extends AppCompatActivity {
         buildingArray.add("Hogwarts School of Witchcraft and Wizardry"); // Test Data
 
         List<String> eastTowneArray = new ArrayList<String>();
-        for(XMLParser.Entry entry: entries) {
-            if(entry.type.equals("Normal")) eastTowneArray.add(entry.name);
+        for(Node entry: entries) {
+            if(entry.getType().equals(NodeType.normal)) eastTowneArray.add(entry.getName());
         }
 
         List<String> hogwartsArray = new ArrayList<String>();
