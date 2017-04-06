@@ -407,9 +407,9 @@ public class MainActivity extends AppCompatActivity {
             testFavorites.add(new Favorite(i, "Test Building Name " + i, "Test Start Location " + i, "Test Destination " + i));
         }
 
-        List<Building> testBuildings = new ArrayList<Building>();
+        List<BuildingDB> testBuildings = new ArrayList<BuildingDB>();
         for (int i = 0;i < 4; i++){
-            testBuildings.add(new Building(i, "Test Name(Building) " + i));
+            testBuildings.add(new BuildingDB(i, "Test Name(Building) " + i));
         }
 
         List<Location> testLocations = new ArrayList<Location>();
@@ -422,7 +422,7 @@ public class MainActivity extends AppCompatActivity {
             dataBaseHandler.addFavorite(f);
         }
 
-        for (Building b: testBuildings){
+        for (BuildingDB b: testBuildings){
             Log.d("Insert:", "Inserting "+b.getName());
             dataBaseHandler.addBuilding(b);
         }
@@ -440,9 +440,9 @@ public class MainActivity extends AppCompatActivity {
                     + " Destination: " + f.getDestination());
         }
 
-        List<Building> resultBuildings = dataBaseHandler.getAllBuildings();
+        List<BuildingDB> resultBuildings = dataBaseHandler.getAllBuildings();
         Log.d("Reading:", "Buildings");
-        for (Building b: resultBuildings){
+        for (BuildingDB b: resultBuildings){
             Log.d("Read:", "ID: " + b.getID() + " Name: " + b.getName());
         }
 
