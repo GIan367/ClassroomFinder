@@ -46,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Find"
-        android:onClick="displayMap"
+        android:onClick="findBF"
         android:layout_marginBottom="17dp"
         android:id="@+id/button_b"
         android:layout_alignParentBottom="true"

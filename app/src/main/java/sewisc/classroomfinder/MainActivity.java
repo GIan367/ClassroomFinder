@@ -1,7 +1,9 @@
 package sewisc.classroomfinder;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -12,10 +14,20 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TabHost;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
+
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    DataBaseHandler dataBaseHandler;
+    List<Favorite> favoriteList;
+    List<String> favoritesArray;
+    SwipeDetector swipeDetector;
     SearchableSpinner buildingSpinner1;
     SearchableSpinner curLocSpinner1;
     SearchableSpinner destSpinner1;
@@ -29,6 +41,11 @@ public class MainActivity extends AppCompatActivity {
     boolean curLocSpinner1Valid;
     boolean destSpinner1Valid;
 
+    public static final String EXTRA_BUILDING = "sewisc.classroomfinder.BUILDING";
+    public static final String EXTRA_LOC = "sewisc.classroomfinder.LOC";
+    public static final String EXTRA_DEST = "sewisc.classroomfinder.DEST";
+    public static final String EXTRA_FLOOR = "sewisc.classroomfinder.FLOOR";
+
     // Temporary declarations and test data before database integration
     ArrayAdapter<String> buildingAdapter;
     ArrayAdapter<String> eastTowneAdapter;
@@ -37,23 +54,56 @@ public class MainActivity extends AppCompatActivity {
     GridAdapter favoritesAdapter;
 
     Integer[] eastTowneFloors = {
-            R.drawable.map
+            R.mipmap.east_towne1
     };
     Integer[] hogwartsFloors = {
-            R.drawable.map, R.drawable.map, R.drawable.map, R.drawable.map,
-            R.drawable.map, R.drawable.map, R.drawable.map, R.drawable.map,
-            R.drawable.map, R.drawable.map, R.drawable.map, R.drawable.map,
-            R.drawable.map, R.drawable.map, R.drawable.map, R.drawable.map,
-            R.drawable.map, R.drawable.map, R.drawable.map, R.drawable.map,
-            R.drawable.map, R.drawable.map, R.drawable.map, R.drawable.map,
-            R.drawable.map, R.drawable.map, R.drawable.map, R.drawable.map,
-            R.drawable.map, R.drawable.map, R.drawable.map, R.drawable.map
+            R.mipmap.map2, R.mipmap.east_towne1, R.mipmap.map2, R.mipmap.east_towne1,
+            R.mipmap.map2, R.mipmap.map2, R.mipmap.east_towne1, R.mipmap.map2,
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        dataBaseHandler = new DataBaseHandler(this);
+
+        /*
+        // Temporary parser code to parse XML file. Just prints our each entry line by line
+        // an Entry is defined in XMLParser.java and currently consists of name, type, x, y, z
+        // If xml format should change, this can easily be update and accounted for in XMLParser.java
+         */
+        InputStream stream = null;
+        XMLParser xmlParser = new XMLParser();
+        List<XMLParser.Entry> entries = null;
+        try {
+            //new FileInputStream(new File("easttowne.xml"));
+            stream = getAssets().open("easttowne.xml");
+            entries = xmlParser.parse(stream);
+        }
+          catch (FileNotFoundException e) {
+            System.out.println("xml file not found");
+        } catch (XmlPullParserException e) {
+            System.out.println("parser not working");
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (stream != null) {
+            try {
+                stream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+        for(XMLParser.Entry entry: entries) {
+            System.out.println("Name: " + entry.name + " Type " +  entry.type + " X: "
+                + entry.x + " Y: " + entry.y + " Z: " + entry.z);
+        }
+
 
         // Set up tabs
         TabHost host = (TabHost) findViewById(R.id.tabHost);
@@ -83,27 +133,24 @@ public class MainActivity extends AppCompatActivity {
         spec.setContent(R.id.favorite);
         host.addTab(spec);
 
-        SQLTest();
+        //SQLTest();
+        //dataBaseHandler.clearAllData();
 
-        // Generic test info; will later be replaced with database integration code
+        // Replace with reading info from XML files?
         List<String> buildingArray = new ArrayList<String>();
         buildingArray.add("East Towne Mall");
-        buildingArray.add("Hogwarts School of Witchcraft and Wizardry");
+        buildingArray.add("Hogwarts School of Witchcraft and Wizardry"); // Test Data
 
         List<String> eastTowneArray = new ArrayList<String>();
-        eastTowneArray.add("The Gap");
-        eastTowneArray.add("Food Court");
-        eastTowneArray.add("Radio Shack");
+        for(XMLParser.Entry entry: entries) {
+            if(entry.type.equals("Normal")) eastTowneArray.add(entry.name);
+        }
 
         List<String> hogwartsArray = new ArrayList<String>();
         hogwartsArray.add("Headmaster's Office");
         hogwartsArray.add("The Great Hall");
         hogwartsArray.add("Gryffindor Tower");
         hogwartsArray.add("Quidditch Pitch");
-
-        List<String> favoritesArray = new ArrayList<String>();
-        favoritesArray.add("Hogwarts School of Witchcraft and Wizardry: Headmaster's Office to Quidditch Pitch");
-        favoritesArray.add("East Towne Mall: The Gap to Food Court");
 
         // SearchableSpinners
         buildingSpinner1 = (SearchableSpinner) findViewById(R.id.spinner1_r);
@@ -173,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 curLocSpinner1Valid = true;
-                if(destSpinner1Valid == true) {
+                if(destSpinner1Valid) {
                     find1.setEnabled(true);
                 }
             }
@@ -189,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 destSpinner1Valid = true;
-                if(curLocSpinner1Valid == true) {
+                if(curLocSpinner1Valid) {
                     find1.setEnabled(true);
                 }
             }
@@ -224,17 +271,53 @@ public class MainActivity extends AppCompatActivity {
         floors.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                displayMap(getCurrentFocus());
+                displayMap(getCurrentFocus(), floorsAdapter.getItemRef(position));
             }
         });
 
+        favoritesArray = new ArrayList<String>();
         favorites = (GridView) findViewById(R.id.gridView1_f);
-        favoritesAdapter = new GridAdapter(favoritesArray);
-        favorites.setAdapter(favoritesAdapter);
+        favorites.setChoiceMode(GridView.CHOICE_MODE_SINGLE);
+        favorites.setSelector(android.R.color.darker_gray);
+        updateFavorites();
+        swipeDetector = new SwipeDetector();
+        favorites.setOnTouchListener(swipeDetector);
         favorites.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                displayMap(getCurrentFocus());
+                final Favorite f = favoriteList.get(position);
+                if(swipeDetector.swipeDetected()) {
+                    if(swipeDetector.getAction() == SwipeDetector.Action.RL) {
+                        new AlertDialog.Builder(MainActivity.this)
+                                .setTitle("Delete entry")
+                                .setMessage("Are you sure you want to delete the highlighted entry?")
+                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dataBaseHandler.deleteFavorite(f);
+                                        updateFavorites();
+                                    }
+                                })
+                                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        // do nothing
+                                    }
+                                })
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .show();
+                    }
+                } else {
+                    displayMap(getCurrentFocus(), f.getBuildingName(), f.getStartLocation(), f.getDestination());
+                }
+            }
+        });
+
+        // Refresh list of favorites whenever switching to Favorites tab
+        host.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String s) {
+                if(s.equals("Favorites")) updateFavorites();
             }
         });
     }
@@ -261,6 +344,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Currently chooses from test data; will of course work with database later
     public void populateGallery(Object selectedBuilding) {
+        floorsAdapter.setmThumbIds(null);
         String buildingName = selectedBuilding.toString();
         if(buildingName.equals("East Towne Mall")) {
             floorsAdapter.setmThumbIds(eastTowneFloors);
@@ -269,9 +353,41 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // Currently displays the same test map no matter where it's called from
-    public void displayMap(View view) {
+    // Generates the favorites list from the favorites database and sets the grid adapter
+    public void updateFavorites() {
+        favoritesArray.clear();
+        favoriteList = dataBaseHandler.getAllFavorites();
+        for(Favorite f: favoriteList) {
+            System.out.println(f.getIndx() + f.getBuildingName() + f.getStartLocation() + f.getDestination());
+            favoritesArray.add(f.getBuildingName() + ": " + f.getStartLocation() + " to " + f.getDestination());
+        }
+        favoritesAdapter = new GridAdapter(favoritesArray);
+        favorites.setAdapter(favoritesAdapter);
+    }
+
+    // Handle find button press from RoomFinder view
+    public void findRF(View view) {
+        displayMap(getCurrentFocus(), buildingSpinner1.getSelectedItem().toString(), curLocSpinner1.getSelectedItem().toString(), destSpinner1.getSelectedItem().toString());
+    }
+
+    // Handle find button press from BathroomFinder view
+    public void findBF(View view) {
+        displayMap(getCurrentFocus(), buildingSpinner3.getSelectedItem().toString(), curLocSpinner3.getSelectedItem().toString(), null);
+    }
+
+    // When given a floor from Floor Gallery
+    public void displayMap(View view, Integer floor) {
         Intent intent = new Intent(this, MapView.class);
+        intent.putExtra(EXTRA_FLOOR, floor);
+        startActivity(intent);
+    }
+
+    // When given text info
+    public void displayMap(View view, String building, String loc, String dest) {
+        Intent intent = new Intent(this, MapView.class);
+        intent.putExtra(EXTRA_BUILDING, building);
+        intent.putExtra(EXTRA_LOC, loc);
+        intent.putExtra(EXTRA_DEST, dest);
         startActivity(intent);
     }
 
@@ -284,7 +400,6 @@ public class MainActivity extends AppCompatActivity {
 
     //not a very intensive test - only tests insert; shows output in debugger
     public void SQLTest(){
-        DataBaseHandler dataBaseHandler = new DataBaseHandler(this);
         dataBaseHandler.clearAllData(); //resets data
 
         List<Favorite> testFavorites = new ArrayList<Favorite>();
@@ -292,9 +407,9 @@ public class MainActivity extends AppCompatActivity {
             testFavorites.add(new Favorite(i, "Test Building Name " + i, "Test Start Location " + i, "Test Destination " + i));
         }
 
-        List<Building> testBuildings = new ArrayList<Building>();
+        List<BuildingDB> testBuildings = new ArrayList<BuildingDB>();
         for (int i = 0;i < 4; i++){
-            testBuildings.add(new Building(i, "Test Name(Building) " + i));
+            testBuildings.add(new BuildingDB(i, "Test Name(Building) " + i));
         }
 
         List<Location> testLocations = new ArrayList<Location>();
@@ -307,7 +422,7 @@ public class MainActivity extends AppCompatActivity {
             dataBaseHandler.addFavorite(f);
         }
 
-        for (Building b: testBuildings){
+        for (BuildingDB b: testBuildings){
             Log.d("Insert:", "Inserting "+b.getName());
             dataBaseHandler.addBuilding(b);
         }
@@ -325,9 +440,9 @@ public class MainActivity extends AppCompatActivity {
                     + " Destination: " + f.getDestination());
         }
 
-        List<Building> resultBuildings = dataBaseHandler.getAllBuildings();
+        List<BuildingDB> resultBuildings = dataBaseHandler.getAllBuildings();
         Log.d("Reading:", "Buildings");
-        for (Building b: resultBuildings){
+        for (BuildingDB b: resultBuildings){
             Log.d("Read:", "ID: " + b.getID() + " Name: " + b.getName());
         }
 

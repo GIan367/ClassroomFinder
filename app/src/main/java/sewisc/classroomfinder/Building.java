@@ -1,42 +1,96 @@
 package sewisc.classroomfinder;
 
-import android.os.Build;
+import org.xmlpull.v1.XmlPullParserException;
 
-/**
- * Created by Matthew on 3/14/2017.
- */
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+
 public class Building {
+    private String name;
+    private List<Node> rooms;
+    private List<Node> bathrooms;
+    private List<Node> entrances;
+    private List<String> floorMaps;
+    private Graph buildingGraph;
 
-    //table variables
-    int id;
-    String name;
+    public Building(String name, String xmlFile, List<String> floorMaps) throws XmlPullParserException{
+        InputStream in = new FileInputStream(new File(xmlFile));
+        List<Node> nodeList = XMLParser.parse(in);
+        HashMap<Node,Node[]> hashMap = new HashMap<Node,Node[]>();
+        Iterator<Node> nodeIterator = nodeList.iterator();
+        rooms = new ArrayList<Node>();
+        bathrooms = new ArrayList<Node>();
+        entrances = new ArrayList<Node>();
+        while (nodeIterator.hasNext()){
+            Node nextNode = nodeIterator.next();
+            Node[] neighbors = new Node[nextNode.getNeighbors().length];
+            for (int i = 0; i < nextNode.getNeighbors().length; i++){
+                Iterator<Node> neighborIterator = nodeList.iterator();
+                while (nodeIterator.hasNext()){
+                    Node nextNeighbor = neighborIterator.next();
+                    if (nextNode.getNeighbors()[i].equalsIgnoreCase(nextNeighbor.getName())){
+                        neighbors[i] = nextNeighbor;
+                    }
+                }
+            }
+            hashMap.put(nextNode, neighbors);
+            if (nextNode.getType().equals(NodeType.bathroom)){
+                bathrooms.add(nextNode);
+            }//TODO rooms vs entrances?
+        }
 
-    public Building(){
-        //empty constructor
-    }
-
-    public Building(int id, String name){
-        this.id = id;
         this.name = name;
+        this.buildingGraph = new Graph(hashMap);
+        this.floorMaps = floorMaps;
     }
 
-    //the following are getter methods for a record's fields
-    public int getID(){
-        return this.id;
+    public List<Node> FindPath(Node currentLocation, Node destination){
+        AStar pathFinder = new AStar(buildingGraph);
+        return pathFinder.findPath(currentLocation, destination);
     }
 
-    public String getName(){
-        return this.name;
+    public List<Node> FindNearestBathroom (Node currentLocation){
+        Iterator<Node> bathroomIterator = bathrooms.iterator();
+        Node bathroomNode = bathroomIterator.next();
+        int distance = buildingGraph.heuristic(currentLocation, bathroomNode);
+        while (bathroomIterator.hasNext()){
+            Node nextBathroomNode = bathroomIterator.next();
+            int nextDistance = buildingGraph.heuristic(currentLocation, nextBathroomNode);
+            if (nextDistance < distance){
+                distance = nextDistance;
+                bathroomNode = nextBathroomNode;
+            }
+        }
+        return FindPath(currentLocation,bathroomNode);
     }
 
-    //the following are setter methods for a record's fields
-    public void setID(int id){
-        this.id = id;
+    public List<Node> getBathrooms() {
+        return bathrooms;
     }
 
-    public void setName(String name){
-        this.name = name;
+    public Graph getBuildingGraph() {
+        return buildingGraph;
     }
 
+    public List<Node> getEntrances() {
+        return entrances;
+    }
+
+    public List<String> getFloorMaps() {
+        return floorMaps;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<Node> getRooms() {
+        return rooms;
+    }
 
 }

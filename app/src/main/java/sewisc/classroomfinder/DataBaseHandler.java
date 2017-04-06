@@ -116,7 +116,7 @@ public class DataBaseHandler extends SQLiteOpenHelper{
     }
 
     //INSERTS A BUILDING RECORD
-    public void addBuilding(Building building){
+    public void addBuilding(BuildingDB building){
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -164,7 +164,7 @@ public class DataBaseHandler extends SQLiteOpenHelper{
     }
 
     //RETRIEVES BUILDING RECORD
-    public Building getBuilding(int id){
+    public BuildingDB getBuilding(int id){
         SQLiteDatabase db = this.getWritableDatabase();
 
         String selectQuery = "SELECT * FROM " + TABLE_BUILDING + " WHERE "
@@ -175,7 +175,7 @@ public class DataBaseHandler extends SQLiteOpenHelper{
         if (c != null)
             c.moveToFirst();
 
-        Building building = new Building();
+        BuildingDB building = new BuildingDB();
         building.setID(c.getInt(c.getColumnIndex(KEY_ID)));
         building.setName(c.getString(c.getColumnIndex(KEY_NAME)));
 
@@ -228,8 +228,8 @@ public class DataBaseHandler extends SQLiteOpenHelper{
         return favorites;
     }
     //returns a list of all buildings
-    public List<Building> getAllBuildings(){
-        List<Building> buildings = new ArrayList<Building>();
+    public List<BuildingDB> getAllBuildings(){
+        List<BuildingDB> buildings = new ArrayList<BuildingDB>();
         String selectQuery = "SELECT * FROM "  + TABLE_BUILDING;
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -238,7 +238,7 @@ public class DataBaseHandler extends SQLiteOpenHelper{
         //loops through rows and adds each to the list
         if (c.moveToFirst()){
             do {
-                Building building = new Building();
+                BuildingDB building = new BuildingDB();
                 building.setID(c.getInt(c.getColumnIndex(KEY_ID)));
                 building.setName(c.getString(c.getColumnIndex(KEY_NAME)));
 
@@ -277,9 +277,9 @@ public class DataBaseHandler extends SQLiteOpenHelper{
         String selectQuery = "SELECT * FROM "  + TABLE_FAVORITE;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(selectQuery, null);
+        int count = c.getCount();
         c.close();
-
-        return c.getCount();
+        return count;
     }
 
     //returns buildings record count
@@ -287,9 +287,9 @@ public class DataBaseHandler extends SQLiteOpenHelper{
         String selectQuery = "SELECT * FROM "  + TABLE_BUILDING;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(selectQuery, null);
+        int count = c.getCount();
         c.close();
-
-        return c.getCount();
+        return count;
     }
 
     //returns locations record count
@@ -297,9 +297,9 @@ public class DataBaseHandler extends SQLiteOpenHelper{
         String selectQuery = "SELECT * FROM "  + TABLE_LOCATION;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(selectQuery, null);
+        int count = c.getCount();
         c.close();
-
-        return c.getCount();
+        return count;
     }
 
     //updates favorite record
@@ -317,7 +317,7 @@ public class DataBaseHandler extends SQLiteOpenHelper{
     }
 
     //updates building record
-    public int updateBuilding(Building building){
+    public int updateBuilding(BuildingDB building){
         SQLiteDatabase db = this.getReadableDatabase();
 
         ContentValues values = new ContentValues();
@@ -343,12 +343,13 @@ public class DataBaseHandler extends SQLiteOpenHelper{
     //deletes favorite record
     public void deleteFavorite(Favorite favorite){
         SQLiteDatabase db = this.getReadableDatabase();
-        db.delete(TABLE_FAVORITE, KEY_BUILDING_NAME + " = ?",
-                new String[]{String.valueOf(favorite.getBuildingName())});
+        db.delete(TABLE_FAVORITE, KEY_INDX + " = ?", //KEY_BUILDING_NAME + "=? and " + KEY_START_LOCATION + "=? and " + KEY_DESTINATION + "=?",
+                new String[]{String.valueOf(favorite.getIndx())});
+                //new String[]{String.valueOf(favorite.getBuildingName()), String.valueOf(favorite.getStartLocation()), String.valueOf(favorite.getDestination())});
         db.close();
     }
     //deletes building record
-    public void deleteBuilding(Building building){
+    public void deleteBuilding(BuildingDB building){
         SQLiteDatabase db = this.getReadableDatabase();
         db.delete(TABLE_BUILDING, KEY_ID + " = ?",
                 new String[]{String.valueOf(building.getID())});
