@@ -8,7 +8,7 @@ public class Building {
 	private List<Node> entrances;
 	private List<BufferedImage> floorMaps;
 	private Graph buildingGraph;
-	
+
 	public Building(String name, List<Node> rooms, List<Node> bathrooms,
 			List<Node> entrances, List<BufferedImage> floorMaps,
 			Graph buildingGraph){
