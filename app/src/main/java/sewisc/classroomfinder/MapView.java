@@ -23,6 +23,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -116,20 +117,45 @@ public class MapView extends AppCompatActivity {
         } **/
 
 
-        System.out.println("Destination: " + dest);
+        /** System.out.println("Destination: " + dest);
         System.out.println("Location: " + loc);
         System.out.println("Ref: " + ref);
-        System.out.println("Building: " + building);
-        if(dest != null) { // All text fields populated -- standard Room Finder AStar
-            //TODO: call AStar, determine correct map image to draw on (currently dummy value)
-            int id = getResources().getIdentifier("east_towne1", "mipmap", getPackageName());
-            drawPath(id, testNodes);
-        } else if(loc != null) { // No destination populated -- Bathroom Finder AStar
-            //TODO: call AStar, determine correct map image to draw on (currently dummy value)
-            int id = getResources().getIdentifier("east_towne1", "mipmap", getPackageName());
-            drawPath(id, testNodes);
-        } else { // No text fields populated -- only displaying a floor
-            imageView.setImageResource(ref);
+        System.out.println("Building: " + building); **/
+        try {
+            if (dest != null) { // All text fields populated -- standard Room Finder AStar
+                //TODO: Fix this stuff. Currently calling dummy draw method. Commented lines cause NullPointerException due to A* eventually feeding g.heuristic a null node; haven't discovered why.
+                int id = 0;
+                List<String> floors = new ArrayList<String>();
+                Building buildingObj = null; // Handle this better
+                Node locNode = null; // Handle this better
+                Node destNode = null; // Handle this better
+                if (building.equals("East Towne Mall")) {
+                    floors.add("east_towne1");
+                    buildingObj = new Building(this, "East Towne Mall", "easttowne.xml", floors);
+                    id = getResources().getIdentifier("east_towne1", "mipmap", getPackageName());
+                } else if (building.equals("Hogwarts School of Witchcraft and Wizardry")) { // Test garbage; delete eventually
+                    buildingObj = new Building(this, "East Towne Mall", "easttowne.xml", floors);
+                    id = getResources().getIdentifier("east_towne1", "mipmap", getPackageName());
+                }
+                List<Node> rooms = buildingObj.getRooms();
+                Iterator<Node> itr = rooms.iterator();
+                while(itr.hasNext()) {
+                    Node curr = itr.next();
+                    if(curr.getName().equals(loc)) locNode = curr;
+                    if(curr.getName().equals(dest)) destNode = curr;
+                }
+                //List<Node> pathNodes = buildingObj.FindPath(locNode, destNode);
+                //drawPath(id, pathNodes);
+                drawPath(id, testNodes);
+            } else if (loc != null) { // No destination populated -- Bathroom Finder AStar
+                //TODO: call AStar, determine correct map image to draw on (currently dummy value)
+                int id = getResources().getIdentifier("east_towne1", "mipmap", getPackageName());
+                drawPath(id, testNodes);
+            } else { // No text fields populated -- only displaying a floor
+                imageView.setImageResource(ref);
+            }
+        } catch(XmlPullParserException e) {
+            // TODO: SOMETHING
         }
 
         imageView.setOnLongClickListener(new View.OnLongClickListener() {
