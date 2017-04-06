@@ -56,7 +56,7 @@ public class MapView extends AppCompatActivity {
         List<Node> nodes = new ArrayList<Node>();
         InputStream stream = null;
         XMLParser xmlParser = new XMLParser();
-        List<XMLParser.Entry> entries = null;
+        List<Node> entries = null;
         try {
             //new FileInputStream(new File("easttowne.xml"));
             stream = getAssets().open("easttowne.xml");
@@ -79,22 +79,22 @@ public class MapView extends AppCompatActivity {
             }
         }
         List<Node> testNodes = new ArrayList<Node>();
-        testNodes.add(new Node(NodeType.normal, 4710, 3735, 1, "Amplified Phones"));
-        testNodes.add(new Node(NodeType.normal, 5215, 4905, 1, "Dick's"));
-        testNodes.add(new Node(NodeType.normal, 1905, 3975, 1, "Boston Store"));
-        testNodes.add(new Node(NodeType.normal, 995, 3165, 1, "Sears"));
-        testNodes.add(new Node(NodeType.normal, 5847, 3160, 1, "JCPenney"));
+        testNodes.add(new Node(NodeType.normal, 4710, 3735, 1, "Amplified Phones", new String[0]));
+        testNodes.add(new Node(NodeType.normal, 5215, 4905, 1, "Dick's", new String[0]));
+        testNodes.add(new Node(NodeType.normal, 1905, 3975, 1, "Boston Store", new String[0]));
+        testNodes.add(new Node(NodeType.normal, 995, 3165, 1, "Sears", new String[0]));
+        testNodes.add(new Node(NodeType.normal, 5847, 3160, 1, "JCPenney", new String[0]));
         //testNodes.add(new Node(NodeType.normal, 4710, 3735, 1, "Amplified Phones 2"));
 
 
         //uses parser to add all the nodes to a list; list should be used to construct building
         //class which will then be used to make the graph for the A* which will then be used to
         //choose a list of nodes for the path used for drawPath (I believe)
-        for(XMLParser.Entry entry: entries) {
+        /** for(Node entry: entries) {
             Node node = null;
             //I have to use a switch case here because I cannot use one instantiation statement
             //to account for all the enum values required for the first parameter.
-            switch (entry.type){
+            switch (entry.getType()){
                 case ("Normal"):
                     node = new Node(NodeType.normal, entry.x, entry.y, entry.z, entry.name);
                     break;
@@ -113,7 +113,7 @@ public class MapView extends AppCompatActivity {
             }
             //System.out.println("Name: " + entry.name + " Type " + entry.type + " X: "
            //         + entry.x + " Y: " + entry.y + " Z: " + entry.z);
-        }
+        } **/
 
 
         System.out.println("Destination: " + dest);
