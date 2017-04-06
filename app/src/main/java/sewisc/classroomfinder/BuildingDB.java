@@ -5,17 +5,17 @@ import android.os.Build;
 /**
  * Created by Matthew on 3/14/2017.
  */
-public class Building {
+public class BuildingDB {
 
     //table variables
     int id;
     String name;
 
-    public Building(){
+    public BuildingDB(){
         //empty constructor
     }
 
-    public Building(int id, String name){
+    public BuildingDB(int id, String name){
         this.id = id;
         this.name = name;
     }
