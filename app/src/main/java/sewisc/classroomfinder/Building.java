@@ -1,9 +1,12 @@
 package sewisc.classroomfinder;
 
-import org.xmlpull.v1.XmlPullParserException;
+import android.content.Context;
 
+import org.xmlpull.v1.XmlPullParserException;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,6 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Building {
+    private Context context;
     private String name;
     private List<Node> rooms;
     private List<Node> bathrooms;
@@ -18,9 +22,19 @@ public class Building {
     private List<String> floorMaps;
     private Graph buildingGraph;
 
-    public Building(String name, String xmlFile, List<String> floorMaps) throws XmlPullParserException{
-        InputStream in = new FileInputStream(new File(xmlFile));
-        List<Node> nodeList = XMLParser.parse(in);
+    public Building(Context context, String name, String xmlFile, List<String> floorMaps) throws XmlPullParserException{
+        this.context = context;
+        List<Node> nodeList = null;
+        try {
+            InputStream in = context.getAssets().open(xmlFile);
+            nodeList = XMLParser.parse(in);
+        } catch (FileNotFoundException e) {
+            // TODO: SOMETHING
+            System.out.println(e);
+        } catch (IOException e) {
+            // TODO: SOMETHING
+            System.out.println(e);
+        }
         HashMap<Node,Node[]> hashMap = new HashMap<Node,Node[]>();
         Iterator<Node> nodeIterator = nodeList.iterator();
         rooms = new ArrayList<Node>();
@@ -31,7 +45,7 @@ public class Building {
             Node[] neighbors = new Node[nextNode.getNeighbors().length];
             for (int i = 0; i < nextNode.getNeighbors().length; i++){
                 Iterator<Node> neighborIterator = nodeList.iterator();
-                while (nodeIterator.hasNext()){
+                while (neighborIterator.hasNext()){
                     Node nextNeighbor = neighborIterator.next();
                     if (nextNode.getNeighbors()[i].equalsIgnoreCase(nextNeighbor.getName())){
                         neighbors[i] = nextNeighbor;
@@ -41,7 +55,9 @@ public class Building {
             hashMap.put(nextNode, neighbors);
             if (nextNode.getType().equals(NodeType.bathroom)){
                 bathrooms.add(nextNode);
-            }//TODO rooms vs entrances?
+            } else if (nextNode.getType().equals(NodeType.normal)) {
+                rooms.add(nextNode);
+            } // TODO: handle entrances, etc.?
         }
 
         this.name = name;

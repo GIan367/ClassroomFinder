@@ -72,6 +72,7 @@ public class XMLParser {
         String name = parser.getAttributeValue(0);
         NodeType type = null;
         String neighbors = null;
+        String[] neighborsList = new String[0];
         int x = -1;
         int y = -1;
         int z = -1;
@@ -94,9 +95,9 @@ public class XMLParser {
                 skip(parser);
             }
         }
-        String[] neighborsList = neighbors.split(",");
-        for (int i = 0; i < this.neighborsList.length; i++){
-        	this.neighborsList[i].trim();
+        if(neighbors != null) neighborsList = neighbors.split(",");
+        for (int i = 0; i < neighborsList.length; i++){
+        	neighborsList[i].trim();
         }
         return new Node(type, x, y, z, name, neighborsList);
     }
@@ -112,11 +113,14 @@ public class XMLParser {
         	enumType = NodeType.bathroom;
         }else if (type.equalsIgnoreCase("Elevator")){
         	enumType = NodeType.elevator;
-        }else if (type.equalsIgnoreCase("Stair")){
-        	enumType = NodeType.stair;
+        }else if (type.equalsIgnoreCase("Stair")) {
+            enumType = NodeType.stair;
+        }else if (type.equalsIgnoreCase("Hall")) {
+            enumType = NodeType.hall;
         }else{
         	//TODO Throw proper exception for type not found
-        	throw new XmlPullParserException();
+        	// throw new XmlPullParserException();
+            enumType = null;
         }
         return enumType;
     }
@@ -144,7 +148,7 @@ public class XMLParser {
 
     private static String readNeighbors(XmlPullParser parser) throws IOException, XmlPullParserException {
         parser.require(XmlPullParser.START_TAG, ns, "Neighbor");
-        String neighbors = readNumber(parser);
+        String neighbors = readText(parser);
         parser.require(XmlPullParser.END_TAG, ns, "Neighbor");
         return neighbors;
     }

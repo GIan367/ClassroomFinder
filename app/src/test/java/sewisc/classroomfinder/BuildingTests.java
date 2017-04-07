@@ -14,7 +14,7 @@ public class BuildingTests {
 	}
 	
 	public static void basicTest (){
-		Building myBuilding;
+		Building myBuilding = null;
 		try {
 			myBuilding = new Building("buildingName","Clean.xml",null);
 		}catch (XmlPullParserException e){
@@ -42,7 +42,7 @@ public class BuildingTests {
 	}
 	
 	public static void noNeighborTest () {
-		Building myBuilding;
+		Building myBuilding = null;
 		try {
 			myBuilding = new Building("buildingName","No_Neighbors.xml",null);
 		}catch (XmlPullParserException e){

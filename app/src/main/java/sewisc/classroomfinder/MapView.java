@@ -23,6 +23,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -56,7 +57,7 @@ public class MapView extends AppCompatActivity {
         List<Node> nodes = new ArrayList<Node>();
         InputStream stream = null;
         XMLParser xmlParser = new XMLParser();
-        List<XMLParser.Entry> entries = null;
+        List<Node> entries = null;
         try {
             //new FileInputStream(new File("easttowne.xml"));
             stream = getAssets().open("easttowne.xml");
@@ -79,22 +80,22 @@ public class MapView extends AppCompatActivity {
             }
         }
         List<Node> testNodes = new ArrayList<Node>();
-        testNodes.add(new Node(NodeType.normal, 4710, 3735, 1, "Amplified Phones"));
-        testNodes.add(new Node(NodeType.normal, 5215, 4905, 1, "Dick's"));
-        testNodes.add(new Node(NodeType.normal, 1905, 3975, 1, "Boston Store"));
-        testNodes.add(new Node(NodeType.normal, 995, 3165, 1, "Sears"));
-        testNodes.add(new Node(NodeType.normal, 5847, 3160, 1, "JCPenney"));
+        testNodes.add(new Node(NodeType.normal, 4710, 3735, 1, "Amplified Phones", new String[0]));
+        testNodes.add(new Node(NodeType.normal, 5215, 4905, 1, "Dick's", new String[0]));
+        testNodes.add(new Node(NodeType.normal, 1905, 3975, 1, "Boston Store", new String[0]));
+        testNodes.add(new Node(NodeType.normal, 995, 3165, 1, "Sears", new String[0]));
+        testNodes.add(new Node(NodeType.normal, 5847, 3160, 1, "JCPenney", new String[0]));
         //testNodes.add(new Node(NodeType.normal, 4710, 3735, 1, "Amplified Phones 2"));
 
 
         //uses parser to add all the nodes to a list; list should be used to construct building
         //class which will then be used to make the graph for the A* which will then be used to
         //choose a list of nodes for the path used for drawPath (I believe)
-        for(XMLParser.Entry entry: entries) {
+        /** for(Node entry: entries) {
             Node node = null;
             //I have to use a switch case here because I cannot use one instantiation statement
             //to account for all the enum values required for the first parameter.
-            switch (entry.type){
+            switch (entry.getType()){
                 case ("Normal"):
                     node = new Node(NodeType.normal, entry.x, entry.y, entry.z, entry.name);
                     break;
@@ -113,23 +114,48 @@ public class MapView extends AppCompatActivity {
             }
             //System.out.println("Name: " + entry.name + " Type " + entry.type + " X: "
            //         + entry.x + " Y: " + entry.y + " Z: " + entry.z);
-        }
+        } **/
 
 
-        System.out.println("Destination: " + dest);
+        /** System.out.println("Destination: " + dest);
         System.out.println("Location: " + loc);
         System.out.println("Ref: " + ref);
-        System.out.println("Building: " + building);
-        if(dest != null) { // All text fields populated -- standard Room Finder AStar
-            //TODO: call AStar, determine correct map image to draw on (currently dummy value)
-            int id = getResources().getIdentifier("east_towne1", "mipmap", getPackageName());
-            drawPath(id, testNodes);
-        } else if(loc != null) { // No destination populated -- Bathroom Finder AStar
-            //TODO: call AStar, determine correct map image to draw on (currently dummy value)
-            int id = getResources().getIdentifier("east_towne1", "mipmap", getPackageName());
-            drawPath(id, testNodes);
-        } else { // No text fields populated -- only displaying a floor
-            imageView.setImageResource(ref);
+        System.out.println("Building: " + building); **/
+        try {
+            if (dest != null) { // All text fields populated -- standard Room Finder AStar
+                //TODO: Fix this stuff. Currently calling dummy draw method. Commented lines cause NullPointerException due to A* eventually feeding g.heuristic a null node; haven't discovered why.
+                int id = 0;
+                List<String> floors = new ArrayList<String>();
+                Building buildingObj = null; // Handle this better
+                Node locNode = null; // Handle this better
+                Node destNode = null; // Handle this better
+                if (building.equals("East Towne Mall")) {
+                    floors.add("east_towne1");
+                    buildingObj = new Building(this, "East Towne Mall", "easttowne.xml", floors);
+                    id = getResources().getIdentifier("east_towne1", "mipmap", getPackageName());
+                } else if (building.equals("Hogwarts School of Witchcraft and Wizardry")) { // Test garbage; delete eventually
+                    buildingObj = new Building(this, "East Towne Mall", "easttowne.xml", floors);
+                    id = getResources().getIdentifier("east_towne1", "mipmap", getPackageName());
+                }
+                List<Node> rooms = buildingObj.getRooms();
+                Iterator<Node> itr = rooms.iterator();
+                while(itr.hasNext()) {
+                    Node curr = itr.next();
+                    if(curr.getName().equals(loc)) locNode = curr;
+                    if(curr.getName().equals(dest)) destNode = curr;
+                }
+                //List<Node> pathNodes = buildingObj.FindPath(locNode, destNode);
+                //drawPath(id, pathNodes);
+                drawPath(id, testNodes);
+            } else if (loc != null) { // No destination populated -- Bathroom Finder AStar
+                //TODO: call AStar, determine correct map image to draw on (currently dummy value)
+                int id = getResources().getIdentifier("east_towne1", "mipmap", getPackageName());
+                drawPath(id, testNodes);
+            } else { // No text fields populated -- only displaying a floor
+                imageView.setImageResource(ref);
+            }
+        } catch(XmlPullParserException e) {
+            // TODO: SOMETHING
         }
 
         imageView.setOnLongClickListener(new View.OnLongClickListener() {
