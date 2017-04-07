@@ -1,14 +1,15 @@
 # classroomFinder
 All up to date code is located in the master branch. The master branch should only be merged to at the end of an iteration OR with the agreement of a majority team.  
-Java classes pertaining to Database functionality, Pathfinding, and Map Layout are located in   ClassroomFinder/app/src/main/java/sewisc/classroomfinder/:  
+Java classes pertaining to Database functionality, Pathfinding, and Map Layout are located in ClassroomFinder/app/src/main/java/sewisc/classroomfinder/:
 BuildingDB.java: This class represents the Building table in the database, with the corresponding getter/setter methods for its fields.   
-DataBaseHandler.java: This class has functions that can create, manipulate, and delete a database; to be used with the Building, Favorite, and Location classes.    
+DataBaseHandler.java: This class has functions that can create, manipulate, and delete a database; to be used with the BuildingDB, Favorite, and Location classes.    
 Favorite.java: This class represents the Favorite table in the database, with the corresponding getter/setter methods for its fields.    
 GridAdapter.java: This class assembles text in a format that can be interpreted by the Favorites View's GridView.
 ImageAdapter.java: This class assembles images in a format that can be interpreted by the FloorGallery View's GridView.
 Location.java: This class represents the Location table in the database, with the corresponding getter/setter methods for its fields.    
 MainActivity.java: This class gives functionality to the 4 tabs representing the primary views.
 MapView.java: This class describes the View containing the requested map, with or without a computed path.
+SwipeDetector.java: This class handles analyzing touch events to determine if the action qualifies as a directional swipe.
 
 AStar.java: This class implements A star pathfinding.  
 PriorityNode.java: This class is used by the PriorityQueue in AStar and associates a Node object with a priority.  
