@@ -6,7 +6,7 @@ import java.util.List;
 import org.xmlpull.v1.XmlPullParserException;
 
 public class BuildingTests {
-	
+	/*
 	public static void RunTests () {
 		basicTest();
 		badTypeTest();
@@ -56,5 +56,5 @@ public class BuildingTests {
 		}
 		assert false : "ERROR: AStar did not throw an exception when a path could not be formed";
 	}
-	
+	*/
 }

@@ -21,10 +21,10 @@ public class Test_Location {
     }
     public void locationSets(){
         Location test1 = new Location(1, "Humanities", 1121, 1);
-        assertEquals(true, test1.getBuildingID() == 1);
+        assertEquals(true, test1.getBuildingID() == 1221);
         assertEquals(true, test1.getName().equals("Humanities"));
         assertEquals(true, test1.getFloorNumber() == 1);
-        assertEquals(true, test1.getID() == 1121);
+        assertEquals(true, test1.getID() == 1);
         test1.setBuildingID(2);
         test1.setFloorNumber(2);
         test1.setID(2);
