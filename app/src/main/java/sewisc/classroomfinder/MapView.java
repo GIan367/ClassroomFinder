@@ -79,43 +79,6 @@ public class MapView extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-        List<Node> testNodes = new ArrayList<Node>();
-        testNodes.add(new Node(NodeType.normal, 4710, 3735, 1, "Amplified Phones", new String[0]));
-        testNodes.add(new Node(NodeType.normal, 5215, 4905, 1, "Dick's", new String[0]));
-        testNodes.add(new Node(NodeType.normal, 1905, 3975, 1, "Boston Store", new String[0]));
-        testNodes.add(new Node(NodeType.normal, 995, 3165, 1, "Sears", new String[0]));
-        testNodes.add(new Node(NodeType.normal, 5847, 3160, 1, "JCPenney", new String[0]));
-        //testNodes.add(new Node(NodeType.normal, 4710, 3735, 1, "Amplified Phones 2"));
-
-
-        //uses parser to add all the nodes to a list; list should be used to construct building
-        //class which will then be used to make the graph for the A* which will then be used to
-        //choose a list of nodes for the path used for drawPath (I believe)
-        /** for(Node entry: entries) {
-            Node node = null;
-            //I have to use a switch case here because I cannot use one instantiation statement
-            //to account for all the enum values required for the first parameter.
-            switch (entry.getType()){
-                case ("Normal"):
-                    node = new Node(NodeType.normal, entry.x, entry.y, entry.z, entry.name);
-                    break;
-                case ("Bathroom"):
-                    node = new Node(NodeType.bathroom, entry.x, entry.y, entry.z, entry.name);
-                    break;
-                case ("Stair"):
-                    node = new Node(NodeType.stair, entry.x, entry.y, entry.z, entry.name);
-                    break;
-                case ("Elevator"):
-                    node = new Node(NodeType.elevator, entry.x, entry.y, entry.z, entry.name);
-                    break;
-            }
-            if (node != null){
-                nodes.add(node);
-            }
-            //System.out.println("Name: " + entry.name + " Type " + entry.type + " X: "
-           //         + entry.x + " Y: " + entry.y + " Z: " + entry.z);
-        } **/
-
 
         /** System.out.println("Destination: " + dest);
         System.out.println("Location: " + loc);
@@ -123,12 +86,36 @@ public class MapView extends AppCompatActivity {
         System.out.println("Building: " + building); **/
         try {
             if (dest != null) { // All text fields populated -- standard Room Finder AStar
-                //TODO: Fix this stuff. Currently calling dummy draw method. Commented lines cause NullPointerException due to A* eventually feeding g.heuristic a null node; haven't discovered why.
                 int id = 0;
                 List<String> floors = new ArrayList<String>();
                 Building buildingObj = null; // Handle this better
                 Node locNode = null; // Handle this better
                 Node destNode = null; // Handle this better
+                if (building.equals("East Towne Mall")) {
+                    floors.add("east_towne1");
+                    buildingObj = new Building(this, "East Towne Mall", "easttowne.xml", floors);
+                    id = getResources().getIdentifier("east_towne1", "mipmap", getPackageName());
+                } /** else if (building.equals("Hogwarts School of Witchcraft and Wizardry")) {
+                    buildingObj = new Building(this, "East Towne Mall", "easttowne.xml", floors);
+                    id = getResources().getIdentifier("east_towne1", "mipmap", getPackageName());
+                } **/
+                List<Node> rooms = buildingObj.getRooms();
+                Iterator<Node> itr = rooms.iterator();
+                while(itr.hasNext()) {
+                    Node curr = itr.next();
+                    if(curr.getName().equals(loc)) locNode = curr;
+                    if(curr.getName().equals(dest)) destNode = curr;
+                }
+                List<Node> pathNodes = buildingObj.FindPath(locNode, destNode);
+                /** for(Node node: pathNodes) {
+                    System.out.println("FINAL PATH________________________: " + node.getName());
+                } **/
+                drawPath(id, pathNodes);
+            } else if (loc != null) { // No destination populated -- Bathroom Finder AStar
+                int id = 0;
+                List<String> floors = new ArrayList<String>();
+                Building buildingObj = null; // Handle this better
+                Node locNode = null; // Handle this better
                 if (building.equals("East Towne Mall")) {
                     floors.add("east_towne1");
                     buildingObj = new Building(this, "East Towne Mall", "easttowne.xml", floors);
@@ -142,15 +129,12 @@ public class MapView extends AppCompatActivity {
                 while(itr.hasNext()) {
                     Node curr = itr.next();
                     if(curr.getName().equals(loc)) locNode = curr;
-                    if(curr.getName().equals(dest)) destNode = curr;
                 }
-                //List<Node> pathNodes = buildingObj.FindPath(locNode, destNode);
-                //drawPath(id, pathNodes);
-                drawPath(id, testNodes);
-            } else if (loc != null) { // No destination populated -- Bathroom Finder AStar
-                //TODO: call AStar, determine correct map image to draw on (currently dummy value)
-                int id = getResources().getIdentifier("east_towne1", "mipmap", getPackageName());
-                drawPath(id, testNodes);
+                List<Node> pathNodes = buildingObj.FindNearestBathroom(locNode);
+                /** for(Node node: pathNodes) {
+                    System.out.println("FINAL PATH________________________: " + node.getName());
+                } **/
+                drawPath(id, pathNodes);
             } else { // No text fields populated -- only displaying a floor
                 imageView.setImageResource(ref);
             }
@@ -178,7 +162,6 @@ public class MapView extends AppCompatActivity {
     }
 
     // Draw line on given map image reference from current location to destination via list of nodes
-    // TODO: Call AStar to get nodes and pass here -- currently hardcoded to draw a simple line
     void drawPath(int ref, List<Node> nodes){
         BitmapFactory.Options myOptions = new BitmapFactory.Options();
         myOptions.inDither = true;
@@ -196,26 +179,28 @@ public class MapView extends AppCompatActivity {
         Bitmap workingBitmap = Bitmap.createBitmap(bitmap);
         Bitmap mutableBitmap = workingBitmap.copy(Bitmap.Config.ARGB_8888, true);
         Bitmap startIcon = BitmapFactory.decodeResource(getResources(), getResources().getIdentifier("mapicon", "mipmap", getPackageName())); //mapicon bitmap creation
+        Bitmap destIcon = BitmapFactory.decodeResource(getResources(), getResources().getIdentifier("mapicon2", "mipmap", getPackageName())); //mapicon bitmap creation
         double scale = (2100.0/6998.0); //scale used for pixel conversion
         Canvas canvas = new Canvas(mutableBitmap);
 
-        // TODO: loop through list of nodes from AStar; currently draws a simple test line
-        Node prevNode = null;
+        Node destNode = null;
         Node startNode =null;
         for (Node n: nodes){
-            if (prevNode == null){
+            if (startNode == null){
                 //set the first node
-                startNode = n;
+                destNode = n;
             }
             else{
-                canvas.drawLine((int) (prevNode.getRelativeX() * scale), (int) (prevNode.getRelativeY() * scale) , (int) (n.getRelativeX() * scale), (int) (n.getRelativeY() * scale), paint);
+                canvas.drawLine((int) (startNode.getRelativeX() * scale), (int) (startNode.getRelativeY() * scale) , (int) (n.getRelativeX() * scale), (int) (n.getRelativeY() * scale), paint);
             }
-            prevNode = n;
+            startNode = n;
         }
 
         //draw the start icon
-        if (startNode != null)
+        if (startNode != null && destNode != null) {
             canvas.drawBitmap(startIcon, (int) (startNode.getRelativeX() * scale) - 64, (int) (startNode.getRelativeY() * scale) - 120, paint);
+            canvas.drawBitmap(destIcon, (int) (destNode.getRelativeX() * scale) - 64, (int) (destNode.getRelativeY() * scale) - 120, paint);
+        }
 
         imageView.setAdjustViewBounds(true);
         imageView.setImageBitmap(mutableBitmap);

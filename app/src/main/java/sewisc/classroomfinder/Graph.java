@@ -14,9 +14,11 @@ public class Graph {
     //Function that returns the cost of movement from one node to another
     public int cost (Node A, Node B){
         //TODO: We will need to change cost function to reflect actual cost. This will be based on dimension of the map.
-        if (B.getType() == NodeType.normal) return 10;
-        if (B.getType() == NodeType.stair) return 15;
-        if (B.getType() == NodeType.elevator) return 11;
+        if (B.getType() == NodeType.normal) return 200;
+        if (B.getType() == NodeType.hall) return 100;
+        if (B.getType() == NodeType.bathroom) return 200;
+        if (B.getType() == NodeType.stair) return 300;
+        if (B.getType() == NodeType.elevator) return 300;
         return 10;
     }
 

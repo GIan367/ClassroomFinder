@@ -28,6 +28,8 @@ public class AStar {
         while(!(frontier.isEmpty())){
             Node current = frontier.poll().getNode();
 
+            System.out.println("NAME InFrontier----------------------: " + current.getName());
+
             //Early Exit
             if (current.equals(goal)){
                 break;
@@ -36,6 +38,7 @@ public class AStar {
             Node[] edges = g.neighbors(current);
 
             for(Node node: edges){
+                System.out.println("Neighbor________________________: " + node.getName());
                 int newCost = costSoFar.get(current) + g.cost(current, node);
                 if (!(costSoFar.containsKey(node)) || (newCost < costSoFar.get(node))){
                     costSoFar.put(node, newCost);

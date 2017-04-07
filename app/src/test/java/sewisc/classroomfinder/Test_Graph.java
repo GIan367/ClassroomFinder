@@ -4,6 +4,8 @@ package sewisc.classroomfinder;
  * Created by rfugs on 4/4/17.
  */
 import org.junit.Test;
+
+import java.util.HashMap;
 import static org.junit.Assert.*;
 
 public class Test_Graph {
