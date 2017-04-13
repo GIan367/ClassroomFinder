@@ -5,48 +5,56 @@
       <Y>3735</Y>
       <Z>1</Z>
       <type>Normal</type>
+      <Neighbor>Z</Neighbor>
    </Node>
    <Node name="Auntie Anne's">
       <X>3655</X>
       <Y>3790</Y>
       <Z>1</Z>
       <type>Normal</type>
+      <Neighbor>Z</Neighbor>
    </Node>
    <Node name="Customized Teez">
       <X>4000</X>
       <Y>3709</Y>
       <Z>1</Z>
       <type>Normal</type>
+      <Neighbor>Z</Neighbor>
    </Node>
    <Node name="Piercing Pagoda">
       <X>4350</X>
       <Y>3790</Y>
       <Z>1</Z>
       <type>Normal</type>
+      <Neighbor>Z</Neighbor>
    </Node>
    <Node name="ecoATM">
       <X>3515</X>
       <Y>4130</Y>
       <Z>1</Z>
       <type>Normal</type>
+      <Neighbor>Z</Neighbor>
    </Node>
    <Node name="Sunglass Hut">
       <X>3340</X>
       <Y>4330</Y>
       <Z>1</Z>
       <type>Normal</type>
+      <Neighbor>Z</Neighbor>
    </Node>
    <Node name="Justice">
       <X>3440</X>
       <Y>4330</Y>
       <Z>1</Z>
       <type>Normal</type>
+      <Neighbor>Z</Neighbor>
    </Node>
    <Node name="Chinese Relaxation Center">
       <X>2780</X>
       <Y>3970</Y>
       <Z>1</Z>
       <type>Normal</type>
+      <Neighbor>Z</Neighbor>
    </Node>
    <Node name="Journeys">
       <X>5060</X>
@@ -195,7 +203,7 @@
       <type>Normal</type>
       <Neighbor>G</Neighbor>
    </Node>
-   <Node name="La Botique Eybrow Threading">
+   <Node name="La Botique Eyebrow Threading">
       <X>3455</X>
       <Y>5360</Y>
       <Z>1</Z>
@@ -676,76 +684,76 @@
       <Y>2303</Y>
       <Z>1</Z>
       <type>Hall</type>
-      <Neighbor>B, Best Buy Mobile, Barnes and Noble Bookseller, Buffalo Wild Wings, Kato's Cajun, Subway, Sarku Japan, Steak Escape, Arby's Open Hearth Charbroiled Chicken, Stir Fry 88, McDonald's, Taco Bell, EMPTY, Bathroom 1</Neighbor>
+      <Neighbor>B,Best Buy Mobile,Barnes and Noble Booksellers,Buffalo Wild Wings,Kato's Cajun,Subway,Sarku Japan,Steak Escape,Arby's,Open Hearth Charbroiled Chicken,Stir Fry 88,McDonald's,Taco Bell,EMPTY,Bathroom 1</Neighbor>
    </Node>
    <Node name="B">
       <X>3330</X>
       <Y>3180</Y>
       <Z>1</Z>
       <type>Hall</type>
-      <Neighbor>A, C, D, Zumiez, Vanity, Lids, Mia and Maxx Hair Studio, Fanzz, Foot Locker</Neighbor>
+      <Neighbor>A,C,D,Zumiez,Vanity,Lids,Mia and Maxx Hair Studio,Fanzz,Foot Locker</Neighbor>
    </Node>
    <Node name="C">
       <X>2973</X>
       <Y>3180</Y>
       <Z>1</Z>
       <type>Hall</type>
-      <Neighbor>B, Bathroom 2</Neighbor>
+      <Neighbor>B,Bathroom 2</Neighbor>
    </Node>
    <Node name="D">
       <X>3330</X>
       <Y>3990</Y>
       <Z>1</Z>
       <type>Hall</type>
-      <Neighbor>B,E,G,H, Claire's, Bath and Body Works, maurices, Amy's Hallmark, Kay Jewelers, Buckle, Aeropostale, Things Remembered, Rogers and Hollands Jewelers, GNC, francesca's</Neighbor>
+      <Neighbor>B,E,G,H,Claire's,Zales,Bath and Body Works,maurices,Amy's Hallmark,Kay Jewelers,Buckle,Aeropostale,Things Remembered,Rogers and Hollands Jewelers,GNC,francesca's</Neighbor>
    </Node>
    <Node name="E">
       <X>2317</X>
       <Y>3990</Y>
       <Z>1</Z>
       <type>Hall</type>
-      <Neighbor>D,F, Hot Topic, Complete Nutrition, Champs Sports, LensCrafters, Finish Line, Boston Store, AT&amp;T, Gamestop, Rue21</Neighbor>
+      <Neighbor>D,F,Hot Topic,Complete Nutrition,Champs Sports,LensCrafters,Finish Line,Boston Store,AT&amp;T,Gamestop,rue21</Neighbor>
    </Node>
    <Node name="F">
       <X>1103</X>
       <Y>3240</Y>
       <Z>1</Z>
       <type>Hall</type>
-      <Neighbor>E, Payless ShoeSource, The Salon Professional Academy, American Eagle Outfitters, Planet Fitness</Neighbor>
+      <Neighbor>E,Payless ShoeSource,The Salon Professional Academy,American Eagle Outfitters,Planet Fitness</Neighbor>
    </Node>
    <Node name="G">
       <X>3330</X>
       <Y>4897</Y>
       <Z>1</Z>
       <type>Hall</type>
-      <Neighbor>D, Bathroom 3, Steinhafels, The B-12 Store, Life Uniform, Just Fine Alterations, Cricket, La Botique Eyebrow Threading, Best Nails, Selah Hair &amp; Fashions, On 2 The Field, Spencer's, Claire's</Neighbor>
+      <Neighbor>D,Bathroom 3,Steinhafels,The B-12 Store,Life Uniform,Just Fine Alterations,Cricket,La Botique Eyebrow Threading,Best Nails,Selah Hair &amp; Fashions,On 2 The Field,Spencer's,Claire's</Neighbor>
    </Node>
    <Node name="H">
-      <X>3330</X>
-      <Y>5460</Y>
+      <X>3800</X>
+      <Y>4010</Y>
       <Z>1</Z>
       <type>Hall</type>
-      <Neighbor>D,I, Fred Meyer Jewelers, DOZ CELL / iAccessories, Express, Hollister Co., Gymboree</Neighbor>
+      <Neighbor>D,I,Fred Meyer Jewelers,DOZ CELL / iAccessories,Express,Hollister Co.,Gymboree</Neighbor>
    </Node>
    <Node name="I">
-      <X>4243</X>
-      <Y>3990</Y>
+      <X>4513</X>
+      <Y>3900</Y>
       <Z>1</Z>
       <type>Hall</type>
-      <Neighbor>H,J,K, Journeys, Charlotte Russe, Sprint Store by Wireless Evolution, T-Mobile, TechBank, U.S. Cellular, Victoria's Secret, Motherhood Maternity, The Children's Place, Torrid, Lane Bryant</Neighbor>
+      <Neighbor>H,J,K,Journeys,Charlotte Russe,Sprint Store by Wireless Evolution,T-Mobile,TechBank,U.S. Cellular,Victoria's Secret,Motherhood Maternity,The Children's Place,Torrid,Lane Bryant</Neighbor>
    </Node>
    <Node name="J">
       <X>4593</X>
       <Y>3817</Y>
       <Z>1</Z>
       <type>Hall</type>
-      <Neighbor>I, Shoe Carnival, Gordmans, JCPenney, Windsor, dressbarn, Tradehome Shoes</Neighbor>
+      <Neighbor>I,Shoe Carnival,Gordmans,JCPenney,Windsor,dressbarn,Tradehome Shoes</Neighbor>
    </Node>
    <Node name="K">
       <X>5190</X>
       <Y>4890</Y>
       <Z>1</Z>
       <type>Hall</type>
-      <Neighbor>I, Nails and Spa, Picture People, Happy Feet Salon, Name of the Game, Master Cuts, Dakota Watch Company, Proactiv ZoomShops, Bathroom 4, Dick's Sporting Goods</Neighbor>
+      <Neighbor>I,Nails and Spa,Picture People,Happy Feet Salon,Name of the Game,Master Cuts,Dakota Watch Company,Proactiv ZoomShops,Bathroom 4,Dick's Sporting Goods</Neighbor>
    </Node>
 </feed>

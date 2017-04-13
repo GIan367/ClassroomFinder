@@ -49,16 +49,11 @@ public class MainActivity extends AppCompatActivity {
     // Temporary declarations and test data before database integration
     ArrayAdapter<String> buildingAdapter;
     ArrayAdapter<String> eastTowneAdapter;
-    ArrayAdapter<String> hogwartsAdapter;
     ImageAdapter floorsAdapter;
     GridAdapter favoritesAdapter;
 
     Integer[] eastTowneFloors = {
             R.mipmap.east_towne1
-    };
-    Integer[] hogwartsFloors = {
-            R.mipmap.map2, R.mipmap.east_towne1, R.mipmap.map2, R.mipmap.east_towne1,
-            R.mipmap.map2, R.mipmap.map2, R.mipmap.east_towne1, R.mipmap.map2,
     };
 
     @Override
@@ -69,16 +64,14 @@ public class MainActivity extends AppCompatActivity {
         dataBaseHandler = new DataBaseHandler(this);
 
         /*
-        // Temporary parser code to parse XML file. Just prints our each entry line by line
-        // an Entry is defined in XMLParser.java and currently consists of name, type, x, y, z
-        // If xml format should change, this can easily be update and accounted for in XMLParser.java
+        // Parse XML file.
+        // An entry is defined in Node.java and currently consists of name, type, x, y, z, and neighbor nodes.
+        // If XML format should change, this can easily be updated and accounted for in XMLParser.java
          */
         InputStream stream = null;
         XMLParser xmlParser = new XMLParser();
-        //List<XMLParser.Entry> entries = null;
         List<Node> entries = null;
         try {
-            //new FileInputStream(new File("easttowne.xml"));
             stream = getAssets().open("easttowne.xml");
             entries = xmlParser.parse(stream);
         }
@@ -90,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         if (stream != null) {
             try {
                 stream.close();
@@ -99,12 +91,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-
-        for(Node entry: entries) {
+        /** for(Node entry: entries) {
             System.out.println("Name: " + entry.getName() + " Type " +  entry.getType() + " X: "
                 + entry.getRelativeX() + " Y: " + entry.getRelativeY() + " Z: " + entry.getFloor());
-        }
-
+        } **/
 
         // Set up tabs
         TabHost host = (TabHost) findViewById(R.id.tabHost);
@@ -140,18 +130,11 @@ public class MainActivity extends AppCompatActivity {
         // Replace with reading info from XML files?
         List<String> buildingArray = new ArrayList<String>();
         buildingArray.add("East Towne Mall");
-        buildingArray.add("Hogwarts School of Witchcraft and Wizardry"); // Test Data
 
         List<String> eastTowneArray = new ArrayList<String>();
         for(Node entry: entries) {
             if(entry.getType().equals(NodeType.normal)) eastTowneArray.add(entry.getName());
         }
-
-        List<String> hogwartsArray = new ArrayList<String>();
-        hogwartsArray.add("Headmaster's Office");
-        hogwartsArray.add("The Great Hall");
-        hogwartsArray.add("Gryffindor Tower");
-        hogwartsArray.add("Quidditch Pitch");
 
         // SearchableSpinners
         buildingSpinner1 = (SearchableSpinner) findViewById(R.id.spinner1_r);
@@ -166,9 +149,6 @@ public class MainActivity extends AppCompatActivity {
 
         eastTowneAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, eastTowneArray);
         eastTowneAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        hogwartsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, hogwartsArray);
-        hogwartsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         buildingSpinner1.setAdapter(buildingAdapter);
         buildingSpinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -333,14 +313,14 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 curLocSpinner3.setAdapter(eastTowneAdapter);
             }
-        } else if (buildingName.equals("Hogwarts School of Witchcraft and Wizardry")) {
+        } /** else if (buildingName.equals("Hogwarts School of Witchcraft and Wizardry")) {
             if(tab == 1) {
                 curLocSpinner1.setAdapter(hogwartsAdapter);
                 destSpinner1.setAdapter(hogwartsAdapter);
             } else {
                 curLocSpinner3.setAdapter(hogwartsAdapter);
             }
-        }
+        } **/
     }
 
     // Currently chooses from test data; will of course work with database later
@@ -349,9 +329,9 @@ public class MainActivity extends AppCompatActivity {
         String buildingName = selectedBuilding.toString();
         if(buildingName.equals("East Towne Mall")) {
             floorsAdapter.setmThumbIds(eastTowneFloors);
-        } else if (buildingName.equals("Hogwarts School of Witchcraft and Wizardry")) {
+        } /** else if (buildingName.equals("Hogwarts School of Witchcraft and Wizardry")) {
             floorsAdapter.setmThumbIds(hogwartsFloors);
-        }
+        } **/
     }
 
     // Generates the favorites list from the favorites database and sets the grid adapter

@@ -37,6 +37,8 @@ public class AStar {
         while(!(frontier.isEmpty())){
             Node current = frontier.poll().getNode();
 
+            System.out.println("NAME InFrontier----------------------: " + current.getName());
+
             //Early Exit
             if (current.equals(goal)){
                 break;
@@ -45,7 +47,12 @@ public class AStar {
             Node[] edges = graph.neighbors(current);
 
             for(Node node: edges){
+<<<<<<< HEAD
                 int newCost = costSoFar.get(current) + graph.cost(current, node);
+=======
+                System.out.println("Neighbor________________________: " + node.getName());
+                int newCost = costSoFar.get(current) + g.cost(current, node);
+>>>>>>> master
                 if (!(costSoFar.containsKey(node)) || (newCost < costSoFar.get(node))){
                     costSoFar.put(node, newCost);
                     int priority = newCost + graph.heuristic(node, goal);
