@@ -1,5 +1,6 @@
 package sewisc.classroomfinder;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -30,7 +31,7 @@ import java.util.List;
  * Created by Zak on 3/15/2017.
  */
 
-public class MapView extends AppCompatActivity {
+public class MapView extends Activity {
     ImageView imageView;
     int ref;
     String building;

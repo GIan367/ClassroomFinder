@@ -9,6 +9,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Building"
+        android:layout_marginBottom="30dip"
+        android:textSize="14pt"
         android:id="@+id/textView3_r"
         android:layout_above="@+id/spinner1_r"
         android:layout_centerHorizontal="true" />
@@ -17,6 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Destination"
+        android:textSize="14pt"
         android:id="@+id/textView_r"
         android:layout_above="@+id/spinner3_r"
         android:layout_centerHorizontal="true" />
@@ -35,6 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Current Location"
+        android:textSize="14pt"
         android:id="@+id/textView2_r"
         android:layout_above="@+id/spinner2_r"
         android:layout_centerHorizontal="true" />

@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TabHost xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/tabHost"
+
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
     <RelativeLayout
         android:layout_width="fill_parent"
+
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+
         <TabWidget
             android:id="@android:id/tabs"
+
             android:layout_width="fill_parent"
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"></TabWidget>
@@ -18,21 +22,25 @@
         <FrameLayout
             android:id="@android:id/tabcontent"
             android:layout_width="fill_parent"
+
             android:layout_height="fill_parent"
             android:layout_marginBottom="50dp">
 
             <include
                 android:id="@+id/room_finder"
-                layout="@layout/room_finder"/>
+                layout="@layout/room_finder" />
+
             <include
                 android:id="@+id/floor_gallery"
-                layout="@layout/floor_gallery"/>
+                layout="@layout/floor_gallery" />
+
             <include
                 android:id="@+id/bathroom"
-                layout="@layout/bathroom"/>
+                layout="@layout/bathroom" />
+
             <include
                 android:id="@+id/favorite"
-                layout="@layout/favorite"/>
+                layout="@layout/favorite" />
 
         </FrameLayout>
     </RelativeLayout>

@@ -1,5 +1,6 @@
 package sewisc.classroomfinder;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,7 +24,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
     DataBaseHandler dataBaseHandler;
     List<Favorite> favoriteList;
     List<String> favoritesArray;
