@@ -2,17 +2,19 @@ package sewisc.classroomfinder;
 
 import java.util.Iterator;
 import java.util.List;
+import org.junit.Test;
 
 import org.xmlpull.v1.XmlPullParserException;
 
 public class BuildingTests {
-	/*
+    /*
+	@Test
 	public static void RunTests () {
 		basicTest();
 		badTypeTest();
 		noNeighborTest();
 	}
-	
+	@Test
 	public static void basicTest (){
 		Building myBuilding = null;
 		try {
@@ -22,7 +24,7 @@ public class BuildingTests {
 		}
 		astarTest (myBuilding);
 	}
-	
+	@Test
 	public static void astarTest(Building myBuilding){
 		Node[] nodeList = (Node[]) myBuilding.getBuildingGraph().getAllNodes().toArray();
 		List<Node> pathNodes = myBuilding.FindPath(nodeList[0],nodeList[2]);
@@ -31,7 +33,7 @@ public class BuildingTests {
 		assert pathIterator.next() == nodeList[1] : "ERROR: The given AStar path did not properly find the only path";
 		assert pathIterator.next() == nodeList[2] : "ERROR: The given AStar path did not end with the destination node";
 	}
-	
+	@Test
 	public static void badTypeTest () {
 		try {
 			Building myBuilding = new Building("buildingName","Bad_Type.xml",null);
@@ -40,7 +42,7 @@ public class BuildingTests {
 		}
 		assert false : "ERROR: Building.java did not throw an exception when a node contained an invalid type";
 	}
-	
+	@Test
 	public static void noNeighborTest () {
 		Building myBuilding = null;
 		try {
@@ -56,5 +58,5 @@ public class BuildingTests {
 		}
 		assert false : "ERROR: AStar did not throw an exception when a path could not be formed";
 	}
-	*/
+*/
 }
