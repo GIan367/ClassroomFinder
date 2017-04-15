@@ -31,7 +31,7 @@ import java.util.List;
  * Created by Zak on 3/15/2017.
  */
 
-public class MapView extends Activity {
+public class MapView extends AppCompatActivity {
     ImageView imageView;
     int ref;
     String building;

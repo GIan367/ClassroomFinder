@@ -24,7 +24,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
     DataBaseHandler dataBaseHandler;
     List<Favorite> favoriteList;
     List<String> favoritesArray;
