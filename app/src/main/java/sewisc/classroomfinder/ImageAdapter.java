@@ -26,10 +26,14 @@ public class ImageAdapter extends BaseAdapter {
         this.mThumbIds = mThumbIds;
     }
 
+    // Not used by our application, but must be implemented by BaseAdapter subclasses.
+    // Simply return null as a placeholder.
     public Object getItem(int position) {
         return null;
     }
 
+    // Not used by our application, but must be implemented by BaseAdapter subclasses.
+    // Simply return 0 as a placeholder.
     public long getItemId(int position) {
         return 0;
     }

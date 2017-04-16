@@ -50,6 +50,8 @@ public class GridAdapter extends BaseAdapter {
         return mItems.get(position);
     }
 
+    // The class must override this method, but it is not needed by our application.
+    // Simply return the provided position as a placeholder.
     @Override
     public long getItemId(final int position) {
         return position;

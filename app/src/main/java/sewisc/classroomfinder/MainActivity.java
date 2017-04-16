@@ -339,7 +339,7 @@ public class MainActivity extends AppCompatActivity {
         favoritesArray.clear();
         favoriteList = dataBaseHandler.getAllFavorites();
         for(Favorite f: favoriteList) {
-            System.out.println(f.getIndx() + f.getBuildingName() + f.getStartLocation() + f.getDestination());
+            //System.out.println(f.getIndx() + f.getBuildingName() + f.getStartLocation() + f.getDestination());
             favoritesArray.add(f.getBuildingName() + ": " + f.getStartLocation() + " to " + f.getDestination());
         }
         favoritesAdapter = new GridAdapter(favoritesArray);
