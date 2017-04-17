@@ -86,7 +86,7 @@ public class MapView extends AppCompatActivity {
         System.out.println("Ref: " + ref);
         System.out.println("Building: " + building); **/
         try {
-            if (dest != null) { // All text fields populated -- standard Room Finder AStar
+            if((dest != null) && (!dest.equals("Nearest Bathroom"))) { // All text fields populated -- standard Room Finder AStar
                 int id = 0;
                 List<String> floors = new ArrayList<String>();
                 Building buildingObj = null; // Handle this better
@@ -154,7 +154,11 @@ public class MapView extends AppCompatActivity {
                     } else {
                         indx = favorites.get(favorites.size() - 1).getIndx() + 1;
                     }
-                    dataBaseHandler.addFavorite(new Favorite(indx, building, loc, dest));
+                    if(dest != null) {
+                        dataBaseHandler.addFavorite(new Favorite(indx, building, loc, dest));
+                    } else {
+                        dataBaseHandler.addFavorite(new Favorite(indx, building, loc, "Nearest Bathroom"));
+                    }
                     toast.show();
                 }
                 return true;
