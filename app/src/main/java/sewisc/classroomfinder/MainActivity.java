@@ -115,13 +115,13 @@ public class MainActivity extends AppCompatActivity {
 
         //Tab 3
         spec = host.newTabSpec("Bathroom");
-        spec.setIndicator("Bathroom");
+        spec.setIndicator("Bath Finder");
         spec.setContent(R.id.bathroom);
         host.addTab(spec);
 
         //Tab 4
         spec = host.newTabSpec("Favorites");
-        spec.setIndicator("Favorites");
+        spec.setIndicator("Saved Paths");
         spec.setContent(R.id.favorite);
         host.addTab(spec);
 
