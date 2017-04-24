@@ -15,6 +15,9 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TabHost;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
+import com.vstechlab.easyfonts.EasyFonts;
+import android.widget.TextView;
+import com.fenjuly.mylibrary.ToggleExpandLayout;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -35,12 +38,20 @@ public class MainActivity extends AppCompatActivity {
     SearchableSpinner buildingSpinner2;
     SearchableSpinner buildingSpinner3;
     SearchableSpinner curLocSpinner3;
+    View room_CurrLoc;
+    View room_SpinCurrLoc;
+    View room_Building;
+    View room_SpinBuilding;
+    View room_Dest;
+    View room_SpinDest;
     GridView floors;
     GridView favorites;
     Button find1;
     Button find2;
     boolean curLocSpinner1Valid;
     boolean destSpinner1Valid;
+
+    TextView tvCapture;
 
     public static final String EXTRA_BUILDING = "sewisc.classroomfinder.BUILDING";
     public static final String EXTRA_LOC = "sewisc.classroomfinder.LOC";
@@ -61,6 +72,35 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
+
+        room_Building = findViewById(R.id.textView3_r);
+        room_Building.animate().translationY(300);
+        room_SpinBuilding = findViewById(R.id.spinner1_r);
+        room_SpinBuilding.animate().translationY(300);
+
+        room_Dest = findViewById(R.id.textView_r);
+        room_Dest.animate().alpha(0.0f);
+        room_SpinDest = findViewById(R.id.spinner3_r);
+        room_SpinDest.animate().alpha(0.0f);
+
+        room_CurrLoc = findViewById(R.id.textView2_r);
+        room_CurrLoc.animate().alpha(0.0f);
+
+        room_SpinCurrLoc = findViewById(R.id.spinner2_r);
+        room_SpinCurrLoc.animate().alpha(0.0f);
+
+
+        tvCapture = (TextView) room_Building;
+        tvCapture.setTypeface(EasyFonts.captureIt(this));
+        tvCapture = (TextView) room_CurrLoc;
+        tvCapture.setTypeface(EasyFonts.captureIt(this));
+        tvCapture = (TextView) room_Dest;
+        tvCapture.setTypeface(EasyFonts.captureIt(this));
+
+
 
         dataBaseHandler = new DataBaseHandler(this);
 
@@ -139,6 +179,9 @@ public class MainActivity extends AppCompatActivity {
 
         // SearchableSpinners
         buildingSpinner1 = (SearchableSpinner) findViewById(R.id.spinner1_r);
+
+
+
         curLocSpinner1 = (SearchableSpinner) findViewById(R.id.spinner2_r);
         destSpinner1 = (SearchableSpinner) findViewById(R.id.spinner3_r);
         buildingSpinner2 = (SearchableSpinner) findViewById(R.id.spinner1_g);
@@ -157,6 +200,13 @@ public class MainActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 curLocSpinner1.setEnabled(true);
                 destSpinner1.setEnabled(true);
+
+                room_CurrLoc.animate().alpha(1.0f).setDuration(1000);
+                room_SpinCurrLoc.animate().alpha(1.0f).setDuration(1000);
+                room_Dest.animate().alpha(1.0f).setDuration(1000);
+                room_SpinDest.animate().alpha(1.0f).setDuration(1000);
+                room_Building.animate().translationY(0).setDuration(500);
+                room_SpinBuilding.animate().translationY(0).setDuration(500);
                 populateSpinners(1, buildingSpinner1.getSelectedItem());
             }
 

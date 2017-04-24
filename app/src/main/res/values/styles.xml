@@ -8,6 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowBackground">@color/colorWindowBackground</item>
         <item name="android:textColor">@color/colorTextColor</item>
+        <item name="android:textColorHint">#ffffff</item>
+        <item name="android:fontFamily">sans-serif-condensed</item>
     </style>
 
 </resources>
