@@ -3,7 +3,9 @@
     android:id="@+id/tabHost"
 
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:background="@drawable/background_color"
+    >
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -15,15 +17,17 @@
         <TabWidget
             android:id="@android:id/tabs"
             android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:layout_alignParentBottom="true"></TabWidget>
+            android:layout_height="70dp"
+            android:layout_alignParentBottom="true"
+            ></TabWidget>
 
         <FrameLayout
             android:id="@android:id/tabcontent"
             android:layout_width="fill_parent"
 
             android:layout_height="fill_parent"
-            android:layout_marginBottom="50dp">
+            android:layout_marginBottom="50dp"
+            >
 
             <include
                 android:id="@+id/room_finder"

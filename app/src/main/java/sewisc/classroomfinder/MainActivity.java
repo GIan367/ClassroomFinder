@@ -3,6 +3,7 @@ package sewisc.classroomfinder;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -17,7 +18,7 @@ import android.widget.TabHost;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 import com.vstechlab.easyfonts.EasyFonts;
 import android.widget.TextView;
-import com.fenjuly.mylibrary.ToggleExpandLayout;
+import mehdi.sakout.fancybuttons.FancyButton;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -41,13 +42,15 @@ public class MainActivity extends AppCompatActivity {
     View room_CurrLoc;
     View room_SpinCurrLoc;
     View room_Building;
+    TextView rb;
     View room_SpinBuilding;
     View room_Dest;
     View room_SpinDest;
     GridView floors;
     GridView favorites;
-    Button find1;
+    FancyButton find1;
     Button find2;
+    TabHost host;
     boolean curLocSpinner1Valid;
     boolean destSpinner1Valid;
 
@@ -69,6 +72,16 @@ public class MainActivity extends AppCompatActivity {
     };
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        for ( int i = 0; i < host.getTabWidget().getTabCount(); i++) {
+            TextView tv = (TextView) host.getTabWidget().getChildTabViewAt(i).findViewById(android.R.id.title);
+            tv.setTextColor(Color.parseColor("#ffffff"));
+        }
+
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -77,6 +90,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         room_Building = findViewById(R.id.textView3_r);
+        rb = (TextView) room_Building;
+        rb.animate().scaleX(1.5f);
+        rb.animate().scaleY(1.5f);
         room_Building.animate().translationY(300);
         room_SpinBuilding = findViewById(R.id.spinner1_r);
         room_SpinBuilding.animate().translationY(300);
@@ -138,13 +154,14 @@ public class MainActivity extends AppCompatActivity {
         } **/
 
         // Set up tabs
-        TabHost host = (TabHost) findViewById(R.id.tabHost);
+        host = (TabHost) findViewById(R.id.tabHost);
         host.setup();
 
         //Tab 1
         TabHost.TabSpec spec = host.newTabSpec("Room Finder");
         spec.setIndicator("Room Finder");
         spec.setContent(R.id.room_finder);
+
         host.addTab(spec);
 
         //Tab 2
@@ -200,7 +217,8 @@ public class MainActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 curLocSpinner1.setEnabled(true);
                 destSpinner1.setEnabled(true);
-
+                rb.animate().scaleX(1);
+                rb.animate().scaleY(1);
                 room_CurrLoc.animate().alpha(1.0f).setDuration(1000);
                 room_SpinCurrLoc.animate().alpha(1.0f).setDuration(1000);
                 room_Dest.animate().alpha(1.0f).setDuration(1000);
@@ -254,6 +272,8 @@ public class MainActivity extends AppCompatActivity {
                 curLocSpinner1Valid = true;
                 if(destSpinner1Valid) {
                     find1.setEnabled(true);
+                    find1.setVisibility(View.VISIBLE);
+
                 }
             }
 
@@ -270,6 +290,8 @@ public class MainActivity extends AppCompatActivity {
                 destSpinner1Valid = true;
                 if(curLocSpinner1Valid) {
                     find1.setEnabled(true);
+                    find1.setVisibility(View.VISIBLE);
+                  
                 }
             }
 
@@ -293,7 +315,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Buttons
-        find1 = (Button) findViewById(R.id.button_r);
+        find1 = (FancyButton) findViewById(R.id.button_r);
+        find1.setVisibility(View.INVISIBLE);
+
         find2 = (Button) findViewById(R.id.button_b);
 
         // GridViews
