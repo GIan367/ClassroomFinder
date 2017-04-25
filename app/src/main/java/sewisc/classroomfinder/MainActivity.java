@@ -1,5 +1,6 @@
 package sewisc.classroomfinder;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -114,13 +115,13 @@ public class MainActivity extends AppCompatActivity {
 
         //Tab 3
         spec = host.newTabSpec("Bathroom");
-        spec.setIndicator("Bathroom");
+        spec.setIndicator("Bath Finder");
         spec.setContent(R.id.bathroom);
         host.addTab(spec);
 
         //Tab 4
         spec = host.newTabSpec("Favorites");
-        spec.setIndicator("Favorites");
+        spec.setIndicator("Saved Paths");
         spec.setContent(R.id.favorite);
         host.addTab(spec);
 
@@ -339,7 +340,7 @@ public class MainActivity extends AppCompatActivity {
         favoritesArray.clear();
         favoriteList = dataBaseHandler.getAllFavorites();
         for(Favorite f: favoriteList) {
-            System.out.println(f.getIndx() + f.getBuildingName() + f.getStartLocation() + f.getDestination());
+            //System.out.println(f.getIndx() + f.getBuildingName() + f.getStartLocation() + f.getDestination());
             favoritesArray.add(f.getBuildingName() + ": " + f.getStartLocation() + " to " + f.getDestination());
         }
         favoritesAdapter = new GridAdapter(favoritesArray);

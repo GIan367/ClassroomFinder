@@ -1,5 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feed>
+   <Node name="Amplified Phones">
+      <X>4710</X>
+      <Y>3735</Y>
+      <Z>1</Z>
+      <type>Normal</type>
+      <Neighbor>Z</Neighbor>
+   </Node>
+   <Node name="Auntie Anne's">
+      <X>3655</X>
+      <Y>3790</Y>
+      <Z>1</Z>
+      <type>Normal</type>
+      <Neighbor>Z</Neighbor>
+   </Node>
+   <Node name="Customized Teez">
+      <X>4000</X>
+      <Y>3709</Y>
+      <Z>1</Z>
+      <type>Normal</type>
+      <Neighbor>Z</Neighbor>
+   </Node>
+   <Node name="Piercing Pagoda">
+      <X>4350</X>
+      <Y>3790</Y>
+      <Z>1</Z>
+      <type>Normal</type>
+      <Neighbor>Z</Neighbor>
+   </Node>
+   <Node name="ecoATM">
+      <X>3515</X>
+      <Y>4130</Y>
+      <Z>1</Z>
+      <type>Normal</type>
+      <Neighbor>Z</Neighbor>
+   </Node>
+   <Node name="Sunglass Hut">
+      <X>3340</X>
+      <Y>4330</Y>
+      <Z>1</Z>
+      <type>Normal</type>
+      <Neighbor>Z</Neighbor>
+   </Node>
+   <Node name="Justice">
+      <X>3440</X>
+      <Y>4330</Y>
+      <Z>1</Z>
+      <type>Normal</type>
+      <Neighbor>Z</Neighbor>
+   </Node>
+   <Node name="Chinese Relaxation Center">
+      <X>2780</X>
+      <Y>3970</Y>
+      <Z>1</Z>
+      <type>Normal</type>
+      <Neighbor>Z</Neighbor>
+   </Node>
    <Node name="Journeys">
       <X>5060</X>
       <Y>3647</Y>
