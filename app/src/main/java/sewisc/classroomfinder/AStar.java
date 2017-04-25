@@ -8,19 +8,10 @@ import java.util.List;
 import java.util.PriorityQueue;
 
 public class AStar {
+    private Graph g;
 
-    private Graph graph; // Graph of the current building
-
-    //Setter for the Graph variable graph
-    public void setGraph(Graph graph) {
-        this.graph = graph;
-    }
-
-    //Empty Constructor
-    public AStar (){this.graph = null;};
-    //Constructor taking in the Graph parameter
-    public AStar (Graph graph){
-        this.graph = graph;
+    public AStar (Graph g){
+        this.g = g;
     }
 
     //Pathfinding using sewisc.classroomfinder.AStar
@@ -44,18 +35,14 @@ public class AStar {
                 break;
             }
 
-            Node[] edges = graph.neighbors(current);
+            Node[] edges = g.neighbors(current);
 
             for(Node node: edges){
-<<<<<<< HEAD
-                int newCost = costSoFar.get(current) + graph.cost(current, node);
-=======
                 System.out.println("Neighbor________________________: " + node.getName());
                 int newCost = costSoFar.get(current) + g.cost(current, node);
->>>>>>> master
                 if (!(costSoFar.containsKey(node)) || (newCost < costSoFar.get(node))){
                     costSoFar.put(node, newCost);
-                    int priority = newCost + graph.heuristic(node, goal);
+                    int priority = newCost + g.heuristic(node, goal);
                     frontier.add(new PriorityNode(node,priority));
                     cameFrom.put(node, current);
                 }
@@ -73,4 +60,3 @@ public class AStar {
         return path;
     }
 }
-
