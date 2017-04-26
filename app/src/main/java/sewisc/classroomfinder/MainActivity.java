@@ -1,5 +1,6 @@
 package sewisc.classroomfinder;
 
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -7,8 +8,10 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -81,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,9 +98,9 @@ public class MainActivity extends AppCompatActivity {
         rb = (TextView) room_Building;
         rb.animate().scaleX(1.5f);
         rb.animate().scaleY(1.5f);
-        room_Building.animate().translationY(300);
+        room_Building.animate().translationY(200);
         room_SpinBuilding = findViewById(R.id.spinner1_r);
-        room_SpinBuilding.animate().translationY(300);
+        room_SpinBuilding.animate().translationY(200);
 
         room_Dest = findViewById(R.id.textView_r);
         room_Dest.animate().alpha(0.0f);
@@ -273,6 +278,16 @@ public class MainActivity extends AppCompatActivity {
                 if(destSpinner1Valid) {
                     find1.setEnabled(true);
                     find1.setVisibility(View.VISIBLE);
+                    View findButton = (View) find1;
+                    int btWidth = find1.getMeasuredWidth();
+                    DisplayMetrics metrics = new DisplayMetrics();
+                    getWindowManager().getDefaultDisplay().getMetrics(metrics);
+                    int width = metrics.widthPixels;
+                    ObjectAnimator outAnim = ObjectAnimator.ofFloat(findButton, "x", width,
+                            (width/2f) - (btWidth/2f));
+                    outAnim.setDuration(300);
+                    outAnim.start();
+
 
                 }
             }
@@ -291,7 +306,15 @@ public class MainActivity extends AppCompatActivity {
                 if(curLocSpinner1Valid) {
                     find1.setEnabled(true);
                     find1.setVisibility(View.VISIBLE);
-                  
+                    int btWidth = find1.getMeasuredWidth();
+                    View findButton = (View) find1;
+                    DisplayMetrics metrics = new DisplayMetrics();
+                    getWindowManager().getDefaultDisplay().getMetrics(metrics);
+                    int width = metrics.widthPixels;
+                    ObjectAnimator outAnim = ObjectAnimator.ofFloat(findButton, "x", width,
+                            (width/2f) - (btWidth/2f));
+                    outAnim.setDuration(300);
+                    outAnim.start();
                 }
             }
 
@@ -447,12 +470,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+
 
     //not a very intensive test - only tests insert; shows output in debugger
     public void SQLTest(){
