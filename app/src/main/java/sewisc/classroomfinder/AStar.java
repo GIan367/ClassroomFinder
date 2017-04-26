@@ -60,4 +60,3 @@ public class AStar {
         return path;
     }
 }
-
