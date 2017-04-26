@@ -9,6 +9,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -81,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,9 +96,9 @@ public class MainActivity extends AppCompatActivity {
         rb = (TextView) room_Building;
         rb.animate().scaleX(1.5f);
         rb.animate().scaleY(1.5f);
-        room_Building.animate().translationY(300);
+        room_Building.animate().translationY(200);
         room_SpinBuilding = findViewById(R.id.spinner1_r);
-        room_SpinBuilding.animate().translationY(300);
+        room_SpinBuilding.animate().translationY(200);
 
         room_Dest = findViewById(R.id.textView_r);
         room_Dest.animate().alpha(0.0f);
@@ -291,7 +294,7 @@ public class MainActivity extends AppCompatActivity {
                 if(curLocSpinner1Valid) {
                     find1.setEnabled(true);
                     find1.setVisibility(View.VISIBLE);
-                  
+
                 }
             }
 
@@ -447,12 +450,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+
 
     //not a very intensive test - only tests insert; shows output in debugger
     public void SQLTest(){

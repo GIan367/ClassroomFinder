@@ -111,6 +111,7 @@
 
 
     <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+
         android:id="@+id/spinner2_r"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
