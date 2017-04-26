@@ -11,7 +11,7 @@
     <item
         android:title="fave"
         android:id="@+id/action_favorite"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/plus"
 
         app:showAsAction="ifRoom"/>
 </menu>

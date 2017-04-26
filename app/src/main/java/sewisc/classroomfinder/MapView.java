@@ -86,11 +86,28 @@ public class MapView extends AppCompatActivity {
                     } else {
                         indx = favorites.get(favorites.size() - 1).getIndx() + 1;
                     }
+
+                    Favorite fav;
                     if(dest != null) {
-                        dataBaseHandler.addFavorite(new Favorite(indx, building, loc, dest));
+                        fav = new Favorite(indx, building, loc, dest);
                     } else {
-                        dataBaseHandler.addFavorite(new Favorite(indx, building, loc, "Nearest Bathroom"));
+                        fav = new Favorite(indx, building, loc, "Nearest Bathroom");
                     }
+
+                    Iterator<Favorite> favIterator = favorites.iterator();
+                    while(favIterator.hasNext()){
+                        Favorite current = favIterator.next();
+                        if ((current.getBuildingName().equals(fav.getBuildingName()))
+                                && (current.getStartLocation().equals(fav.getStartLocation()))
+                                && (current.getDestination().equals(fav.getDestination()))){
+                            toast = Toast.makeText(getApplicationContext(), "Path is already saved.", Toast.LENGTH_SHORT);
+                            toast.show();
+                            return false;
+                        }
+                    }
+
+                    dataBaseHandler.addFavorite(fav);
+                    toast = Toast.makeText(getApplicationContext(), "Path saved to favorites.", Toast.LENGTH_SHORT);
                     toast.show();
                 }
                 return true;

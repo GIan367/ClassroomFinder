@@ -68,7 +68,7 @@
         fancy:fb_fontIconResource="&#xf064;"
         fancy:fb_radius="30dp"
         fancy:fb_text="FIND IT  "
-        fancy:fb_defaultColor="#680303"
+        fancy:fb_defaultColor="#0b5470"
         fancy:fb_iconPosition="right"
         fancy:fb_focusColor="#141E30"
         fancy:fb_borderColor="#FFFFFF"

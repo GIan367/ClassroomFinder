@@ -45,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
     View room_CurrLoc;
     View room_SpinCurrLoc;
     View room_Building;
+    View bath_Building;
+    View bath_CurrLoc;
+    View gal_Building;
     TextView rb;
     View room_SpinBuilding;
     View room_Dest;
@@ -52,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     GridView floors;
     GridView favorites;
     FancyButton find1;
-    Button find2;
+    FancyButton find2;
     TabHost host;
     boolean curLocSpinner1Valid;
     boolean destSpinner1Valid;
@@ -113,12 +116,24 @@ public class MainActivity extends AppCompatActivity {
         room_SpinCurrLoc = findViewById(R.id.spinner2_r);
         room_SpinCurrLoc.animate().alpha(0.0f);
 
+        bath_Building = findViewById(R.id.textView3_b);
+        bath_CurrLoc = findViewById(R.id.textView_b);
+
+        gal_Building = findViewById(R.id.textView3_g);
+
 
         tvCapture = (TextView) room_Building;
         tvCapture.setTypeface(EasyFonts.captureIt(this));
         tvCapture = (TextView) room_CurrLoc;
         tvCapture.setTypeface(EasyFonts.captureIt(this));
         tvCapture = (TextView) room_Dest;
+        tvCapture.setTypeface(EasyFonts.captureIt(this));
+
+        tvCapture = (TextView) bath_Building;
+        tvCapture.setTypeface(EasyFonts.captureIt(this));
+        tvCapture = (TextView) bath_CurrLoc;
+        tvCapture.setTypeface(EasyFonts.captureIt(this));
+        tvCapture = (TextView) gal_Building;
         tvCapture.setTypeface(EasyFonts.captureIt(this));
 
 
@@ -341,7 +356,7 @@ public class MainActivity extends AppCompatActivity {
         find1 = (FancyButton) findViewById(R.id.button_r);
         find1.setVisibility(View.INVISIBLE);
 
-        find2 = (Button) findViewById(R.id.button_b);
+        find2 = (FancyButton) findViewById(R.id.button_b);
 
         // GridViews
         floors = (GridView) findViewById(R.id.gridView1_g);
