@@ -6,12 +6,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,6 +24,8 @@ import android.widget.TabHost;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 import com.vstechlab.easyfonts.EasyFonts;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import mehdi.sakout.fancybuttons.FancyButton;
 
 import org.xmlpull.v1.XmlPullParserException;
@@ -56,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
     GridView favorites;
     FancyButton find1;
     FancyButton find2;
+
     TabHost host;
     boolean curLocSpinner1Valid;
     boolean destSpinner1Valid;
@@ -73,6 +79,9 @@ public class MainActivity extends AppCompatActivity {
     ImageAdapter floorsAdapter;
     GridAdapter favoritesAdapter;
 
+    private float x1,x2;
+    static final int MIN_DISTANCE = 150;
+
     Integer[] eastTowneFloors = {
             R.mipmap.east_towne1
     };
@@ -84,7 +93,62 @@ public class MainActivity extends AppCompatActivity {
             TextView tv = (TextView) host.getTabWidget().getChildTabViewAt(i).findViewById(android.R.id.title);
             tv.setTextColor(Color.parseColor("#ffffff"));
         }
+       // setUpViews();
+    }
 
+    
+    @Override
+    public boolean onTouchEvent(MotionEvent event)
+    {
+        switch(event.getAction())
+        {
+            case MotionEvent.ACTION_DOWN:
+                x1 = event.getX();
+                break;
+            case MotionEvent.ACTION_UP:
+                x2 = event.getX();
+                float deltaX = x2 - x1;
+                if (Math.abs(deltaX) > MIN_DISTANCE)
+                {
+                    if (x2 > x1)
+                    {
+                        //Toast.makeText(this, "Left to Right swipe [Next]", Toast.LENGTH_SHORT).show ();
+                        int curr = host.getCurrentTab();
+                        if(curr == 1) {
+                            host.setCurrentTab(0);
+                        }
+                        else if(curr == 2) {
+                            host.setCurrentTab(1);
+                        }
+                        else if(curr == 3) {
+                            host.setCurrentTab(2);
+                        }
+
+                    }
+
+                    // Right to left swipe action
+                    else
+                    {
+                        //Toast.makeText(this, "Right to Left swipe [Previous]", Toast.LENGTH_SHORT).show ();
+                        int curr = host.getCurrentTab();
+                        if(curr == 0) {
+                            host.setCurrentTab(1);
+                        }
+                        else if(curr == 1) {
+                            host.setCurrentTab(2);
+                        }
+                        else if(curr == 2) {
+                            host.setCurrentTab(3);
+                        }
+                    }
+                }
+                else
+                {
+                    // consider as something else - a screen tap for example
+                }
+                break;
+        }
+        return super.onTouchEvent(event);
     }
 
 
@@ -93,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
 
 
@@ -434,6 +499,33 @@ public class MainActivity extends AppCompatActivity {
                 curLocSpinner3.setAdapter(hogwartsAdapter);
             }
         } **/
+    }
+
+    private void setUpViews() {
+        List<View> views = new ArrayList<View>();
+        LayoutInflater inflater = LayoutInflater.from(this);
+        views.add(inflater.inflate(R.layout.room_finder, null));
+        views.add(inflater.inflate(R.layout.floor_gallery, null));
+        views.add(inflater.inflate(R.layout.bathroom, null));
+        views.add(inflater.inflate(R.layout.favorite, null));
+        VpAdapter adapter = new VpAdapter(views);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.vp);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                /// 4. when some views conflict with swipe back , you should do these, for example:
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
+        viewPager.setAdapter(adapter);
     }
 
     // Currently chooses from test data; will of course work with database later
