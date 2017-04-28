@@ -71,6 +71,31 @@ public class MapView extends AppCompatActivity {
             MenuInflater inflater = getMenuInflater();
             // then inflate the mainmenu.xml to menu object name "inflatedMenu"
             inflater.inflate(R.menu.menu_main, inflatedMenu);
+
+            List<Favorite> favorites = dataBaseHandler.getAllFavorites();
+
+                inflatedMenu.getItem(0).setIcon(getResources().getDrawable(R.drawable.heartgrey));
+
+
+
+                Favorite fav;
+                if(dest != null) {
+                    fav = new Favorite(0, building, loc, dest);
+                } else {
+                    fav = new Favorite(0, building, loc, "Nearest Bathroom");
+                }
+
+                Iterator<Favorite> favIterator = favorites.iterator();
+                while(favIterator.hasNext()){
+                    Favorite current = favIterator.next();
+                    if ((current.getBuildingName().equals(fav.getBuildingName()))
+                            && (current.getStartLocation().equals(fav.getStartLocation()))
+                            && (current.getDestination().equals(fav.getDestination()))){
+
+                        inflatedMenu.getItem(0).setIcon(getResources().getDrawable(R.drawable.heartred));
+                    }
+                }
+
         }
         return true;
     }
@@ -83,6 +108,7 @@ public class MapView extends AppCompatActivity {
                 // User chose the "Favorite" action, mark the current item
                 // as a favorite...
                 if(loc != null) {
+                    item.setIcon(getResources().getDrawable(R.drawable.heartred));
                     List<Favorite> favorites = dataBaseHandler.getAllFavorites();
                     int indx;
                     if(favorites.isEmpty()) {

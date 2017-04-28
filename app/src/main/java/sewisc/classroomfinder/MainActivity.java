@@ -64,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
     FancyButton find1;
     FancyButton find2;
 
+    boolean firstPassIsDone = false;
+
     TabHost host;
     boolean curLocSpinner1Valid;
     boolean destSpinner1Valid;
@@ -299,13 +301,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 curLocSpinner1.setEnabled(true);
-                destSpinner1.setEnabled(true);
-                rb.animate().scaleX(1);
-                rb.animate().scaleY(1);
+                //destSpinner1.setEnabled(true);
+                rb.animate().scaleX(0.7f);
+                rb.animate().scaleY(0.7f);
                 room_CurrLoc.animate().alpha(1.0f).setDuration(1000);
+                if(!firstPassIsDone) {
+                    room_CurrLoc.animate().scaleY(1.2f);
+                    room_CurrLoc.animate().scaleX(1.2f);
+                }
+
                 room_SpinCurrLoc.animate().alpha(1.0f).setDuration(1000);
-                room_Dest.animate().alpha(1.0f).setDuration(1000);
-                room_SpinDest.animate().alpha(1.0f).setDuration(1000);
+                //room_Dest.animate().alpha(1.0f).setDuration(1000);
+                //room_SpinDest.animate().alpha(1.0f).setDuration(1000);
                 room_Building.animate().translationY(0).setDuration(500);
                 room_SpinBuilding.animate().translationY(0).setDuration(500);
                 populateSpinners(1, buildingSpinner1.getSelectedItem());
@@ -366,6 +373,16 @@ public class MainActivity extends AppCompatActivity {
                     outAnim.setDuration(300);
                     outAnim.start();
                 }
+                room_CurrLoc.animate().scaleY(0.7f);
+                room_CurrLoc.animate().scaleX(0.7f);
+                destSpinner1.setEnabled(true);
+                if(!firstPassIsDone) {
+                    room_Dest.animate().scaleX(1.3f);
+                    room_Dest.animate().scaleY(1.3f);
+                }
+
+                room_Dest.animate().alpha(1.0f).setDuration(1000);
+                room_SpinDest.animate().alpha(1.0f).setDuration(1000);
             }
 
             @Override
@@ -379,7 +396,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 destSpinner1Valid = true;
+                firstPassIsDone = true;
                 if(curLocSpinner1Valid) {
+
+
+                    //resize all text views back
+                    room_Dest.animate().scaleX(0.7f);
+                    room_Dest.animate().scaleY(0.7f);
+
+
+
                     find1.setEnabled(true);
                     find1.setVisibility(View.VISIBLE);
                     int btWidth = find1.getMeasuredWidth();
