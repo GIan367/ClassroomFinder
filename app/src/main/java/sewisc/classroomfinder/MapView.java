@@ -198,9 +198,6 @@ public class MapView extends AppCompatActivity {
                     floors.add("east_towne1");
                     buildingObj = new Building(this, "East Towne Mall", "easttowne.xml", floors);
                     id = getResources().getIdentifier("east_towne1", "mipmap", getPackageName());
-                } else if (building.equals("Hogwarts School of Witchcraft and Wizardry")) { // Test garbage; delete eventually
-                    buildingObj = new Building(this, "East Towne Mall", "easttowne.xml", floors);
-                    id = getResources().getIdentifier("east_towne1", "mipmap", getPackageName());
                 }
                 List<Node> rooms = buildingObj.getRooms();
                 Iterator<Node> itr = rooms.iterator();
@@ -217,36 +214,6 @@ public class MapView extends AppCompatActivity {
         } catch(XmlPullParserException e) {
             // TODO: SOMETHING
         }
-
-
-
-/*
-        imageView.setOnLongClickListener(new View.OnLongClickListener() {
-
-
-
-            @Override
-            public boolean onLongClick(View v) {
-
-
-                if(loc != null) {
-                    List<Favorite> favorites = dataBaseHandler.getAllFavorites();
-                    int indx;
-                    if(favorites.isEmpty()) {
-                        indx = 0;
-                    } else {
-                        indx = favorites.get(favorites.size() - 1).getIndx() + 1;
-                    }
-                    if(dest != null) {
-                        dataBaseHandler.addFavorite(new Favorite(indx, building, loc, dest));
-                    } else {
-                        dataBaseHandler.addFavorite(new Favorite(indx, building, loc, "Nearest Bathroom"));
-                    }
-                    toast.show();
-                }
-                return false;
-            }
-        }); */
     }
 
 
