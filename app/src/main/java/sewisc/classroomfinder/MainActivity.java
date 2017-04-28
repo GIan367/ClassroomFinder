@@ -4,13 +4,16 @@ import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.gesture.Gesture;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -40,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
     DataBaseHandler dataBaseHandler;
     List<Favorite> favoriteList;
     List<String> favoritesArray;
-    SwipeDetector swipeDetector;
     SearchableSpinner buildingSpinner1;
     SearchableSpinner curLocSpinner1;
     SearchableSpinner destSpinner1;
@@ -73,14 +75,15 @@ public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_DEST = "sewisc.classroomfinder.DEST";
     public static final String EXTRA_FLOOR = "sewisc.classroomfinder.FLOOR";
 
-    // Temporary declarations and test data before database integration
     ArrayAdapter<String> buildingAdapter;
     ArrayAdapter<String> eastTowneAdapter;
     ImageAdapter floorsAdapter;
     GridAdapter favoritesAdapter;
 
-    private float x1,x2;
+    private float x1,x2,y;
     static final int MIN_DISTANCE = 150;
+
+    boolean avail;
 
     Integer[] eastTowneFloors = {
             R.mipmap.east_towne1
@@ -120,10 +123,10 @@ public class MainActivity extends AppCompatActivity {
                         else if(curr == 2) {
                             host.setCurrentTab(1);
                         }
-                        else if(curr == 3) {
+                        // Handled by the favorites GridView
+                        /*else if(curr == 3) {
                             host.setCurrentTab(2);
-                        }
-
+                        }*/
                     }
 
                     // Right to left swipe action
@@ -267,9 +270,6 @@ public class MainActivity extends AppCompatActivity {
         spec.setContent(R.id.favorite);
         host.addTab(spec);
 
-        //SQLTest();
-        //dataBaseHandler.clearAllData();
-
         // Replace with reading info from XML files?
         List<String> buildingArray = new ArrayList<String>();
         buildingArray.add("East Towne Mall");
@@ -281,8 +281,6 @@ public class MainActivity extends AppCompatActivity {
 
         // SearchableSpinners
         buildingSpinner1 = (SearchableSpinner) findViewById(R.id.spinner1_r);
-
-
 
         curLocSpinner1 = (SearchableSpinner) findViewById(R.id.spinner2_r);
         destSpinner1 = (SearchableSpinner) findViewById(R.id.spinner3_r);
@@ -367,8 +365,6 @@ public class MainActivity extends AppCompatActivity {
                             (width/2f) - (btWidth/2f));
                     outAnim.setDuration(300);
                     outAnim.start();
-
-
                 }
             }
 
@@ -439,36 +435,72 @@ public class MainActivity extends AppCompatActivity {
         favorites.setChoiceMode(GridView.CHOICE_MODE_SINGLE);
         favorites.setSelector(android.R.color.darker_gray);
         updateFavorites();
-        swipeDetector = new SwipeDetector();
-        favorites.setOnTouchListener(swipeDetector);
+        avail = true;
         favorites.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                final Favorite f = favoriteList.get(position);
-                if(swipeDetector.swipeDetected()) {
-                    if(swipeDetector.getAction() == SwipeDetector.Action.RL) {
-                        new AlertDialog.Builder(MainActivity.this)
-                                .setTitle("Delete entry")
-                                .setMessage("Are you sure you want to delete the highlighted entry?")
-                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        dataBaseHandler.deleteFavorite(f);
-                                        updateFavorites();
-                                    }
-                                })
-                                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        // do nothing
-                                    }
-                                })
-                                .setIcon(android.R.drawable.ic_dialog_alert)
-                                .show();
-                    }
-                } else {
+                if(avail == true){
+                    final Favorite f = favoriteList.get(position);
                     displayMap(getCurrentFocus(), f.getBuildingName(), f.getStartLocation(), f.getDestination());
                 }
+            }
+        });
+        final Handler handler = new Handler();
+        final Runnable mLongPressed = new Runnable() {
+            public void run() {
+                avail = false;
+                int position = favorites.pointToPosition((int) x2, (int) y);
+                if(position!=GridView.INVALID_POSITION){
+                    final Favorite f = favoriteList.get(position);
+                    new AlertDialog.Builder(MainActivity.this)
+                            .setTitle("Delete entry")
+                            .setMessage("Are you sure you want to delete the highlighted entry?")
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dataBaseHandler.deleteFavorite(f);
+                                    updateFavorites();
+                                    avail = true;
+                                }
+                            })
+                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    avail = true;
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+                }
+            }
+        };
+        favorites.setOnTouchListener(new AdapterView.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, final MotionEvent event){
+                switch(event.getAction())
+                {
+                    case MotionEvent.ACTION_DOWN:
+                        x1 = event.getX();
+                        handler.postDelayed(mLongPressed, 1000);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        x2 = event.getX();
+                        y = event.getY();
+                        handler.removeCallbacks(mLongPressed);
+                        float deltaX = x2 - x1;
+                        if (Math.abs(deltaX) > MIN_DISTANCE) {
+                            if (x2 > x1) {
+                                host.setCurrentTab(2);
+                            }
+
+                        }
+                        else {
+                            GestureDetector gestureDetector = new GestureDetector(getApplicationContext(), new GestureDetector.SimpleOnGestureListener() {});
+                            return gestureDetector.onTouchEvent(event);
+                        }
+                        break;
+                }
+                return true;
             }
         });
 
@@ -491,17 +523,10 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 curLocSpinner3.setAdapter(eastTowneAdapter);
             }
-        } /** else if (buildingName.equals("Hogwarts School of Witchcraft and Wizardry")) {
-            if(tab == 1) {
-                curLocSpinner1.setAdapter(hogwartsAdapter);
-                destSpinner1.setAdapter(hogwartsAdapter);
-            } else {
-                curLocSpinner3.setAdapter(hogwartsAdapter);
-            }
-        } **/
+        }
     }
 
-    private void setUpViews() {
+    /*private void setUpViews() {
         List<View> views = new ArrayList<View>();
         LayoutInflater inflater = LayoutInflater.from(this);
         views.add(inflater.inflate(R.layout.room_finder, null));
@@ -526,7 +551,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         viewPager.setAdapter(adapter);
-    }
+    }*/
 
     // Currently chooses from test data; will of course work with database later
     public void populateGallery(Object selectedBuilding) {
@@ -534,9 +559,7 @@ public class MainActivity extends AppCompatActivity {
         String buildingName = selectedBuilding.toString();
         if(buildingName.equals("East Towne Mall")) {
             floorsAdapter.setmThumbIds(eastTowneFloors);
-        } /** else if (buildingName.equals("Hogwarts School of Witchcraft and Wizardry")) {
-            floorsAdapter.setmThumbIds(hogwartsFloors);
-        } **/
+        }
     }
 
     // Generates the favorites list from the favorites database and sets the grid adapter
@@ -575,68 +598,5 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(EXTRA_LOC, loc);
         intent.putExtra(EXTRA_DEST, dest);
         startActivity(intent);
-    }
-
-
-
-    //not a very intensive test - only tests insert; shows output in debugger
-    public void SQLTest(){
-        dataBaseHandler.clearAllData(); //resets data
-
-        List<Favorite> testFavorites = new ArrayList<Favorite>();
-        for (int i = 0;i < 4; i++){
-            testFavorites.add(new Favorite(i, "Test Building Name " + i, "Test Start Location " + i, "Test Destination " + i));
-        }
-
-        List<BuildingDB> testBuildings = new ArrayList<BuildingDB>();
-        for (int i = 0;i < 4; i++){
-            testBuildings.add(new BuildingDB(i, "Test Name(Building) " + i));
-        }
-
-        List<Location> testLocations = new ArrayList<Location>();
-        for (int i = 0;i < 4; i++){
-            testLocations.add(new Location(i, "Test Name(Location) " + i, i, i));
-        }
-
-        for (Favorite f: testFavorites){
-            Log.d("Insert:", "Inserting "+f.getBuildingName());
-            dataBaseHandler.addFavorite(f);
-        }
-
-        for (BuildingDB b: testBuildings){
-            Log.d("Insert:", "Inserting "+b.getName());
-            dataBaseHandler.addBuilding(b);
-        }
-
-        for (Location l: testLocations){
-            Log.d("Insert:", "Inserting " + l.getName());
-            dataBaseHandler.addLocation(l);
-        }
-
-        List<Favorite> resultFavorites = dataBaseHandler.getAllFavorites();
-        Log.d("Reading:", "Favorites");
-        for (Favorite f: resultFavorites){
-            Log.d("Read:", "Index: " + f.getIndx() + " Building Name: "
-                    + f.getBuildingName() + " Start Location: " + f.getStartLocation()
-                    + " Destination: " + f.getDestination());
-        }
-
-        List<BuildingDB> resultBuildings = dataBaseHandler.getAllBuildings();
-        Log.d("Reading:", "Buildings");
-        for (BuildingDB b: resultBuildings){
-            Log.d("Read:", "ID: " + b.getID() + " Name: " + b.getName());
-        }
-
-        List<Location> resultLocations = dataBaseHandler.getAllLocations();
-        Log.d("Reading:", "Favorites");
-        for (Location l: resultLocations){
-            Log.d("Read:", "ID: " + l.getID() + " Name: "
-                    + l.getName() + " Building ID: " + l.getBuildingID()
-                    + " Floor Number: " + l.getFloorNumber());
-        }
-
-        dataBaseHandler.closeDB();
-
-
     }
 }
