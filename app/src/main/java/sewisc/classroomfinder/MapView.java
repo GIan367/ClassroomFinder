@@ -1,6 +1,7 @@
 package sewisc.classroomfinder;
 
 import android.app.Activity;
+import android.content.ClipData;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -51,6 +52,7 @@ public class MapView extends AppCompatActivity {
     Toast toast;
     DataBaseHandler dataBaseHandler;
     Matrix matrix = new Matrix();
+
     private static final float AXIS_X_MIN = -1f;
     private static final float AXIS_X_MAX = 1f;
     private static final float AXIS_Y_MIN = -1f;
@@ -64,10 +66,20 @@ public class MapView extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu inflatedMenu)
     {
+
         //to infate menu we need MenuInflater.
         MenuInflater inflater = getMenuInflater();
         // then inflate the mainmenu.xml to menu object name "inflatedMenu"
         inflater.inflate(R.menu.menu_main,inflatedMenu);
+
+        List<Favorite> favorites = dataBaseHandler.getAllFavorites();
+        if(favorites.isEmpty()){
+            inflatedMenu.getItem(0).setIcon(getResources().getDrawable(R.drawable.heartgrey));
+        }
+        else {
+
+        }
+
         return true;
     }
 

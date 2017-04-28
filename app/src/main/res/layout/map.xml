@@ -7,6 +7,7 @@
 
     <com.jsibbold.zoomage.ZoomageView
         android:id="@+id/image"
+        android:layout_marginTop="90dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:zoomage_restrictBounds="false"
