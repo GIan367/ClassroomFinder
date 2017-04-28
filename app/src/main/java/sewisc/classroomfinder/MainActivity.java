@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
        // setUpViews();
     }
 
-    
+
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
@@ -501,32 +501,7 @@ public class MainActivity extends AppCompatActivity {
         } **/
     }
 
-    private void setUpViews() {
-        List<View> views = new ArrayList<View>();
-        LayoutInflater inflater = LayoutInflater.from(this);
-        views.add(inflater.inflate(R.layout.room_finder, null));
-        views.add(inflater.inflate(R.layout.floor_gallery, null));
-        views.add(inflater.inflate(R.layout.bathroom, null));
-        views.add(inflater.inflate(R.layout.favorite, null));
-        VpAdapter adapter = new VpAdapter(views);
-        ViewPager viewPager = (ViewPager) findViewById(R.id.vp);
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
 
-            @Override
-            public void onPageSelected(int position) {
-                /// 4. when some views conflict with swipe back , you should do these, for example:
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-            }
-        });
-        viewPager.setAdapter(adapter);
-    }
 
     // Currently chooses from test data; will of course work with database later
     public void populateGallery(Object selectedBuilding) {
