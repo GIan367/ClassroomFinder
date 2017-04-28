@@ -19,10 +19,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.Spinner;
 import android.widget.TabHost;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 import com.vstechlab.easyfonts.EasyFonts;
@@ -38,6 +41,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
     DataBaseHandler dataBaseHandler;
@@ -66,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
     boolean firstPassIsDone = false;
 
+
     TabHost host;
     boolean curLocSpinner1Valid;
     boolean destSpinner1Valid;
@@ -87,9 +93,35 @@ public class MainActivity extends AppCompatActivity {
 
     boolean avail;
 
+    final Handler handler = new Handler();
+
+    Timer timer;
+    Spinner currSpinnerShaking;
+    TimerTask task = new TimerTask() {
+        @Override
+        public void run() {
+
+            handler.post(new Runnable() {
+                public void run() {
+                    Spinner spin = (Spinner) currSpinnerShaking;
+                    Animation shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
+                    spin.startAnimation(shake);
+                }
+
+            });
+
+        }
+    };
+
     Integer[] eastTowneFloors = {
             R.mipmap.east_towne1
     };
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
 
     @Override
     protected void onResume() {
@@ -98,6 +130,8 @@ public class MainActivity extends AppCompatActivity {
             TextView tv = (TextView) host.getTabWidget().getChildTabViewAt(i).findViewById(android.R.id.title);
             tv.setTextColor(Color.parseColor("#ffffff"));
         }
+
+
     }
 
     @Override
@@ -172,6 +206,10 @@ public class MainActivity extends AppCompatActivity {
         rb.animate().scaleY(1.5f);
         room_Building.animate().translationY(200);
         room_SpinBuilding = findViewById(R.id.spinner1_r);
+
+
+
+        //spin.animate().scaleY(1.5f);
         room_SpinBuilding.animate().translationY(200);
 
         room_Dest = findViewById(R.id.textView_r);
@@ -300,6 +338,11 @@ public class MainActivity extends AppCompatActivity {
         buildingSpinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                currSpinnerShaking = (Spinner) room_SpinCurrLoc;
+                timer = new Timer("shakeAndBake");
+
+                timer.schedule(task,3000, 3500);
+                //timer.cancel();
                 curLocSpinner1.setEnabled(true);
                 //destSpinner1.setEnabled(true);
                 rb.animate().scaleX(0.7f);
@@ -359,6 +402,8 @@ public class MainActivity extends AppCompatActivity {
         curLocSpinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+
                 curLocSpinner1Valid = true;
                 if(destSpinner1Valid) {
                     find1.setEnabled(true);
@@ -383,6 +428,8 @@ public class MainActivity extends AppCompatActivity {
 
                 room_Dest.animate().alpha(1.0f).setDuration(1000);
                 room_SpinDest.animate().alpha(1.0f).setDuration(1000);
+
+                currSpinnerShaking = (Spinner) room_SpinDest;
             }
 
             @Override
@@ -395,6 +442,7 @@ public class MainActivity extends AppCompatActivity {
         destSpinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                timer.cancel();
                 destSpinner1Valid = true;
                 firstPassIsDone = true;
                 if(curLocSpinner1Valid) {
