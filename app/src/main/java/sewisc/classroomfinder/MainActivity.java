@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
     ImageAdapter floorsAdapter;
     GridAdapter favoritesAdapter;
 
-    private float x1,x2,y;
+    private float x1,x2,y1,y2,deltaX,deltaY;
     static final int MIN_DISTANCE = 150;
 
     boolean avail;
@@ -105,15 +105,17 @@ public class MainActivity extends AppCompatActivity {
         {
             case MotionEvent.ACTION_DOWN:
                 x1 = event.getX();
+                y1 = event.getY();
                 break;
             case MotionEvent.ACTION_UP:
                 x2 = event.getX();
-                float deltaX = x2 - x1;
-                if (Math.abs(deltaX) > MIN_DISTANCE)
+                y2 = event.getY();
+                deltaX = x2 - x1;
+                deltaY = y2 - y1;
+                if ((Math.abs(deltaX) > MIN_DISTANCE) && (Math.abs(deltaX) > Math.abs(deltaY)))
                 {
                     if (x2 > x1)
                     {
-                        //Toast.makeText(this, "Left to Right swipe [Next]", Toast.LENGTH_SHORT).show ();
                         int curr = host.getCurrentTab();
                         if(curr == 1) {
                             host.setCurrentTab(0);
@@ -130,7 +132,6 @@ public class MainActivity extends AppCompatActivity {
                     // Right to left swipe action
                     else
                     {
-                        //Toast.makeText(this, "Right to Left swipe [Previous]", Toast.LENGTH_SHORT).show ();
                         int curr = host.getCurrentTab();
                         if(curr == 0) {
                             host.setCurrentTab(1);
@@ -218,7 +219,7 @@ public class MainActivity extends AppCompatActivity {
             stream = getAssets().open("easttowne.xml");
             entries = xmlParser.parse(stream);
         }
-          catch (FileNotFoundException e) {
+        catch (FileNotFoundException e) {
             System.out.println("xml file not found");
         } catch (XmlPullParserException e) {
             System.out.println("parser not working");
@@ -235,9 +236,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         /** for(Node entry: entries) {
-            System.out.println("Name: " + entry.getName() + " Type " +  entry.getType() + " X: "
-                + entry.getRelativeX() + " Y: " + entry.getRelativeY() + " Z: " + entry.getFloor());
-        } **/
+         System.out.println("Name: " + entry.getName() + " Type " +  entry.getType() + " X: "
+         + entry.getRelativeX() + " Y: " + entry.getRelativeY() + " Z: " + entry.getFloor());
+         } **/
 
         // Set up tabs
         host = (TabHost) findViewById(R.id.tabHost);
@@ -431,7 +432,6 @@ public class MainActivity extends AppCompatActivity {
         favoritesArray = new ArrayList<String>();
         favorites = (GridView) findViewById(R.id.gridView1_f);
         favorites.setChoiceMode(GridView.CHOICE_MODE_SINGLE);
-        favorites.setSelector(android.R.color.darker_gray);
         updateFavorites();
         avail = true;
         favorites.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -447,12 +447,12 @@ public class MainActivity extends AppCompatActivity {
         final Runnable mLongPressed = new Runnable() {
             public void run() {
                 avail = false;
-                int position = favorites.pointToPosition((int) x2, (int) y);
+                int position = favorites.pointToPosition((int) x1, (int) y1);
                 if(position!=GridView.INVALID_POSITION){
                     final Favorite f = favoriteList.get(position);
                     new AlertDialog.Builder(MainActivity.this)
                             .setTitle("Delete entry")
-                            .setMessage("Are you sure you want to delete the highlighted entry?")
+                            .setMessage("Delete path " + f.getBuildingName() + ": " + f.getStartLocation() + " to " + f.getDestination() + "?")
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
@@ -479,20 +479,24 @@ public class MainActivity extends AppCompatActivity {
                 {
                     case MotionEvent.ACTION_DOWN:
                         x1 = event.getX();
+                        y1 = event.getY();
                         handler.postDelayed(mLongPressed, 1000);
                         break;
                     case MotionEvent.ACTION_UP:
                         x2 = event.getX();
-                        y = event.getY();
+                        y2 = event.getY();
                         handler.removeCallbacks(mLongPressed);
-                        float deltaX = x2 - x1;
-                        if (Math.abs(deltaX) > MIN_DISTANCE) {
+                        deltaX = x2 - x1;
+                        deltaY = y2 - y1;
+                        if ((Math.abs(deltaX) > MIN_DISTANCE) && (Math.abs(deltaX) > Math.abs(deltaY))) {
                             if (x2 > x1) {
                                 host.setCurrentTab(2);
                             }
-
-                        }
-                        else {
+                        } else if((Math.abs(deltaY) > MIN_DISTANCE) && (Math.abs(deltaY) > Math.abs(deltaX))) {
+                            if(avail == true) {
+                                favorites.smoothScrollBy((int) -deltaY, 2 * (int) Math.abs(deltaY));
+                            }
+                        } else {
                             GestureDetector gestureDetector = new GestureDetector(getApplicationContext(), new GestureDetector.SimpleOnGestureListener() {});
                             return gestureDetector.onTouchEvent(event);
                         }

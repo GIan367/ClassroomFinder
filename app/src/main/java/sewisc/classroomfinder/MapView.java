@@ -22,6 +22,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.xmlpull.v1.XmlPullParserException;
@@ -36,6 +37,7 @@ import android.view.ScaleGestureDetector;
 import android.view.ScaleGestureDetector.SimpleOnScaleGestureListener;
 import android.view.MotionEvent;
 import com.jsibbold.zoomage.ZoomageView;
+import com.vstechlab.easyfonts.EasyFonts;
 
 /**
  * Created by Zak on 3/15/2017.
@@ -64,10 +66,12 @@ public class MapView extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu inflatedMenu)
     {
-        //to infate menu we need MenuInflater.
-        MenuInflater inflater = getMenuInflater();
-        // then inflate the mainmenu.xml to menu object name "inflatedMenu"
-        inflater.inflate(R.menu.menu_main,inflatedMenu);
+        if(loc != null) {
+            //to infate menu we need MenuInflater.
+            MenuInflater inflater = getMenuInflater();
+            // then inflate the mainmenu.xml to menu object name "inflatedMenu"
+            inflater.inflate(R.menu.menu_main, inflatedMenu);
+        }
         return true;
     }
 
@@ -125,6 +129,8 @@ public class MapView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.map);
+        TextView pathName = (TextView) findViewById(R.id.textView4);
+        pathName.setTypeface(EasyFonts.captureIt(this));
 
         Intent intent = getIntent();
         ref = intent.getIntExtra(MainActivity.EXTRA_FLOOR, 0);
@@ -169,6 +175,7 @@ public class MapView extends AppCompatActivity {
 
         try {
             if((dest != null) && (!dest.equals("Nearest Bathroom"))) { // All text fields populated -- standard Room Finder AStar
+                pathName.setText(building + ": " + loc + " to " + dest);
                 int id = 0;
                 List<String> floors = new ArrayList<String>();
                 Building buildingObj = null; // Handle this better
@@ -190,6 +197,7 @@ public class MapView extends AppCompatActivity {
 
                 drawPath(id, pathNodes);
             } else if (loc != null) { // No destination populated -- Bathroom Finder AStar
+                pathName.setText(building + ": " + loc + " to Nearest Bathroom");
                 int id = 0;
                 List<String> floors = new ArrayList<String>();
                 Building buildingObj = null; // Handle this better
