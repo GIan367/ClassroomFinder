@@ -117,6 +117,11 @@ public class MainActivity extends AppCompatActivity {
             R.mipmap.east_towne1
     };
 
+    //cs101
+    Integer[] csFloors = {
+            R.mipmap.cs
+    };
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -314,6 +319,9 @@ public class MainActivity extends AppCompatActivity {
         List<String> buildingArray = new ArrayList<String>();
         buildingArray.add("East Towne Mall");
 
+        //cs101
+        buildingArray.add("Computer Science");
+
         List<String> eastTowneArray = new ArrayList<String>();
         for(Node entry: entries) {
             if(entry.getType().equals(NodeType.normal)) eastTowneArray.add(entry.getName());
@@ -341,12 +349,12 @@ public class MainActivity extends AppCompatActivity {
                 currSpinnerShaking = (Spinner) room_SpinCurrLoc;
                 timer = new Timer("shakeAndBake");
 
-                timer.schedule(task,3000, 3500);
+                timer.schedule(task,5000, 5000);
                 //timer.cancel();
                 curLocSpinner1.setEnabled(true);
                 //destSpinner1.setEnabled(true);
-                rb.animate().scaleX(0.7f);
-                rb.animate().scaleY(0.7f);
+                rb.animate().scaleX(1.0f);
+                rb.animate().scaleY(1.0f);
                 room_CurrLoc.animate().alpha(1.0f).setDuration(1000);
                 if(!firstPassIsDone) {
                     room_CurrLoc.animate().scaleY(1.2f);
@@ -372,10 +380,15 @@ public class MainActivity extends AppCompatActivity {
         buildingSpinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                //cs101
+                floorsAdapter.notifyDataSetChanged();
+
+
                 floors.setVisibility(View.GONE);
                 populateGallery(buildingSpinner2.getSelectedItem());
                 floors.setVisibility(View.VISIBLE);
                 floors.setEnabled(true);
+
             }
 
             @Override
@@ -418,8 +431,8 @@ public class MainActivity extends AppCompatActivity {
                     outAnim.setDuration(300);
                     outAnim.start();
                 }
-                room_CurrLoc.animate().scaleY(0.7f);
-                room_CurrLoc.animate().scaleX(0.7f);
+                room_CurrLoc.animate().scaleY(1.0f);
+                room_CurrLoc.animate().scaleX(1.0f);
                 destSpinner1.setEnabled(true);
                 if(!firstPassIsDone) {
                     room_Dest.animate().scaleX(1.3f);
@@ -449,8 +462,8 @@ public class MainActivity extends AppCompatActivity {
 
 
                     //resize all text views back
-                    room_Dest.animate().scaleX(0.7f);
-                    room_Dest.animate().scaleY(0.7f);
+                    room_Dest.animate().scaleX(1.0f);
+                    room_Dest.animate().scaleY(1.0f);
 
 
 
@@ -609,6 +622,11 @@ public class MainActivity extends AppCompatActivity {
         String buildingName = selectedBuilding.toString();
         if(buildingName.equals("East Towne Mall")) {
             floorsAdapter.setmThumbIds(eastTowneFloors);
+        }
+
+        //cs101
+        else if(buildingName.equals("Computer Science")) {
+            floorsAdapter.setmThumbIds(csFloors);
         }
     }
 

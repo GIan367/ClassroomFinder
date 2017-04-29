@@ -3,6 +3,10 @@
     android:interpolator="@android:anim/overshoot_interpolator"
     android:fillAfter="true">
 
+
+
+
+
         <translate
             android:fromXDelta="-30"
             android:toXDelta="29"
