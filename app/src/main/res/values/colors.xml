@@ -8,5 +8,6 @@
     <color name="startColor">#141e30</color>
     <color name="endColor">#243B55</color>
     <color name="white">#fdfdfd</color>
+    <color name="notification">#ffff05</color>
     <!-- <color name="colorTextColor">#e7e2e2</color> -->
 </resources>
