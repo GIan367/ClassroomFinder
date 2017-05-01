@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <feed>
 <Node name="1367"><X>165</X><Y>1617</Y><Z>1</Z><type>Normal</type><Neighbor>A</Neighbor></Node>
@@ -40,4 +41,48 @@
 <Node name="1261"><X>1206</X><Y>1080</Y><Z>1</Z><type>Normal</type><Neighbor>Q</Neighbor></Node>
 <Node name="T"><X>1311</X><Y>462</Y><Z>1</Z><type>Hallway</type><Neighbor>1301, N, M</Neighbor></Node>
 <Node name="U"><X>1473</X><Y>1086</Y><Z></Z><type>Hallway</type><Neighbor>Q, 1269, O</Neighbor></Node>
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<feed>
+<Node name="1367"><X>165</X><Y>1617</Y><Z>1</Z><type>Normal</type><Neighbor>A</Neighbor></Node>
+<Node name="1363"><X>264</X><Y>1302</Y><Z>1</Z><type>Normal</type><Neighbor>B</Neighbor></Node>
+<Node name="1366.75"><X>228</X><Y>1725</Y><Z>1</Z><type>Normal</type><Neighbor>A</Neighbor></Node>
+<Node name="1350"><X>498</X><Y>870</Y><Z>1</Z><type>Normal</type><Neighbor>C</Neighbor></Node>
+<Node name="A"><X>201</X><Y>1656</Y><Z>1</Z><type>Hallway</type><Neighbor>1367, 1366 3/4</Neighbor></Node>
+<Node name="B"><X>300</X><Y>1314</Y><Z>1</Z><type>Hallway</type><Neighbor>1363</Neighbor></Node>
+<Node name="C"><X>441</X><Y>843</Y><Z>1</Z><type>Hallway</type><Neighbor>1350</Neighbor></Node>
+<Node name="D"><X>567</X><Y>510</Y><Z>1</Z><type>Hallway</type><Neighbor>E, F</Neighbor></Node>
+<Node name="1329A"><X>537</X><Y>399</Y><Z>1</Z><type>Bathroom</type><Neighbor>E</Neighbor></Node>
+<Node name="1327"><X>546</X><Y>267</Y><Z>1</Z><type>Bathroom</type><Neighbor>E</Neighbor></Node>
+<Node name="Lobby"><X>867</X><Y>411</Y><Z>1</Z><type>Normal</type><Neighbor>F, East Entrance</Neighbor></Node>
+<Node name="E"><X>564</X><Y>354</Y><Z>1</Z><type>Hallway</type><Neighbor>1329A, 1327, D</Neighbor></Node>
+<Node name="F"><X>861</X><Y>516</Y><Z>1</Z><type>Hallway</type><Neighbor>Lobby, M, G</Neighbor></Node>
+<Node name="1343"><X>672</X><Y>1659</Y><Z>1</Z><type>Normal</type><Neighbor>R</Neighbor></Node>
+<Node name="G"><X>810</X><Y>804</Y><Z>1</Z><type>Hallway</type><Neighbor>H, I, F, Union South Entrance</Neighbor></Node>
+<Node name="H"><X>717</X><Y>864</Y><Z>1</Z><type>Hallway</type><Neighbor>R, G</Neighbor></Node>
+<Node name="I"><X>945</X><Y>867</Y><Z>1</Z><type>Hallway</type><Neighbor>G, J</Neighbor></Node>
+<Node name="R"><X>717</X><Y>1590</Y><Z>1</Z><type>Hallway</type><Neighbor>1343, H</Neighbor></Node>
+<Node name="J"><X>945</X><Y>918</Y><Z>1</Z><type>Hallway</type><Neighbor>I, 1330, K</Neighbor></Node>
+<Node name="K"><X>945</X><Y>1344</Y><Z>1</Z><type>Hallway</type><Neighbor>1333, L, J</Neighbor></Node>
+<Node name="L"><X>945</X><Y>1611</Y><Z>1</Z><type>Hallway</type><Neighbor>1335, K</Neighbor></Node>
+<Node name="1330"><X>960</X><Y>918</Y><Z>1</Z><type>Normal</type><Neighbor>J</Neighbor></Node>
+<Node name="1333"><X>960</X><Y>1344</Y><Z>1</Z><type>Normal</type><Neighbor>K</Neighbor></Node>
+<Node name="1335"><X>960</X><Y>14611</Y><Z>1</Z><type>Normal</type><Neighbor>L</Neighbor></Node>
+<Node name="Union South Entrance"><X>810</X><Y>1755</Y><Z>1</Z><type>Normal</type><Neighbor>G</Neighbor></Node>
+<Node name="East Entrance"><X>880</X><Y>3</Y><Z>1</Z><type>Normal</type><Neighbor>Lobby</Neighbor></Node>
+<Node name="M"><X>1086</X><Y>462</Y><Z>1</Z><type>Hallway</type><Neighbor>F, N, 1305, 1308, T</Neighbor></Node>
+<Node name="N"><X>1584</X><Y>462</Y><Z>1</Z><type>Hallway</type><Neighbor>T, O</Neighbor></Node>
+<Node name="O"><X>1584</X><Y>1008</Y><Z>1</Z><type>Hallway</type><Neighbor>N, S, U</Neighbor></Node>
+<Node name="P"><X>1668</X><Y>1527</Y><Z>1</Z><type>Hallway</type><Neighbor>1240, S</Neighbor></Node>
+<Node name="Q"><X>1290</X><Y>1131</Y><Z>1</Z><type>Hallway</type><Neighbor>1261, U</Neighbor></Node>
+<Node name="1305"><X>1131</X><Y>414</Y><Z>1</Z><type>Normal</type><Neighbor>M</Neighbor></Node>
+<Node name="1301"><X>1311</X><Y>417</Y><Z>1</Z><type>Normal</type><Neighbor>T, O</Neighbor></Node>
+<Node name="1308"><X>1056</X><Y>534</Y><Z>1</Z><type>Normal</type><Neighbor>M</Neighbor></Node>
+<Node name="1207"><X>1728</X><Y>1008</Y><Z>1</Z><type>Normal</type><Neighbor>S</Neighbor></Node>
+<Node name="1240"><X>1602</X><Y>1527</Y><Z>1</Z><type>Normal</type><Neighbor>P</Neighbor></Node>
+<Node name="1269"><X>1437</X><Y>1044</Y><Z>1</Z><type>Normal</type><Neighbor>U</Neighbor></Node>
+<Node name="1261"><X>1206</X><Y>1080</Y><Z>1</Z><type>Normal</type><Neighbor>Q</Neighbor></Node>
+<Node name="T"><X>1311</X><Y>462</Y><Z>1</Z><type>Hallway</type><Neighbor>1301, N, M</Neighbor></Node>
+<Node name="U"><X>1473</X><Y>1086</Y><Z></Z><type>Hallway</type><Neighbor>Q, 1269, O</Neighbor></Node>
+>>>>>>> origin/master
 </feed>

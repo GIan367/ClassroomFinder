@@ -14,25 +14,26 @@ public class Test_Location {
     @Test
     public void locationGets(){
         Location test1 = new Location(1, "Humanities", 1121, 1);
-        assertEquals(true, test1.getBuildingID() == 1);
-        assertEquals(true, test1.getName().equals("Humanities"));
-        assertEquals(true, test1.getFloorNumber() == 1);
-        assertEquals(true, test1.getID() == 1121);
+        assertEquals(1121, test1.getBuildingID());
+        assertEquals("Humanities", test1.getName());
+        assertEquals(1, test1.getFloorNumber());
+        assertEquals(1, test1.getID());
     }
+    @Test
     public void locationSets(){
         Location test1 = new Location(1, "Humanities", 1121, 1);
-        assertEquals(true, test1.getBuildingID() == 1221);
-        assertEquals(true, test1.getName().equals("Humanities"));
-        assertEquals(true, test1.getFloorNumber() == 1);
-        assertEquals(true, test1.getID() == 1);
+        assertEquals(1121, test1.getBuildingID());
+        assertEquals("Humanities", test1.getName());
+        assertEquals(1, test1.getFloorNumber());
+        assertEquals(1, test1.getID());
         test1.setBuildingID(2);
         test1.setFloorNumber(2);
         test1.setID(2);
         test1.setName("Bascom");
-        assertEquals(true, test1.getBuildingID() == 2);
-        assertEquals(true, test1.getName().equals("Bascom"));
-        assertEquals(true, test1.getFloorNumber() == 2);
-        assertEquals(true, test1.getID() == 2);
+        assertEquals(2, test1.getBuildingID());
+        assertEquals("Bascom", test1.getName());
+        assertEquals(2, test1.getFloorNumber());
+        assertEquals(2, test1.getID());
     }
 
 }
