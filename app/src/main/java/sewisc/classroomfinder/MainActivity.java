@@ -403,17 +403,17 @@ public class MainActivity extends AppCompatActivity {
                 //destSpinner1.setEnabled(true);
                 rb.animate().scaleX(1.0f);
                 rb.animate().scaleY(1.0f);
-                room_CurrLoc.animate().alpha(1.0f).setDuration(1000);
+                room_CurrLoc.animate().alpha(1.0f).setDuration(500);
                 if(!firstPassIsDone) {
                     room_CurrLoc.animate().scaleY(1.3f);
                     room_CurrLoc.animate().scaleX(1.3f);
                 }
 
-                room_SpinCurrLoc.animate().alpha(1.0f).setDuration(1000);
+                room_SpinCurrLoc.animate().alpha(1.0f).setDuration(500);
                 //room_Dest.animate().alpha(1.0f).setDuration(1000);
                 //room_SpinDest.animate().alpha(1.0f).setDuration(1000);
-                room_Building.animate().translationY(0).setDuration(500);
-                room_SpinBuilding.animate().translationY(0).setDuration(500);
+                room_Building.animate().translationY(0).setDuration(300);
+                room_SpinBuilding.animate().translationY(0).setDuration(300);
                 populateSpinners(1, buildingSpinner1.getSelectedItem());
             }
 
@@ -479,16 +479,16 @@ public class MainActivity extends AppCompatActivity {
                     outAnim.setDuration(300);
                     outAnim.start();
                 }
-                room_CurrLoc.animate().scaleY(1.0f);
-                room_CurrLoc.animate().scaleX(1.0f);
+                room_CurrLoc.animate().scaleY(1.0f).setDuration(300);
+                room_CurrLoc.animate().scaleX(1.0f).setDuration(300);
                 destSpinner1.setEnabled(true);
                 if(!firstPassIsDone) {
-                    room_Dest.animate().scaleX(1.3f);
-                    room_Dest.animate().scaleY(1.3f);
+                    room_Dest.animate().scaleX(1.3f).setDuration(300);
+                    room_Dest.animate().scaleY(1.3f).setDuration(300);
                 }
 
-                room_Dest.animate().alpha(1.0f).setDuration(1000);
-                room_SpinDest.animate().alpha(1.0f).setDuration(1000);
+                room_Dest.animate().alpha(1.0f).setDuration(300);
+                room_SpinDest.animate().alpha(1.0f).setDuration(300);
 
                 currSpinnerShaking = (Spinner) room_SpinDest;
             }
@@ -510,8 +510,8 @@ public class MainActivity extends AppCompatActivity {
 
 
                     //resize all text views back
-                    room_Dest.animate().scaleX(1.0f);
-                    room_Dest.animate().scaleY(1.0f);
+                    room_Dest.animate().scaleX(1.0f).setDuration(300);
+                    room_Dest.animate().scaleY(1.0f).setDuration(300);
 
 
 
