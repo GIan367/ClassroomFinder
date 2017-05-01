@@ -1,5 +1,7 @@
 package sewisc.classroomfinder;
 
+import android.animation.AnimatorSet;
+import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -13,14 +15,18 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.Property;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -35,6 +41,7 @@ import android.widget.Toast;
 import mehdi.sakout.fancybuttons.FancyButton;
 
 import org.xmlpull.v1.XmlPullParserException;
+
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -104,8 +111,48 @@ public class MainActivity extends AppCompatActivity {
             handler.post(new Runnable() {
                 public void run() {
                     Spinner spin = (Spinner) currSpinnerShaking;
-                    Animation shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
-                    spin.startAnimation(shake);
+                    TextView child = (TextView) spin.getChildAt(0);
+
+
+
+                    final Property<TextView, Integer> property = new Property<TextView, Integer>(int.class, "textColor") {
+                        @Override
+                        public Integer get(TextView object) {
+                            return object.getCurrentTextColor();
+                        }
+
+                        @Override
+                        public void set(TextView object, Integer value) {
+                            object.setTextColor(value);
+                        }
+                    };
+
+                    ObjectAnimator animator = ObjectAnimator.ofInt(child, property,
+                                                    getResources().getColor(R.color.colorTextColor),
+                                                    getResources().getColor(R.color.notification),
+                                                    getResources().getColor(R.color.notification),
+
+
+                                                getResources().getColor(R.color.colorTextColor));
+                    animator.setEvaluator(new ArgbEvaluator());
+                    animator.setDuration(2600);
+                    animator.setInterpolator(new AccelerateDecelerateInterpolator());
+                   // animator.setInterpolator(new DecelerateInterpolator(0.15f));
+                    animator.start();
+                    //ObjectAnimator animator2 = ObjectAnimator.ofInt(child, property, Color.BLACK);
+                   // animator2.setDuration(1000);
+                   // //animator2.setEvaluator(new ArgbEvaluator());
+                   // AnimatorSet set = new AnimatorSet();
+                    //set.playSequentially(animator, animator2);
+                    //set.setDuration(2000);
+                    //set.setInterpolator(new DecelerateInterpolator(2));
+
+                    //set.start();
+
+                    //Toast.makeText(getApplicationContext(),((TextView) child).getText() , Toast.LENGTH_SHORT).show();
+
+                    //Animation shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.shake);
+                    //spin.startAnimation(shake);
                 }
 
             });
@@ -125,6 +172,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+
 
     }
 
@@ -347,9 +396,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 currSpinnerShaking = (Spinner) room_SpinCurrLoc;
-                timer = new Timer("shakeAndBake");
 
-                timer.schedule(task,5000, 5000);
+
                 //timer.cancel();
                 curLocSpinner1.setEnabled(true);
                 //destSpinner1.setEnabled(true);
@@ -357,8 +405,8 @@ public class MainActivity extends AppCompatActivity {
                 rb.animate().scaleY(1.0f);
                 room_CurrLoc.animate().alpha(1.0f).setDuration(1000);
                 if(!firstPassIsDone) {
-                    room_CurrLoc.animate().scaleY(1.2f);
-                    room_CurrLoc.animate().scaleX(1.2f);
+                    room_CurrLoc.animate().scaleY(1.3f);
+                    room_CurrLoc.animate().scaleX(1.3f);
                 }
 
                 room_SpinCurrLoc.animate().alpha(1.0f).setDuration(1000);
@@ -601,6 +649,10 @@ public class MainActivity extends AppCompatActivity {
                 if(s.equals("Favorites")) updateFavorites();
             }
         });
+
+        timer = new Timer("shakeAndBake");
+        currSpinnerShaking = (Spinner) room_SpinBuilding;
+        timer.schedule(task,2000, 3300);
     }
 
     // Currently chooses from test data; will of course work with database later
