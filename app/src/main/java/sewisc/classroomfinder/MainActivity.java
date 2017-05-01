@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayAdapter<String> buildingAdapter;
     ArrayAdapter<String> eastTowneAdapter;
+    ArrayAdapter<String> compSciAdapter;
     ImageAdapter floorsAdapter;
     GridAdapter favoritesAdapter;
 
@@ -265,7 +266,7 @@ public class MainActivity extends AppCompatActivity {
             entries = xmlParser.parse(stream);
         }
         catch (FileNotFoundException e) {
-            System.out.println("xml file not found");
+            System.out.println("East Towne XML file not found");
         } catch (XmlPullParserException e) {
             System.out.println("parser not working");
             e.printStackTrace();
@@ -279,10 +280,36 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+        InputStream streamCS = null;
+        XMLParser xmlParserCS = new XMLParser();
+        List<Node> entriesCS = null;
+        try {
+            streamCS = getAssets().open("computersciences.xml");
+            entriesCS = xmlParserCS.parse(streamCS);
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("Computer Sciences XML file not found");
+        } catch (XmlPullParserException e) {
+            System.out.println("parser not working");
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (streamCS != null) {
+            try {
+                streamCS.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
         /** for(Node entry: entries) {
          System.out.println("Name: " + entry.getName() + " Type " +  entry.getType() + " X: "
          + entry.getRelativeX() + " Y: " + entry.getRelativeY() + " Z: " + entry.getFloor());
+         }
+        for(Node entryCS: entriesCS) {
+         System.out.println("Name: " + entryCS.getName() + " Type " +  entryCS.getType() + " X: "
+         + entryCS.getRelativeX() + " Y: " + entryCS.getRelativeY() + " Z: " + entryCS.getFloor());
          } **/
 
         // Set up tabs
@@ -318,13 +345,15 @@ public class MainActivity extends AppCompatActivity {
         // Replace with reading info from XML files?
         List<String> buildingArray = new ArrayList<String>();
         buildingArray.add("East Towne Mall");
-
-        //cs101
-        buildingArray.add("Computer Science");
+        buildingArray.add("Computer Sciences");
 
         List<String> eastTowneArray = new ArrayList<String>();
         for(Node entry: entries) {
             if(entry.getType().equals(NodeType.normal)) eastTowneArray.add(entry.getName());
+        }
+        List<String> compSciArray = new ArrayList<String>();
+        for(Node entryCS: entriesCS) {
+            if(entryCS.getType().equals(NodeType.normal)) compSciArray.add(entryCS.getName());
         }
 
         // SearchableSpinners
@@ -342,16 +371,21 @@ public class MainActivity extends AppCompatActivity {
         eastTowneAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, eastTowneArray);
         eastTowneAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
+        compSciAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, compSciArray);
+        compSciAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        timer = new Timer("shakeAndBake");
+        timer.schedule(task,5000, 5000);
+
         buildingSpinner1.setAdapter(buildingAdapter);
         buildingSpinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 currSpinnerShaking = (Spinner) room_SpinCurrLoc;
-                timer = new Timer("shakeAndBake");
 
-                timer.schedule(task,5000, 5000);
                 //timer.cancel();
                 curLocSpinner1.setEnabled(true);
+
                 //destSpinner1.setEnabled(true);
                 rb.animate().scaleX(1.0f);
                 rb.animate().scaleY(1.0f);
@@ -516,6 +550,37 @@ public class MainActivity extends AppCompatActivity {
                 displayMap(getCurrentFocus(), floorsAdapter.getItemRef(position));
             }
         });
+        floors.setOnTouchListener(new AdapterView.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, final MotionEvent event){
+                switch(event.getAction())
+                {
+                    case MotionEvent.ACTION_DOWN:
+                        x1 = event.getX();
+                        y1 = event.getY();
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        x2 = event.getX();
+                        y2 = event.getY();
+                        deltaX = x2 - x1;
+                        deltaY = y2 - y1;
+                        if ((Math.abs(deltaX) > MIN_DISTANCE) && (Math.abs(deltaX) > Math.abs(deltaY))) {
+                            if (x2 > x1) {
+                                host.setCurrentTab(0);
+                            } else {
+                                host.setCurrentTab(2);
+                            }
+                        } else if((Math.abs(deltaY) > MIN_DISTANCE) && (Math.abs(deltaY) > Math.abs(deltaX))) {
+                                floors.smoothScrollBy((int) -deltaY, 2 * (int) Math.abs(deltaY));
+                        } else {
+                            GestureDetector gestureDetector = new GestureDetector(getApplicationContext(), new GestureDetector.SimpleOnGestureListener() {});
+                            return gestureDetector.onTouchEvent(event);
+                        }
+                        break;
+                }
+                return true;
+            }
+        });
 
         favoritesArray = new ArrayList<String>();
         favorites = (GridView) findViewById(R.id.gridView1_f);
@@ -603,7 +668,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // Currently chooses from test data; will of course work with database later
     public void populateSpinners(int tab, Object selectedBuilding) {
         String buildingName = selectedBuilding.toString();
         if(buildingName.equals("East Towne Mall")) {
@@ -613,19 +677,22 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 curLocSpinner3.setAdapter(eastTowneAdapter);
             }
+        } else if (buildingName.equals("Computer Sciences")) {
+            if (tab == 1) {
+                curLocSpinner1.setAdapter(compSciAdapter);
+                destSpinner1.setAdapter(compSciAdapter);
+            } else {
+                curLocSpinner3.setAdapter(compSciAdapter);
+            }
         }
     }
 
-    // Currently chooses from test data; will of course work with database later
     public void populateGallery(Object selectedBuilding) {
         floorsAdapter.setmThumbIds(null);
         String buildingName = selectedBuilding.toString();
         if(buildingName.equals("East Towne Mall")) {
             floorsAdapter.setmThumbIds(eastTowneFloors);
-        }
-
-        //cs101
-        else if(buildingName.equals("Computer Science")) {
+        } else if(buildingName.equals("Computer Sciences")) {
             floorsAdapter.setmThumbIds(csFloors);
         }
     }

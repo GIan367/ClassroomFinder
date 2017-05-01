@@ -211,6 +211,10 @@ public class MapView extends AppCompatActivity {
                     floors.add("east_towne1");
                     buildingObj = new Building(this, "East Towne Mall", "easttowne.xml", floors);
                     id = getResources().getIdentifier("east_towne1", "mipmap", getPackageName());
+                } else if (building.equals("Computer Sciences")) {
+                    floors.add("cs");
+                    buildingObj = new Building(this, "Computer Sciences", "computersciences.xml", floors);
+                    id = getResources().getIdentifier("cs", "mipmap", getPackageName());
                 }
                 List<Node> rooms = buildingObj.getRooms();
                 Iterator<Node> itr = rooms.iterator();
@@ -232,6 +236,10 @@ public class MapView extends AppCompatActivity {
                     floors.add("east_towne1");
                     buildingObj = new Building(this, "East Towne Mall", "easttowne.xml", floors);
                     id = getResources().getIdentifier("east_towne1", "mipmap", getPackageName());
+                } else if (building.equals("Computer Sciences")) {
+                    floors.add("cs");
+                    buildingObj = new Building(this, "Computer Sciences", "computersciences.xml", floors);
+                    id = getResources().getIdentifier("cs", "mipmap", getPackageName());
                 }
                 List<Node> rooms = buildingObj.getRooms();
                 Iterator<Node> itr = rooms.iterator();
@@ -298,7 +306,12 @@ public class MapView extends AppCompatActivity {
         Bitmap mutableBitmap = workingBitmap.copy(Bitmap.Config.ARGB_8888, true);
         Bitmap startIcon = BitmapFactory.decodeResource(getResources(), getResources().getIdentifier("mapicon", "mipmap", getPackageName())); //mapicon bitmap creation
         Bitmap destIcon = BitmapFactory.decodeResource(getResources(), getResources().getIdentifier("mapicon2", "mipmap", getPackageName())); //mapicon bitmap creation
-        double scale = (2100.0/6998.0); //scale used for pixel conversion
+        double scale = 1; //scale used for pixel conversion
+        if (building.equals("East Towne Mall")) {
+            scale = (2100.0/6998.0);
+        } else if (building.equals("Computer Sciences")) {
+            scale = 1;
+        }
         Canvas canvas = new Canvas(mutableBitmap);
 
         Node destNode = null;
