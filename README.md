@@ -1,3 +1,14 @@
+![](https://media.giphy.com/media/yVZXUIR5jvSdG/giphy.gif)
+
+
+
+
+
+
+
+
+
+
 # classroomFinder
 All up to date code is located in the master branch. The master branch should only be merged to at the end of an iteration OR with the agreement of a majority team.  
 Java classes pertaining to Database functionality, Pathfinding, and Map Layout are located in ClassroomFinder/app/src/main/java/sewisc/classroomfinder/:
